@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CursorAdapter;
+import android.widget.ListView;
 import android.widget.TextView;
 import ebeletskiy.gmail.com.passwords.utils.DBHelper;
 
@@ -18,6 +19,7 @@ public class ItemsList extends ListFragment {
 	private DBHelper dbHelper;
 	private MAdapter mAdapter;
 	private Cursor cursor;
+	private ListItemClickListener listener;
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -30,6 +32,14 @@ public class ItemsList extends ListFragment {
 		mAdapter = new MAdapter(getActivity(), cursor, true);
 
 		setListAdapter(mAdapter);
+	}
+	
+	
+	@Override
+	public void onAttach(Activity activity) {
+		super.onAttach(activity);
+		
+		listener = (ListItemClickListener)activity;
 	}
 	
 	// test method
@@ -46,6 +56,20 @@ public class ItemsList extends ListFragment {
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		return inflater.inflate(R.layout.items_list, container, false);
+	}
+	
+	@Override
+	public void onListItemClick(ListView l, View v, int position, long id) {
+		
+		l.setItemChecked(position, true);
+		
+		if (listener != null) {
+			listener.itemClicked();
+		}
+	}
+	
+	public void enablePersistentSelection() {
+		getListView().setChoiceMode(ListView.CHOICE_MODE_SINGLE);
 	}
 	
 	private class MAdapter extends CursorAdapter {
