@@ -16,6 +16,31 @@ public class ItemsList extends ListFragment {
 	private static final String TAG = "ItemsList";
 	
 	private DBHelper dbHelper;
+	private MAdapter mAdapter;
+	private Cursor cursor;
+	
+	@Override
+	public void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		dbHelper = new DBHelper(getActivity());
+		
+//		fillDB(); // to be removed then
+		
+		cursor = dbHelper.getAll();
+		mAdapter = new MAdapter(getActivity(), cursor, true);
+
+		setListAdapter(mAdapter);
+	}
+	
+	// test method
+	private void fillDB() {
+		for (int i=0; i < 5; i++) {
+			dbHelper.insert("Title" + i, 
+							"Login" + i, 
+							"Password" + i,
+							"Notes" + i);
+		}
+	}
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
