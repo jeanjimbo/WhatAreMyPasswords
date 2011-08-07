@@ -13,11 +13,15 @@ public class WhatAreMyPasswordsActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
         
+        initUI();
+    }
+
+	private void initUI() {
         ActionBar actionBar = getActionBar();
 		BitmapDrawable background = new BitmapDrawable(
 				BitmapFactory.decodeResource(getResources(),
 						R.drawable.actionbar_back));
 		background.setTileModeX(android.graphics.Shader.TileMode.REPEAT);
 		actionBar.setBackgroundDrawable(background);
-    }
+	}
 }
