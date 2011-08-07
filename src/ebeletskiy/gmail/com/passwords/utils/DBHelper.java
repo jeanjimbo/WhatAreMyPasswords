@@ -52,13 +52,18 @@ public class DBHelper extends SQLiteOpenHelper {
 		cv.put(COLUMN_NAME_NOTES, notes);
 		
 		getWritableDatabase().insert(TABLE_NAME, COLUMN_NAME_TITLE, cv);
+		
+		getWritableDatabase().close();
 	}
 	
 	public Cursor getAll() {
 		return(getReadableDatabase()
-				.rawQuery("SELECT _id, COLUMN_NAME_TITLE, COLUMN_NAME_LOGIN," +
-						"COLUMN_NAME_PASSWORD, COLUMN_NAME_NOTES " +
-						"url FROM fragtestdb ORDER BY name", null));
+				.rawQuery("SELECT _id, " + 
+						COLUMN_NAME_TITLE + ", " +
+						COLUMN_NAME_LOGIN + ", " +
+						COLUMN_NAME_PASSWORD + ", " +
+						COLUMN_NAME_NOTES + " FROM " + TABLE_NAME + 
+						" ORDER BY title", null));
 	}
 
 	public String getTitle(Cursor c) {
