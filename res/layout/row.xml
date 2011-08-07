@@ -1,6 +1,14 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
 	android:layout_width="match_parent" android:layout_height="wrap_content"
-	android:orientation="horizontal" android:padding="4dip">
+	android:orientation="horizontal" android:padding="10dip">
+
+	<ImageView android:id="@+id/row_icon"
+	android:src="@drawable/tmp_icon"
+	android:layout_height="wrap_content"
+	android:layout_width="wrap_content"
+	android:paddingRight="5px"
+	android:layout_gravity="center_vertical"
+	/>
 
 	<TextView android:id="@+id/title" android:layout_width="match_parent"
 		android:layout_height="wrap_content"
