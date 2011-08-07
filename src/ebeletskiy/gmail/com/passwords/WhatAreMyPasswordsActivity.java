@@ -6,7 +6,8 @@ import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 
-public class WhatAreMyPasswordsActivity extends Activity {
+public class WhatAreMyPasswordsActivity extends Activity implements 
+												ListItemClickListener{
 	private static final String TAG = "WhatAreMyPasswordsActivity";
 	
     @Override
@@ -15,6 +16,9 @@ public class WhatAreMyPasswordsActivity extends Activity {
         setContentView(R.layout.main);
         
         initUI();
+        
+        ((ItemsList)getFragmentManager().findFragmentById(R.id.left_frag)).
+        	enablePersistentSelection();
     }
 
 	private void initUI() {
@@ -24,5 +28,14 @@ public class WhatAreMyPasswordsActivity extends Activity {
 						R.drawable.actionbar_back));
 		background.setTileModeX(android.graphics.Shader.TileMode.REPEAT);
 		actionBar.setBackgroundDrawable(background);
+	}
+
+	@Override
+	public void itemClicked() {
+//		ItemsDescription rf = ((ItemsDescription)getFragmentManager().findFragmentById(R.id.right_frag));
+//	    TextView tv = (TextView)rf.getView().findViewById(R.id.textView1);
+//	    tv.setText("Updated text");
+//		((ItemsDescription)getFragmentManager().findFragmentById(R.id.right_frag)).callMe();
+		
 	}
 }
