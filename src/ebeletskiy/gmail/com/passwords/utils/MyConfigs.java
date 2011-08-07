@@ -1,5 +1,8 @@
 package ebeletskiy.gmail.com.passwords.utils;
 
-public class MyConfigs {
-
+public final class MyConfigs {
+	private MyConfigs() {
+	}
+	
+	public static final boolean DEBUG = true; 
 }
