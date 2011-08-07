@@ -11,7 +11,7 @@ public class DBHelper extends SQLiteOpenHelper {
 	
 	private static final String TAG = "DBHelper";
 	
-	private static final String DATABASE_NAME = "wampdb";
+	private static final String DATABASE_NAME = "wampdb1";
 	private static final int DATABASE_VERSION = 1;
 	private static final String TABLE_NAME = "userdata";
 	private static final String COLUMN_NAME_TITLE = "title";
