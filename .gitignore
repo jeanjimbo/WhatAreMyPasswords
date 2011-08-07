@@ -13,3 +13,6 @@
 
 # jars
 *.jar
+
+#stuff
+.*
