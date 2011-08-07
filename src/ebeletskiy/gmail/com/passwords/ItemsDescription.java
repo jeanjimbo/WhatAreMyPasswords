@@ -7,7 +7,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 public class ItemsDescription extends Fragment {
-
+	private static final String TAG = "ItemsDescription";
+	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {

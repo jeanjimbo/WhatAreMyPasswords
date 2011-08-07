@@ -7,7 +7,8 @@ import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 
 public class WhatAreMyPasswordsActivity extends Activity {
-    /** Called when the activity is first created. */
+	private static final String TAG = "WhatAreMyPasswordsActivity";
+	
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

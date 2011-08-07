@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 public class ItemsList extends ListFragment {
+	private static final String TAG = "ItemsList";
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
