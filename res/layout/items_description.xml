@@ -3,8 +3,9 @@
 		android:layout_height="wrap_content"
 		android:id="@+id/tableLayout1" 
 		android:layout_width="match_parent"
-		android:padding="60dip"
-		android:stretchColumns="1">
+		android:padding="80dip"
+		android:stretchColumns="1"
+		android:background="#e7ebf7">
 
 	<!--  Titles -->
 	<TableRow android:gravity="center_horizontal">
