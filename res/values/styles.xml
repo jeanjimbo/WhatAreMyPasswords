@@ -4,4 +4,14 @@
 		<item name="android:background">?android:attr/activatedBackgroundIndicator</item>
 	</style>
 	
+	<style name="items_description_plain">
+		<item name="android:textSize">35dip</item>
+		<item name="android:textColor">#d1ad3f</item>
+	</style>	
+	
+	<style name="items_description_bold">
+		<item name="android:textSize">35dip</item>
+		<item name="android:textStyle">bold</item>
+		<item name="android:textColor">#d1ad3f</item>
+	</style>
 </resources>
