@@ -19,6 +19,7 @@
 		android:textColor="@color/row_item_color"
 		android:layout_gravity="center_vertical|right"
 		android:textAppearance="?android:attr/textAppearanceMedium"
+		android:typeface="normal"
 		/>
 
 </LinearLayout>
