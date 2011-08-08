@@ -7,6 +7,8 @@ import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.widget.TextView;
+import ebeletskiy.gmail.com.passwords.models.Ticket;
 
 public class WhatAreMyPasswordsActivity extends Activity implements 
 												ListItemClickListener{
@@ -33,12 +35,20 @@ public class WhatAreMyPasswordsActivity extends Activity implements
 	}
 
 	@Override
-	public void itemClicked() {
-//		ItemsDescription rf = ((ItemsDescription)getFragmentManager().findFragmentById(R.id.right_frag));
-//	    TextView tv = (TextView)rf.getView().findViewById(R.id.textView1);
-//	    tv.setText("Updated text");
-//		((ItemsDescription)getFragmentManager().findFragmentById(R.id.right_frag)).callMe();
+	public void showTicket(Ticket ticket) {
+		ItemsDescription itemsDescription = ((ItemsDescription)getFragmentManager().findFragmentById(R.id.right_frag));
+		TextView title = (TextView)itemsDescription.getView().findViewById(R.id.tv_title);
+	    title.setText(ticket.getTitle());
+	    
+	    TextView login = (TextView)itemsDescription.getView().findViewById(R.id.tv_login_data);
+	    login.setText(ticket.getLogin());
 		
+	    TextView password = (TextView)itemsDescription.getView().findViewById(R.id.tv_password_data);
+	    password.setText(ticket.getPassword());
+	
+	    TextView notes = (TextView)itemsDescription.getView().findViewById(R.id.tv_notes_data);
+	    notes.setText(ticket.getNotes());
+//		itemsDescription.update(ticket);
 	}
 	
 	@Override
