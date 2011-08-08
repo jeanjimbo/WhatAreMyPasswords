@@ -99,6 +99,8 @@ public class ItemsList extends ListFragment {
 
 	static class ViewHolder {
 		private TextView name;
+		private int id;
+		
 		
 		ViewHolder(View row) {
 			name = (TextView)row.findViewById(R.id.title);
@@ -106,6 +108,11 @@ public class ItemsList extends ListFragment {
 		
 		void populateFrom(Cursor c, DBHelper helper) {
 			name.setText(helper.getTitle(c));
+			id = helper.getId(c);
+		}
+		
+		public int getId() {
+			return id;
 		}
 	}
 }
