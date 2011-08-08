@@ -5,6 +5,8 @@ import android.app.Activity;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
 
 public class WhatAreMyPasswordsActivity extends Activity implements 
 												ListItemClickListener{
@@ -37,5 +39,12 @@ public class WhatAreMyPasswordsActivity extends Activity implements
 //	    tv.setText("Updated text");
 //		((ItemsDescription)getFragmentManager().findFragmentById(R.id.right_frag)).callMe();
 		
+	}
+	
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		MenuInflater inflater = getMenuInflater();
+	    inflater.inflate(R.menu.menu, menu);
+	    return true;
 	}
 }
