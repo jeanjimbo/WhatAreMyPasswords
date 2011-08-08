@@ -63,27 +63,37 @@ public class DBHelper extends SQLiteOpenHelper {
 						COLUMN_NAME_LOGIN + ", " +
 						COLUMN_NAME_PASSWORD + ", " +
 						COLUMN_NAME_NOTES + " FROM " + TABLE_NAME + 
-						" ORDER BY title", null));
+						" ORDER BY title", null)); // TODO: updated 'title'
 	}
 
 	public String getTitle(Cursor c) {
 		return(c.getString(1));
 	}
 	
+	public Cursor getItem(int id) {
+		return (getReadableDatabase()
+					.rawQuery("SELECT _id, " + 
+					COLUMN_NAME_TITLE + ", " + 
+					COLUMN_NAME_LOGIN + ", " + 
+					COLUMN_NAME_PASSWORD + ", " + 
+					COLUMN_NAME_NOTES + " FROM " + TABLE_NAME + 
+					" WHERE _id = " + id, null)); // TODO: updated 'title'
+	}
+
 	public int getId(Cursor c) {
 		return(c.getInt(0));
 	}
 
 	public String getLogin(Cursor c) {
-		return(c.getString(2));
+		return(c.getString(1));
 	}
 	
 	public String getPassword(Cursor c) {
-		return(c.getString(3));
+		return(c.getString(2));
 	}
 	
 	public String getNotes(Cursor c) {
-		return(c.getString(4));
+		return(c.getString(3));
 	}
 	
 	public void deleteAll() {
