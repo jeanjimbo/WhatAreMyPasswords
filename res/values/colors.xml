@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="row_item_color">#FFFFFF</color>
-    
+    <color name="row_item_color">#FFDC6B</color>
 </resources>
