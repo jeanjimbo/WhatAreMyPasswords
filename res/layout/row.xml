@@ -3,7 +3,7 @@
 	android:orientation="horizontal"
 	android:padding="20dip"
 	android:minHeight="?android:attr/listPreferredItemHeight"
-	style="@style/activated">
+	style="@style/activated_item">
 
 	<ImageView android:id="@+id/row_icon"
 		android:src="@drawable/tmp_icon"
