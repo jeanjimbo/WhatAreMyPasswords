@@ -70,8 +70,8 @@ public class DBHelper extends SQLiteOpenHelper {
 		return(c.getString(1));
 	}
 	
-	public String getId(Cursor c) {
-		return(Integer.toString(c.getInt(0)));
+	public int getId(Cursor c) {
+		return(c.getInt(0));
 	}
 
 	public String getLogin(Cursor c) {
