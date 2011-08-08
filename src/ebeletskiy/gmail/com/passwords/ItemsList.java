@@ -11,7 +11,9 @@ import android.view.ViewGroup;
 import android.widget.CursorAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+import ebeletskiy.gmail.com.passwords.models.Ticket;
 import ebeletskiy.gmail.com.passwords.utils.DBHelper;
+import ebeletskiy.gmail.com.passwords.utils.DataConverter;
 
 public class ItemsList extends ListFragment {
 	private static final String TAG = "ItemsList";
@@ -26,7 +28,7 @@ public class ItemsList extends ListFragment {
 		super.onCreate(savedInstanceState);
 		dbHelper = new DBHelper(getActivity());
 		
-		fillDB(); // to be removed then
+//		fillDB(); // to be removed then
 		
 		cursor = dbHelper.getAll();
 		mAdapter = new MAdapter(getActivity(), cursor, true);
@@ -60,11 +62,14 @@ public class ItemsList extends ListFragment {
 	
 	@Override
 	public void onListItemClick(ListView l, View v, int position, long id) {
-		
 		l.setItemChecked(position, true);
 		
+		ViewHolder viewHolder = (ViewHolder)v.getTag(); 
+		Cursor cursor = dbHelper.getItem(viewHolder.getId());
+		Ticket ticket = DataConverter.convertToTicket(cursor);
+		
 		if (listener != null) {
-			listener.itemClicked();
+			listener.showTicket(ticket);
 		}
 	}
 	
@@ -107,6 +112,7 @@ public class ItemsList extends ListFragment {
 		}
 		
 		void populateFrom(Cursor c, DBHelper helper) {
+			
 			name.setText(helper.getTitle(c));
 			id = helper.getId(c);
 		}
