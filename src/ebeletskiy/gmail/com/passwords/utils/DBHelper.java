@@ -81,4 +81,8 @@ public class DBHelper extends SQLiteOpenHelper {
 	public String getNotes(Cursor c) {
 		return(c.getString(4));
 	}
+	
+	public void deleteAll() {
+		getReadableDatabase().execSQL("DELETE FROM " + TABLE_NAME);
+	}
 }
