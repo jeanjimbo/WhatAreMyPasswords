@@ -26,7 +26,7 @@ public class ItemsList extends ListFragment {
 		super.onCreate(savedInstanceState);
 		dbHelper = new DBHelper(getActivity());
 		
-//		fillDB(); // to be removed then
+		fillDB(); // to be removed then
 		
 		cursor = dbHelper.getAll();
 		mAdapter = new MAdapter(getActivity(), cursor, true);
@@ -45,10 +45,10 @@ public class ItemsList extends ListFragment {
 	// test method
 	private void fillDB() {
 		for (int i=0; i < 5; i++) {
-			dbHelper.insert("Title" + i, 
-							"Login" + i, 
-							"Password" + i,
-							"Notes" + i);
+			dbHelper.insert("Ebay and PayPal " + i, 
+							"Login " + i, 
+							"Password " + i,
+							"Notes " + i);
 		}
 	}
 
