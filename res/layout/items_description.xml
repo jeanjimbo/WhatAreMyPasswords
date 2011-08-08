@@ -3,7 +3,7 @@
 		android:layout_height="wrap_content"
 		android:id="@+id/tableLayout1" 
 		android:layout_width="match_parent"
-		android:padding="160dip"
+		android:padding="60dip"
 		android:stretchColumns="1">
 
 	<!--  Titles -->
@@ -11,21 +11,24 @@
 		<TextView android:text="Title"
 			android:id="@+id/tv_title" 
 			android:layout_width="wrap_content" 
-			android:layout_height="wrap_content"/>
+			android:layout_height="wrap_content"
+			style="@style/items_description_bold"/>
 	</TableRow>
 	
 	<!--  Login -->
 	<TableRow>
-		<TextView android:text="User name"
+		<TextView android:text="Login"
 			android:id="@+id/tv_login"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
-			android:gravity="left"/>
+			android:gravity="left"
+			style="@style/items_description_bold"/>
 		<TextView android:text="Put it here"
 			android:id="@+id/tv_login_data"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
-			android:gravity="right"/>
+			android:gravity="right"
+			style="@style/items_description_plain"/>
 	</TableRow>
 	
 	<!-- Password -->
@@ -33,27 +36,36 @@
 		<TextView android:id="@+id/tv_password" 
 			android:layout_height="wrap_content" 
 			android:layout_width="wrap_content" 
-			android:text="User name"
-			android:gravity="left"/>
+			android:text="Password"
+			android:gravity="left"
+			style="@style/items_description_bold"/>
 		<TextView android:text="Put it here"
 			android:id="@+id/tv_password_data"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
-			android:gravity="right"/>
+			android:gravity="right"
+			android:password="true"
+			style="@style/items_description_plain"/>
 	</TableRow>
+	
+	<View
+        android:layout_height="2dip"
+        android:background="#FF909090" />
 	
 	<!-- Notes -->
 	<TableRow>
-		<TextView android:text="User name"
+		<TextView android:text="Notes"
 			android:id="@+id/tv_notes"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
-			android:gravity="left"/>
+			android:gravity="left"
+			style="@style/items_description_bold"/>
 		<TextView android:text="Put it here"
 			android:id="@+id/tv_notes_data"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
-			android:gravity="right"/>
+			android:gravity="right"
+			style="@style/items_description_plain"/>
 	</TableRow>
 	
 </TableLayout>
