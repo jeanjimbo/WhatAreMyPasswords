@@ -8,16 +8,23 @@
 		android:background="#e7ebf7">
 
 	<!--  Titles -->
-	<TableRow android:gravity="center_horizontal">
+	<TableRow android:gravity="left">
 		<TextView android:text="Title"
 			android:id="@+id/tv_title" 
 			android:layout_width="wrap_content" 
 			android:layout_height="wrap_content"
-			style="@style/items_description_bold"/>
+			android:textStyle="bold"
+			android:textSize="35dip"
+			android:textColor="#FF909090"
+			android:typeface="monospace"/>
 	</TableRow>
 	
+		<View
+        android:layout_height="2dip"
+        android:background="#FF909090" />
+	
 	<!--  Login -->
-	<TableRow>
+	<TableRow android:paddingTop="30dip">
 		<TextView android:text="Login"
 			android:id="@+id/tv_login"
 			android:layout_width="wrap_content"
@@ -48,10 +55,6 @@
 			android:password="true"
 			style="@style/items_description_plain"/>
 	</TableRow>
-	
-	<View
-        android:layout_height="2dip"
-        android:background="#FF909090" />
 	
 	<!-- Notes -->
 	<TableRow>
