@@ -8,11 +8,13 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.widget.TextView;
+import ebeletskiy.gmail.com.passwords.interfaces.AddNewItemBtnListener;
 import ebeletskiy.gmail.com.passwords.interfaces.ListItemClickListener;
 import ebeletskiy.gmail.com.passwords.models.Ticket;
 
 public class WhatAreMyPasswordsActivity extends Activity implements 
-												ListItemClickListener{
+												ListItemClickListener, 
+												AddNewItemBtnListener{
 	private static final String TAG = "WhatAreMyPasswordsActivity";
 	
     @Override
@@ -58,5 +60,10 @@ public class WhatAreMyPasswordsActivity extends Activity implements
 		MenuInflater inflater = getMenuInflater();
 	    inflater.inflate(R.menu.menu, menu);
 	    return true;
+	}
+
+	@Override
+	public void onButtonClick() {
+		// Open new fragment for new item creation
 	}
 }
