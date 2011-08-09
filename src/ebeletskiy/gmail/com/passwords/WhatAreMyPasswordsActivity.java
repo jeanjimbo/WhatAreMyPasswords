@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.widget.TextView;
+import ebeletskiy.gmail.com.passwords.interfaces.ListItemClickListener;
 import ebeletskiy.gmail.com.passwords.models.Ticket;
 
 public class WhatAreMyPasswordsActivity extends Activity implements 

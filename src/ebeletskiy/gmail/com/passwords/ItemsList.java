@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.CursorAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+import ebeletskiy.gmail.com.passwords.interfaces.ListItemClickListener;
 import ebeletskiy.gmail.com.passwords.models.Ticket;
 import ebeletskiy.gmail.com.passwords.utils.DBHelper;
 import ebeletskiy.gmail.com.passwords.utils.DataConverter;
@@ -28,7 +29,7 @@ public class ItemsList extends ListFragment {
 		super.onCreate(savedInstanceState);
 		dbHelper = new DBHelper(getActivity());
 		
-//		fillDB(); // to be removed then
+//		fillDB(); 
 		
 		cursor = dbHelper.getAll();
 		mAdapter = new MAdapter(getActivity(), cursor, true);
@@ -45,14 +46,14 @@ public class ItemsList extends ListFragment {
 	}
 	
 	// test method
-	private void fillDB() {
-		for (int i=0; i < 5; i++) {
-			dbHelper.insert("Ebay and PayPal " + i, 
-							"Login " + i, 
-							"Password " + i,
-							"Notes " + i);
-		}
-	}
+//	private void fillDB() {
+//		for (int i=0; i < 5; i++) {
+//			dbHelper.insert("Ebay and PayPal " + i, 
+//							"Login " + i, 
+//							"Password " + i,
+//							"Notes " + i);
+//		}
+//	}
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,

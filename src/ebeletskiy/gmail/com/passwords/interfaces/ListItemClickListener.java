@@ -1,4 +1,4 @@
-package ebeletskiy.gmail.com.passwords;
+package ebeletskiy.gmail.com.passwords.interfaces;
 
 import ebeletskiy.gmail.com.passwords.models.Ticket;
 
