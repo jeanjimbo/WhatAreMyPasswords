@@ -7,10 +7,13 @@ import android.database.Cursor;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.CursorAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+import ebeletskiy.gmail.com.passwords.interfaces.AddNewItemBtnListener;
 import ebeletskiy.gmail.com.passwords.interfaces.ListItemClickListener;
 import ebeletskiy.gmail.com.passwords.models.Ticket;
 import ebeletskiy.gmail.com.passwords.utils.DBHelper;
@@ -22,7 +25,8 @@ public class ItemsList extends ListFragment {
 	private DBHelper dbHelper;
 	private MAdapter mAdapter;
 	private Cursor cursor;
-	private ListItemClickListener listener;
+	private ListItemClickListener itemClickListener;
+	private AddNewItemBtnListener newItemBtnListener;
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -37,12 +41,30 @@ public class ItemsList extends ListFragment {
 		setListAdapter(mAdapter);
 	}
 	
+	@Override
+	public void onActivityCreated(Bundle savedInstanceState) {
+		super.onActivityCreated(savedInstanceState);
+		Button newItemBtn = (Button)getView().findViewById(R.id.bt_add_item);
+		newItemBtn.setOnClickListener(onClickListener);
+	};
+	
+	View.OnClickListener onClickListener = new OnClickListener() {
+		
+		@Override
+		public void onClick(View v) {
+			if (newItemBtnListener != null) {
+				newItemBtnListener.onButtonClick();
+			}
+		}
+	};
+	
 	
 	@Override
 	public void onAttach(Activity activity) {
 		super.onAttach(activity);
 		
-		listener = (ListItemClickListener)activity;
+		itemClickListener = (ListItemClickListener)activity;
+		newItemBtnListener = (AddNewItemBtnListener)activity;
 	}
 	
 	// test method
@@ -69,8 +91,8 @@ public class ItemsList extends ListFragment {
 		Cursor cursor = dbHelper.getItem(viewHolder.getId());
 		Ticket ticket = DataConverter.convertToTicket(cursor);
 		
-		if (listener != null) {
-			listener.showTicket(ticket);
+		if (itemClickListener != null) {
+			itemClickListener.showTicket(ticket);
 		}
 	}
 	
