@@ -6,6 +6,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
+import ebeletskiy.gmail.com.passwords.models.Ticket;
 
 public class DBHelper extends SQLiteOpenHelper {
 	
@@ -40,16 +41,15 @@ public class DBHelper extends SQLiteOpenHelper {
 		
 	}
 	
-	public void insert(String title, String login, String password, 
-			String notes) {
+	public void insert(Ticket ticket) {
 
 		Log.d("Dev", "insert()");
 		ContentValues cv=new ContentValues();
 		
-		cv.put(COLUMN_NAME_TITLE, title);
-		cv.put(COLUMN_NAME_LOGIN, login);
-		cv.put(COLUMN_NAME_PASSWORD, password);
-		cv.put(COLUMN_NAME_NOTES, notes);
+		cv.put(COLUMN_NAME_TITLE, ticket.getTitle());
+		cv.put(COLUMN_NAME_LOGIN, ticket.getLogin());
+		cv.put(COLUMN_NAME_PASSWORD, ticket.getPassword());
+		cv.put(COLUMN_NAME_NOTES, ticket.getNotes());
 		
 		getWritableDatabase().insert(TABLE_NAME, COLUMN_NAME_TITLE, cv);
 		
