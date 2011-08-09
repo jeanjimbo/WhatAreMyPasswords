@@ -27,11 +27,12 @@ public class WhatAreMyPasswordsActivity extends Activity implements
 
 	private void initUI() {
         ActionBar actionBar = getActionBar();
-		BitmapDrawable background = new BitmapDrawable(
-				BitmapFactory.decodeResource(getResources(),
-						R.drawable.actionbar_back));
-		background.setTileModeX(android.graphics.Shader.TileMode.REPEAT);
-		actionBar.setBackgroundDrawable(background);
+//		BitmapDrawable background = new BitmapDrawable(
+//				BitmapFactory.decodeResource(getResources(),
+//						R.drawable.actionbar_back));
+//		background.setTileModeX(android.graphics.Shader.TileMode.REPEAT);
+//		actionBar.setBackgroundDrawable(background);
+        actionBar.setTitle("What are my passwords?");
 	}
 
 	@Override
