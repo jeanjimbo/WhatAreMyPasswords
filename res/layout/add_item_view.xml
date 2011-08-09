@@ -8,6 +8,9 @@
   	<EditText android:id="@+id/et_add_item"
   	android:layout_width="300dip"
   	android:layout_height="wrap_content"
-  	android:hint="Add new item here"/>
+  	android:hint="Add new item here"
+  	android:background="@drawable/rounded_edittext"
+  	android:padding="5dip"
+  	android:textColor="#000000"/>
     
 </LinearLayout>
