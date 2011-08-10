@@ -1,6 +1,6 @@
 package ebeletskiy.gmail.com.passwords.models;
 
-public class Ticket {
+public class Ticket implements DataModel {
 	private int id;
 	private String title;
 	private String login;
