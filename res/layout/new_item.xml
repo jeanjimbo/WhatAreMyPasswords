@@ -12,7 +12,7 @@
 				android:layout_width="wrap_content" android:layout_height="wrap_content"
 				style="@style/items_description_plain" />
 			<EditText android:layout_width="wrap_content"
-				android:gravity="right" android:id="@+id/EditText01" style="@style/items_description_plain"
+				android:gravity="right" android:id="@+id/et_title" style="@style/items_description_plain"
 				android:layout_height="wrap_content" android:hint="Your title">
 				<requestFocus></requestFocus>
 			</EditText>
@@ -38,8 +38,7 @@
 				style="@style/items_description_plain" />
 			<EditText android:hint="Your password" android:id="@+id/tv_password_data"
 				android:layout_width="wrap_content" android:layout_height="wrap_content"
-				android:gravity="right" android:password="true"
-				style="@style/items_description_plain" />
+				android:gravity="right"	style="@style/items_description_plain" />
 		</TableRow>
 
 		<!-- Notes -->
