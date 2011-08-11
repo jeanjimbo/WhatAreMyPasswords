@@ -14,4 +14,8 @@ public class ItemsDescription extends Fragment {
 			Bundle savedInstanceState) {
 		return inflater.inflate(R.layout.items_description, container, false);
 	}
+
+	public static Fragment newInstance() {
+		return new ItemsDescription();
+	}
 }
