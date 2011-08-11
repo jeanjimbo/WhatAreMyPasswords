@@ -2,19 +2,22 @@ package ebeletskiy.gmail.com.passwords;
 
 import android.app.ActionBar;
 import android.app.Activity;
-import android.graphics.BitmapFactory;
-import android.graphics.drawable.BitmapDrawable;
+import android.app.Fragment;
+import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.widget.TextView;
 import ebeletskiy.gmail.com.passwords.interfaces.AddNewItemBtnListener;
 import ebeletskiy.gmail.com.passwords.interfaces.ListItemClickListener;
+import ebeletskiy.gmail.com.passwords.interfaces.SaveItemListener;
 import ebeletskiy.gmail.com.passwords.models.Ticket;
+import ebeletskiy.gmail.com.passwords.utils.DBHelper;
 
 public class WhatAreMyPasswordsActivity extends Activity implements 
 												ListItemClickListener, 
-												AddNewItemBtnListener{
+												AddNewItemBtnListener,
+												SaveItemListener{
 	private static final String TAG = "WhatAreMyPasswordsActivity";
 	
     @Override
@@ -23,18 +26,23 @@ public class WhatAreMyPasswordsActivity extends Activity implements
         setContentView(R.layout.main);
         
         initUI();
+        addDynamicFragment();
+//        DBHelper db = new DBHelper(this);
+//        db.deleteAll();
         
-        ((ItemsList)getFragmentManager().findFragmentById(R.id.left_frag)).
-        	enablePersistentSelection();
+        
+        ((ItemsList)getFragmentManager().findFragmentById(R.id.left_frag))
+        	.enablePersistentSelection();
     }
 
+    private void addDynamicFragment() {
+        Fragment fg = ItemsDescription.newInstance();
+        getFragmentManager().beginTransaction().add(R.id.right_frag, fg)
+        	.commit();
+    }
+    
 	private void initUI() {
         ActionBar actionBar = getActionBar();
-//		BitmapDrawable background = new BitmapDrawable(
-//				BitmapFactory.decodeResource(getResources(),
-//						R.drawable.actionbar_back));
-//		background.setTileModeX(android.graphics.Shader.TileMode.REPEAT);
-//		actionBar.setBackgroundDrawable(background);
         actionBar.setTitle("What are my passwords?");
 	}
 
@@ -64,6 +72,16 @@ public class WhatAreMyPasswordsActivity extends Activity implements
 
 	@Override
 	public void onButtonClick() {
-		// Open new fragment for new item creation
+		Fragment newFragment = new EditItem();
+		FragmentTransaction transaction = getFragmentManager().beginTransaction();
+		transaction.replace(R.id.right_frag, newFragment);
+		transaction.addToBackStack(null);
+		transaction.commit();
+	}
+
+	@Override
+	public void refreshItemsList() {
+		((ItemsList)getFragmentManager().findFragmentById(R.id.left_frag)).
+    		refresh();
 	}
 }
