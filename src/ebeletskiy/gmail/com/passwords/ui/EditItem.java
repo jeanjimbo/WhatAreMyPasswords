@@ -1,4 +1,4 @@
-package ebeletskiy.gmail.com.passwords;
+package ebeletskiy.gmail.com.passwords.ui;
 
 import android.app.Activity;
 import android.app.Fragment;
@@ -10,6 +10,9 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import ebeletskiy.gmail.com.passwords.R;
+import ebeletskiy.gmail.com.passwords.R.id;
+import ebeletskiy.gmail.com.passwords.R.layout;
 import ebeletskiy.gmail.com.passwords.interfaces.SaveItemListener;
 import ebeletskiy.gmail.com.passwords.models.Ticket;
 import ebeletskiy.gmail.com.passwords.utils.DBHelper;
