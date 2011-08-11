@@ -29,10 +29,6 @@ public class ItemsList extends ListFragment {
 	private ListItemClickListener itemClickListener;
 	private AddNewItemBtnListener newItemBtnListener;
 	
-	public ItemsList() {
-		Log.i(TAG, "ItemsList instance created");
-	}
-	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
