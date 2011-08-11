@@ -5,6 +5,7 @@ import android.app.ListFragment;
 import android.content.Context;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -27,6 +28,10 @@ public class ItemsList extends ListFragment {
 	private Cursor cursor;
 	private ListItemClickListener itemClickListener;
 	private AddNewItemBtnListener newItemBtnListener;
+	
+	public ItemsList() {
+		Log.i(TAG, "ItemsList instance created");
+	}
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -143,5 +148,9 @@ public class ItemsList extends ListFragment {
 		public int getId() {
 			return id;
 		}
+	}
+	
+	public void refresh() {
+		mAdapter.changeCursor(dbHelper.getAll());
 	}
 }
