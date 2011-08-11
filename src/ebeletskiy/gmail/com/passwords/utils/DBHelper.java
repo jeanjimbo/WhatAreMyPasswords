@@ -43,7 +43,7 @@ public class DBHelper extends SQLiteOpenHelper {
 	
 	public void insert(Ticket ticket) {
 
-		Log.d("Dev", "insert()");
+		Log.i(TAG, "insert()");
 		ContentValues cv=new ContentValues();
 		
 		cv.put(COLUMN_NAME_TITLE, ticket.getTitle());
@@ -53,7 +53,7 @@ public class DBHelper extends SQLiteOpenHelper {
 		
 		getWritableDatabase().insert(TABLE_NAME, COLUMN_NAME_TITLE, cv);
 		
-		getWritableDatabase().close();
+//		getWritableDatabase().close();
 	}
 	
 	public Cursor getAll() {
