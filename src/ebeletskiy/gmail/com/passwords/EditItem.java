@@ -48,18 +48,27 @@ public class EditItem extends Fragment {
 		
 		@Override
 		public void onClick(View v) {
-			
-			Log.i(TAG, "onClick()");
-			Ticket tmpTicket = new Ticket();
-			EditText title = (EditText)getView().findViewById(R.id.et_title);
-			
-			tmpTicket.setTitle( (title.getText()).toString() );
-			
-			dbHelper.insert(tmpTicket);
+			dbHelper.insert( createTicket() );
 			
 			if (saveItemListener != null) {
-				saveItemListener.refreshItemsList();
+				saveItemListener.saveItemList();
 			}
 		}
 	};
+	
+	private Ticket createTicket() {
+		Ticket ticket = new Ticket();
+		
+		EditText title = (EditText)getView().findViewById(R.id.et_title);
+		EditText login = (EditText)getView().findViewById(R.id.et_login_data);
+		EditText password = (EditText)getView().findViewById(R.id.et_password_data);
+		EditText notes = (EditText)getView().findViewById(R.id.et_notes_data);
+		
+		ticket.setTitle( (title.getText()).toString() );
+		ticket.setLogin( (login.getText()).toString() );
+		ticket.setPassword( (password.getText()).toString() );
+		ticket.setNotes( (notes.getText()).toString() );
+		
+		return ticket;
+	}
 }
