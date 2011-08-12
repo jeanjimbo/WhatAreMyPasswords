@@ -14,7 +14,6 @@
 			<EditText android:layout_width="wrap_content"
 				android:gravity="right" android:id="@+id/et_title" style="@style/items_description_plain"
 				android:layout_height="wrap_content" android:hint="Your title">
-				<requestFocus></requestFocus>
 			</EditText>
 		</TableRow>
 
@@ -23,7 +22,7 @@
 			<TextView android:text="Login" android:id="@+id/tv_login"
 				android:layout_width="wrap_content" android:layout_height="wrap_content"
 				android:gravity="left" style="@style/items_description_plain" />
-			<EditText android:id="@+id/tv_login_data"
+			<EditText android:id="@+id/et_login_data"
 				android:layout_width="wrap_content" android:layout_height="wrap_content"
 				android:gravity="right" style="@style/items_description_plain"
 				android:hint="Your login">
@@ -36,7 +35,7 @@
 				android:layout_height="wrap_content" android:layout_width="wrap_content"
 				android:text="Password" android:gravity="left"
 				style="@style/items_description_plain" />
-			<EditText android:hint="Your password" android:id="@+id/tv_password_data"
+			<EditText android:hint="Your password" android:id="@+id/et_password_data"
 				android:layout_width="wrap_content" android:layout_height="wrap_content"
 				android:gravity="right"	style="@style/items_description_plain" />
 		</TableRow>
@@ -46,7 +45,7 @@
 			<TextView android:text="Notes" android:id="@+id/tv_notes"
 				android:layout_width="wrap_content" android:layout_height="wrap_content"
 				android:gravity="left" style="@style/items_description_plain" />
-			<EditText android:hint="Your Notes" android:id="@+id/tv_notes_data"
+			<EditText android:hint="Your Notes" android:id="@+id/et_notes_data"
 				android:layout_width="wrap_content" android:layout_height="wrap_content"
 				android:gravity="right" style="@style/items_description_plain" />
 		</TableRow>
