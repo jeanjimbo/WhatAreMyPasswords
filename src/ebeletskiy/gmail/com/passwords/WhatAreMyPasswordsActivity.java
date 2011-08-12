@@ -80,8 +80,14 @@ public class WhatAreMyPasswordsActivity extends Activity implements
 	}
 
 	@Override
-	public void refreshItemsList() {
+	public void saveItemList() {
 		((ItemsList)getFragmentManager().findFragmentById(R.id.left_frag)).
     		refresh();
+		
+		Fragment newFragment = new ItemsDescription();
+		FragmentTransaction transaction = getFragmentManager().beginTransaction();
+		transaction.replace(R.id.right_frag, newFragment);
+		transaction.addToBackStack(null);
+		transaction.commit();
 	}
 }
