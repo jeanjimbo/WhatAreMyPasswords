@@ -2,7 +2,10 @@ package ebeletskiy.gmail.com.passwords;
 
 import android.app.Activity;
 import android.app.Fragment;
+import android.graphics.Rect;
 import android.os.Bundle;
+import android.text.method.PasswordTransformationMethod;
+import android.text.method.TransformationMethod;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -90,7 +93,7 @@ public class ItemsDescription extends Fragment {
 		switch (item.getItemId()) {
 		
 			case R.id.show_pass: 
-				Log.i(TAG, "show password"); 
+				password.setTransformationMethod(null);
 				break;
 				
 			case R.id.delete_item: 
