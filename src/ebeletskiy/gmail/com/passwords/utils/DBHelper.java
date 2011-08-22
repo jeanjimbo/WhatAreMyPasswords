@@ -65,6 +65,10 @@ public class DBHelper extends SQLiteOpenHelper {
 						COLUMN_NAME_NOTES + " FROM " + TABLE_NAME + 
 						" ORDER BY title", null)); // TODO: updated 'title'
 	}
+	
+	public void deleteRow(int id) {
+		getWritableDatabase().delete(TABLE_NAME, "_id=" + id , null);
+	}
 
 	public String getTitle(Cursor c) {
 		return(c.getString(1));

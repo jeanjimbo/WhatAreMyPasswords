@@ -1,4 +1,4 @@
-package ebeletskiy.gmail.com.passwords.ui;
+package ebeletskiy.gmail.com.passwords;
 
 import android.app.Activity;
 import android.app.ListFragment;

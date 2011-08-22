@@ -1,4 +1,4 @@
-package ebeletskiy.gmail.com.passwords.ui;
+package ebeletskiy.gmail.com.passwords;
 
 import ebeletskiy.gmail.com.passwords.R;
 import ebeletskiy.gmail.com.passwords.R.layout;
