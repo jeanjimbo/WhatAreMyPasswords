@@ -5,6 +5,7 @@ import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.widget.TextView;
@@ -26,7 +27,7 @@ public class WhatAreMyPasswordsActivity extends Activity implements
         setContentView(R.layout.main);
         
         initUI();
-        addDynamicFragment();
+        addEmptyFragment();
 //        DBHelper db = new DBHelper(this);
 //        db.deleteAll();
         
@@ -35,9 +36,15 @@ public class WhatAreMyPasswordsActivity extends Activity implements
         	.enablePersistentSelection();
     }
 
-    private void addDynamicFragment() {
-        Fragment fg = ItemsDescription.newInstance();
+    private void addEmptyFragment() {
+        Fragment fg = EmptyRightFrag.newInstance();
         getFragmentManager().beginTransaction().add(R.id.right_frag, fg)
+        	.commit();
+    }
+    
+    private void addItemsDescrItem(Ticket ticket) {
+    	Fragment fg = new ItemsDescription(ticket);
+        getFragmentManager().beginTransaction().replace(R.id.right_frag, fg, "ttag")
         	.commit();
     }
     
@@ -48,19 +55,7 @@ public class WhatAreMyPasswordsActivity extends Activity implements
 
 	@Override
 	public void showTicket(Ticket ticket) {
-		ItemsDescription itemsDescription = ((ItemsDescription)getFragmentManager().findFragmentById(R.id.right_frag));
-		TextView title = (TextView)itemsDescription.getView().findViewById(R.id.tv_title);
-	    title.setText(ticket.getTitle());
-	    
-	    TextView login = (TextView)itemsDescription.getView().findViewById(R.id.tv_login_data);
-	    login.setText(ticket.getLogin());
-		
-	    TextView password = (TextView)itemsDescription.getView().findViewById(R.id.tv_password_data);
-	    password.setText(ticket.getPassword());
-	
-	    TextView notes = (TextView)itemsDescription.getView().findViewById(R.id.tv_notes_data);
-	    notes.setText(ticket.getNotes());
-//		itemsDescription.update(ticket);
+		addItemsDescrItem(ticket);
 	}
 	
 	@Override
@@ -84,7 +79,7 @@ public class WhatAreMyPasswordsActivity extends Activity implements
 		((ItemsList)getFragmentManager().findFragmentById(R.id.left_frag)).
     		refresh();
 		
-		Fragment newFragment = new ItemsDescription();
+		Fragment newFragment = new EmptyRightFrag();
 		FragmentTransaction transaction = getFragmentManager().beginTransaction();
 		transaction.replace(R.id.right_frag, newFragment);
 		transaction.addToBackStack(null);
