@@ -5,18 +5,18 @@ import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuInflater;
-import ebeletskiy.gmail.com.passwords.R;
 import ebeletskiy.gmail.com.passwords.interfaces.AddNewItemBtnListener;
+import ebeletskiy.gmail.com.passwords.interfaces.DeleteItemListener;
 import ebeletskiy.gmail.com.passwords.interfaces.ListItemClickListener;
 import ebeletskiy.gmail.com.passwords.interfaces.SaveItemListener;
 import ebeletskiy.gmail.com.passwords.models.Ticket;
+import ebeletskiy.gmail.com.passwords.utils.DBHelper;
 
 public class WhatAreMyPasswordsActivity extends Activity implements 
 												ListItemClickListener, 
 												AddNewItemBtnListener,
-												SaveItemListener{
+												SaveItemListener,
+												DeleteItemListener{
 	private static final String TAG = "WhatAreMyPasswordsActivity";
 	
     @Override
@@ -56,13 +56,7 @@ public class WhatAreMyPasswordsActivity extends Activity implements
 		addItemsDescrItem(ticket);
 	}
 	
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		MenuInflater inflater = getMenuInflater();
-	    inflater.inflate(R.menu.menu, menu);
-	    return true;
-	}
-
+	
 	@Override
 	public void onButtonClick() {
 		Fragment newFragment = new EditItem();
@@ -77,6 +71,18 @@ public class WhatAreMyPasswordsActivity extends Activity implements
 		((ItemsList)getFragmentManager().findFragmentById(R.id.left_frag)).
     		refresh();
 		
+		Fragment newFragment = new EmptyRightFrag();
+		FragmentTransaction transaction = getFragmentManager().beginTransaction();
+		transaction.replace(R.id.right_frag, newFragment);
+		transaction.addToBackStack(null);
+		transaction.commit();
+	}
+
+	@Override
+	public void deleteItemChosen() {
+		((ItemsList)getFragmentManager().findFragmentById(R.id.left_frag)).
+		refresh();
+	
 		Fragment newFragment = new EmptyRightFrag();
 		FragmentTransaction transaction = getFragmentManager().beginTransaction();
 		transaction.replace(R.id.right_frag, newFragment);
