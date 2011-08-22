@@ -7,7 +7,7 @@
 
     <application android:icon="@drawable/icon" android:label="@string/app_name" 
     android:debuggable="true" android:hardwareAccelerated="true">
-        <activity android:name=".WhatAreMyPasswordsActivity"
+        <activity android:name=".ui.WhatAreMyPasswordsActivity"
                   android:label="@string/app_name"
                   android:windowSoftInputMode="adjustPan"
                   >
