@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+		android:id="@+id/empty_right_frag"
+		android:layout_height="match_parent"
+		android:layout_width="match_parent"
+		android:padding="80dip"
+		android:stretchColumns="1"
+		android:background="@drawable/decription_back">
+    <TextView android:text="TextView" android:id="@+id/textView1" android:layout_width="wrap_content" android:layout_height="wrap_content"></TextView>
+	
+</LinearLayout>
