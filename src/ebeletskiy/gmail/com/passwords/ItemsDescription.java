@@ -1,9 +1,9 @@
 package ebeletskiy.gmail.com.passwords;
 
-import ebeletskiy.gmail.com.passwords.R;
-import ebeletskiy.gmail.com.passwords.R.layout;
+import android.app.Activity;
 import android.app.Fragment;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -11,13 +11,17 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import ebeletskiy.gmail.com.passwords.interfaces.DeleteItemListener;
 import ebeletskiy.gmail.com.passwords.models.Ticket;
+import ebeletskiy.gmail.com.passwords.utils.DBHelper;
 
 public class ItemsDescription extends Fragment {
 	private static final String TAG = "ItemsDescription";
 	
 	Ticket ticket; 
 	TextView title, login, password, notes;
+	DBHelper dbHelper;
+	DeleteItemListener deleteListener;
 	
 	public ItemsDescription() {
 		
@@ -31,10 +35,18 @@ public class ItemsDescription extends Fragment {
 		}
 	}
 	
+	@Override
+	public void onAttach(Activity activity) {
+		super.onAttach(activity);
+		deleteListener = (DeleteItemListener)activity;
+	}
+	
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		
+		dbHelper = new DBHelper(getActivity());
 		
 		if (savedInstanceState == null) {
 			setHasOptionsMenu(true);
@@ -69,7 +81,26 @@ public class ItemsDescription extends Fragment {
 	
 	@Override
 	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-		 menu.add("Show password").setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
-         menu.add("Delete").setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
+	    inflater.inflate(R.menu.menu, menu);
+	}
+	
+	
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		switch (item.getItemId()) {
+		
+			case R.id.show_pass: 
+				Log.i(TAG, "show password"); 
+				break;
+				
+			case R.id.delete_item: 
+				dbHelper.deleteRow(ticket.getId());
+				deleteListener.deleteItemChosen();
+				break;
+			
+			default: break;
+		}
+		return super.onOptionsItemSelected(item);
+		
 	}
 }
