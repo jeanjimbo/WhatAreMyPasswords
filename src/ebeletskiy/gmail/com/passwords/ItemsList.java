@@ -7,6 +7,9 @@ import android.database.Cursor;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
@@ -36,6 +39,10 @@ public class ItemsList extends ListFragment {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		dbHelper = new DBHelper(getActivity());
+		
+		if (savedInstanceState == null) {
+			setHasOptionsMenu(true);
+		}
 		
 //		fillDB(); 
 		
@@ -152,4 +159,14 @@ public class ItemsList extends ListFragment {
 	public void refresh() {
 		mAdapter.changeCursor(dbHelper.getAll());
 	}
+	
+	@Override
+	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+	    inflater.inflate(R.menu.menu_items_list, menu);
+	}
+	
+//	@Override
+//	public boolean onOptionsItemSelected(MenuItem item) {
+//		return super.onOptionsItemSelected(item);
+//	}
 }
