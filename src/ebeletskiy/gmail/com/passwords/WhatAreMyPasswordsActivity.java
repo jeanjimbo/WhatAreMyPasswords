@@ -4,13 +4,14 @@ import android.app.ActionBar;
 import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import ebeletskiy.gmail.com.passwords.interfaces.AddNewItemBtnListener;
 import ebeletskiy.gmail.com.passwords.interfaces.DeleteItemListener;
 import ebeletskiy.gmail.com.passwords.interfaces.ListItemClickListener;
 import ebeletskiy.gmail.com.passwords.interfaces.SaveItemListener;
 import ebeletskiy.gmail.com.passwords.models.Ticket;
-import ebeletskiy.gmail.com.passwords.utils.DBHelper;
 
 public class WhatAreMyPasswordsActivity extends Activity implements 
 												ListItemClickListener, 
@@ -24,7 +25,7 @@ public class WhatAreMyPasswordsActivity extends Activity implements
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
         
-        initUI();
+        initActionBar();
         addEmptyFragment();
 //        DBHelper db = new DBHelper(this);
 //        db.deleteAll();
@@ -42,13 +43,19 @@ public class WhatAreMyPasswordsActivity extends Activity implements
     
     private void addItemsDescrItem(Ticket ticket) {
     	Fragment fg = new ItemsDescription(ticket);
-        getFragmentManager().beginTransaction().replace(R.id.right_frag, fg, "ttag")
+        getFragmentManager().beginTransaction().replace(R.id.right_frag, fg)
         	.commit();
     }
     
-	private void initUI() {
+	private void initActionBar() {
         ActionBar actionBar = getActionBar();
         actionBar.setTitle("What are my passwords?");
+        
+		BitmapDrawable background = new BitmapDrawable(
+		BitmapFactory.decodeResource(getResources(),
+				R.drawable.actionbar_back));
+		background.setTileModeX(android.graphics.Shader.TileMode.REPEAT);
+		actionBar.setBackgroundDrawable(background);
 	}
 
 	@Override
