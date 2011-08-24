@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
-	<item android:visible="true" android:enabled="true" android:id="@+id/show_pass"
-		android:title="Show Password" android:showAsAction="ifRoom"></item>
-	
-	<item android:visible="true" android:enabled="true" android:id="@+id/delete_item"
-		android:title="Delete" android:showAsAction="ifRoom"></item>
-	
-</menu>
