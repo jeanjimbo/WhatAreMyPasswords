@@ -69,7 +69,7 @@ public class MainActivity extends Activity implements
 	
 	@Override
 	public void onButtonClick() {
-		Fragment newFragment = new EditItem();
+		Fragment newFragment = new NewItem();
 		FragmentTransaction transaction = getFragmentManager().beginTransaction();
 		transaction.replace(R.id.right_frag, newFragment);
 		transaction.addToBackStack(null);

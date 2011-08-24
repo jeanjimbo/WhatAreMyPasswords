@@ -17,7 +17,7 @@ import ebeletskiy.gmail.com.passwords.interfaces.SaveItemListener;
 import ebeletskiy.gmail.com.passwords.models.Ticket;
 import ebeletskiy.gmail.com.passwords.utils.DBHelper;
 
-public class EditItem extends Fragment {
+public class NewItem extends Fragment {
 	private static final String TAG = "EditItem";
 	
 	DBHelper dbHelper;
