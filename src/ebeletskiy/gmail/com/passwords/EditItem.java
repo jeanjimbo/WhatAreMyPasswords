@@ -26,26 +26,24 @@ public class EditItem extends Fragment {
 	@Override
 	public void onAttach(Activity activity) {
 		super.onAttach(activity);
-		Log.i(TAG, "OnAttach()");
 		saveItemListener = (SaveItemListener)activity;
 	}
 	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		Log.i(TAG, "OnCreateView()");
 		return inflater.inflate(R.layout.new_item, container, false);
 	}
 	
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
-		Log.i(TAG, "OnActivityCreated()");
 		
 		dbHelper = new DBHelper(getActivity());
 		Button saveItemButton = (Button)getView().findViewById(R.id.bt_save_item);
 		saveItemButton.setOnClickListener(onSaveClickListener);
 	}
+	
 	
 	View.OnClickListener onSaveClickListener = new OnClickListener() {
 		
@@ -58,6 +56,7 @@ public class EditItem extends Fragment {
 			}
 		}
 	};
+	
 	
 	private Ticket createTicket() {
 		Ticket ticket = new Ticket();
