@@ -62,6 +62,10 @@ public class NewItem extends Fragment {
 			
 			if (saveItemListener != null && checkFields()) {
 				saveItemListener.saveItemList();
+				Toast t = Toast.makeText(getActivity(), "New ticket has been created",
+						Toast.LENGTH_SHORT);
+				t.setGravity(Gravity.CENTER_HORIZONTAL|Gravity.CENTER, 0, 0);
+				t.show();
 			} else {
 				Toast t = Toast.makeText(getActivity(), "Please fill all mandatory fields",
 						Toast.LENGTH_SHORT);
