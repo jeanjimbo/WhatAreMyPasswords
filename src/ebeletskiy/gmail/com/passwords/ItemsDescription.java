@@ -31,11 +31,11 @@ public class ItemsDescription extends Fragment {
 	}
 	
 	public ItemsDescription(Ticket ticket) {
-		if (ticket != null) {
-			this.ticket = ticket;
-		} else {
+		if (ticket == null) {		
 			throw new IllegalArgumentException();
 		}
+		
+		this.ticket = ticket;		
 	}
 	
 	@Override
