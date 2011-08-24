@@ -55,19 +55,7 @@ public class ItemsList extends ListFragment {
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
-		Button newItemBtn = (Button)getView().findViewById(R.id.bt_add_item);
-		newItemBtn.setOnClickListener(onClickListener);
-	};
-	
-	View.OnClickListener onClickListener = new OnClickListener() {
-		
-		@Override
-		public void onClick(View v) {
-			if (newItemBtnListener != null) {
-				newItemBtnListener.onButtonClick();
-			}
-		}
-	};
+	}
 	
 	
 	@Override
@@ -165,8 +153,16 @@ public class ItemsList extends ListFragment {
 	    inflater.inflate(R.menu.menu_items_list, menu);
 	}
 	
-//	@Override
-//	public boolean onOptionsItemSelected(MenuItem item) {
-//		return super.onOptionsItemSelected(item);
-//	}
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		
+		switch (item.getItemId()) {
+			case R.id.add_item:
+				if (newItemBtnListener != null) {
+					newItemBtnListener.onButtonClick();
+				}
+			break;
+		}
+		return super.onOptionsItemSelected(item);
+	}
 }
