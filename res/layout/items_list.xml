@@ -4,14 +4,6 @@
 	android:layout_height="match_parent"
 	android:orientation="vertical">
 	
-	<Button android:id="@+id/bt_add_item"
-	android:layout_width="match_parent"
-	android:layout_height="wrap_content"
-	android:text="Add New Item"
-	android:textStyle="bold"
-	android:layout_gravity="center_horizontal"
-	android:background="@drawable/rounded_btn"/>
-
 	<ListView
 	  android:id="@android:id/list"
 	  android:orientation="vertical"
