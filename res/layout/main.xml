@@ -7,12 +7,12 @@
     
     <fragment class="ebeletskiy.gmail.com.passwords.ItemsList"
     	android:id="@+id/left_frag"
-    	android:layout_weight="80"
+    	android:layout_weight="70"
     	android:layout_width="match_parent"
     	android:layout_height="match_parent"/>
     	
      <FrameLayout android:id="@+id/right_frag" 
-     	android:layout_weight="20"
+     	android:layout_weight="30"
         android:layout_width="match_parent" 
         android:layout_height="match_parent"/>
     
