@@ -7,6 +7,7 @@ import android.app.FragmentTransaction;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
+import android.util.Log;
 import ebeletskiy.gmail.com.passwords.interfaces.AddNewItemBtnListener;
 import ebeletskiy.gmail.com.passwords.interfaces.DeleteItemListener;
 import ebeletskiy.gmail.com.passwords.interfaces.ListItemClickListener;
@@ -51,11 +52,13 @@ public class WhatAreMyPasswordsActivity extends Activity implements
         ActionBar actionBar = getActionBar();
         actionBar.setTitle("What are my passwords?");
         
-		BitmapDrawable background = new BitmapDrawable(
-		BitmapFactory.decodeResource(getResources(),
-				R.drawable.actionbar_back));
-		background.setTileModeX(android.graphics.Shader.TileMode.REPEAT);
-		actionBar.setBackgroundDrawable(background);
+        
+//		BitmapDrawable background = new BitmapDrawable(
+//		BitmapFactory.decodeResource(getResources(),
+//				R.drawable.actionbar_back));
+//		background.setTileModeX(android.graphics.Shader.TileMode.REPEAT);
+//		actionBar.setBackgroundDrawable(background);
+//        Log.i(TAG, "height " + actionBar.getHeight());
 	}
 
 	@Override
