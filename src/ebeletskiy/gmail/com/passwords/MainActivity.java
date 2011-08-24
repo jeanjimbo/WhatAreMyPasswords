@@ -53,11 +53,11 @@ public class MainActivity extends Activity implements
         actionBar.setTitle("What are my passwords?");
         
         
-//		BitmapDrawable background = new BitmapDrawable(
-//		BitmapFactory.decodeResource(getResources(),
-//				R.drawable.actionbar_back));
-//		background.setTileModeX(android.graphics.Shader.TileMode.REPEAT);
-//		actionBar.setBackgroundDrawable(background);
+		BitmapDrawable background = new BitmapDrawable(
+		BitmapFactory.decodeResource(getResources(),
+				R.drawable.action_bar_background));
+		background.setTileModeX(android.graphics.Shader.TileMode.REPEAT);
+		actionBar.setBackgroundDrawable(background);
 //        Log.i(TAG, "height " + actionBar.getHeight());
 	}
 
