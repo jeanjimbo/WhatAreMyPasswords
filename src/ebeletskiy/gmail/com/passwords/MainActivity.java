@@ -14,7 +14,7 @@ import ebeletskiy.gmail.com.passwords.interfaces.ListItemClickListener;
 import ebeletskiy.gmail.com.passwords.interfaces.SaveItemListener;
 import ebeletskiy.gmail.com.passwords.models.Ticket;
 
-public class WhatAreMyPasswordsActivity extends Activity implements 
+public class MainActivity extends Activity implements 
 												ListItemClickListener, 
 												AddNewItemBtnListener,
 												SaveItemListener,
