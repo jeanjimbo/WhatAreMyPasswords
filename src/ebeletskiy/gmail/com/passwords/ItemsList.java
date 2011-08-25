@@ -159,7 +159,7 @@ public class ItemsList extends ListFragment {
 		switch (item.getItemId()) {
 			case R.id.add_item:
 				if (newItemBtnListener != null) {
-					newItemBtnListener.onButtonClick();
+					newItemBtnListener.onSaveNewItem();
 				}
 			break;
 		}
