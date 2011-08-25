@@ -61,7 +61,7 @@ public class NewItem extends Fragment {
 			dbHelper.insert( createTicket() );
 			
 			if (saveItemListener != null && checkFields()) {
-				saveItemListener.saveItemList();
+				saveItemListener.saveItem();
 				Toast t = Toast.makeText(getActivity(), "New ticket has been created",
 						Toast.LENGTH_SHORT);
 				t.setGravity(Gravity.CENTER_HORIZONTAL|Gravity.CENTER, 0, 0);

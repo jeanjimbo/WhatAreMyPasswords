@@ -20,7 +20,7 @@ import android.widget.TextView;
 import ebeletskiy.gmail.com.passwords.R;
 import ebeletskiy.gmail.com.passwords.R.id;
 import ebeletskiy.gmail.com.passwords.R.layout;
-import ebeletskiy.gmail.com.passwords.interfaces.SaveNewItem;
+import ebeletskiy.gmail.com.passwords.interfaces.AddNewItemListener;
 import ebeletskiy.gmail.com.passwords.interfaces.ListItemClickListener;
 import ebeletskiy.gmail.com.passwords.models.Ticket;
 import ebeletskiy.gmail.com.passwords.utils.DBHelper;
@@ -33,7 +33,7 @@ public class ItemsList extends ListFragment {
 	private MAdapter mAdapter;
 	private Cursor cursor;
 	private ListItemClickListener itemClickListener;
-	private SaveNewItem newItemBtnListener;
+	private AddNewItemListener newItemBtnListener;
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -63,7 +63,7 @@ public class ItemsList extends ListFragment {
 		super.onAttach(activity);
 		
 		itemClickListener = (ListItemClickListener)activity;
-		newItemBtnListener = (SaveNewItem)activity;
+		newItemBtnListener = (AddNewItemListener)activity;
 	}
 	
 	// test method
@@ -91,7 +91,7 @@ public class ItemsList extends ListFragment {
 		Ticket ticket = DataConverter.convertToTicket(cursor);
 		
 		if (itemClickListener != null) {
-			itemClickListener.showTicket(ticket);
+			itemClickListener.itemClicked(ticket);
 		}
 	}
 	
@@ -159,7 +159,7 @@ public class ItemsList extends ListFragment {
 		switch (item.getItemId()) {
 			case R.id.add_item:
 				if (newItemBtnListener != null) {
-					newItemBtnListener.onSaveNewItem();
+					newItemBtnListener.onAddNewItem();
 				}
 			break;
 		}

@@ -8,7 +8,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.util.Log;
-import ebeletskiy.gmail.com.passwords.interfaces.SaveNewItem;
+import ebeletskiy.gmail.com.passwords.interfaces.AddNewItemListener;
 import ebeletskiy.gmail.com.passwords.interfaces.DeleteItemListener;
 import ebeletskiy.gmail.com.passwords.interfaces.ListItemClickListener;
 import ebeletskiy.gmail.com.passwords.interfaces.SaveItemListener;
@@ -16,7 +16,7 @@ import ebeletskiy.gmail.com.passwords.models.Ticket;
 
 public class MainActivity extends Activity implements 
 												ListItemClickListener, 
-												SaveNewItem,
+												AddNewItemListener,
 												SaveItemListener,
 												DeleteItemListener{
 	private static final String TAG = "WhatAreMyPasswordsActivity";
@@ -62,13 +62,13 @@ public class MainActivity extends Activity implements
 	}
 
 	@Override
-	public void showTicket(Ticket ticket) {
+	public void itemClicked(Ticket ticket) {
 		addItemsDescrItem(ticket);
 	}
 	
 	
 	@Override
-	public void onSaveNewItem() {
+	public void onAddNewItem() {
 		Fragment newFragment = new NewItem();
 		FragmentTransaction transaction = getFragmentManager().beginTransaction();
 		transaction.replace(R.id.right_frag, newFragment);
@@ -77,7 +77,7 @@ public class MainActivity extends Activity implements
 	}
 
 	@Override
-	public void saveItemList() {
+	public void saveItem() {
 		((ItemsList)getFragmentManager().findFragmentById(R.id.left_frag)).
     		refresh();
 		
@@ -89,7 +89,7 @@ public class MainActivity extends Activity implements
 	}
 
 	@Override
-	public void deleteItemChosen() {
+	public void onDeleteItem() {
 		((ItemsList)getFragmentManager().findFragmentById(R.id.left_frag)).
 		refresh();
 	

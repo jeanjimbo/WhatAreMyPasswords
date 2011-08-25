@@ -98,7 +98,7 @@ public class ItemsDescription extends Fragment {
 				
 			case R.id.delete_item: 
 				dbHelper.deleteRow(ticket.getId());
-				deleteListener.deleteItemChosen();
+				deleteListener.onDeleteItem();
 				break;
 			
 			default: break;

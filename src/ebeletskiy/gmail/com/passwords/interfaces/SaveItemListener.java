@@ -1,5 +1,5 @@
 package ebeletskiy.gmail.com.passwords.interfaces;
 
 public interface SaveItemListener {
-	void saveItemList();
+	void saveItem();
 }
