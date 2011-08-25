@@ -66,12 +66,6 @@
 				
 					</TableLayout>
 					
-						<Button android:id="@+id/bt_save_item" android:layout_width="match_parent"
-							android:layout_height="wrap_content" android:text="Save"
-							android:textStyle="bold" android:layout_weight="1"
-							style="@android:style/Widget.Holo.Light.Button"/>
-			
-			
 			</LinearLayout>
 			
 			</LinearLayout>
