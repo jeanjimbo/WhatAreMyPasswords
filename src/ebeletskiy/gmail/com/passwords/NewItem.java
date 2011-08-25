@@ -6,6 +6,9 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
@@ -38,6 +41,16 @@ public class NewItem extends Fragment {
 	
 	
 	@Override
+	public void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		
+		if (savedInstanceState == null) {
+			setHasOptionsMenu(true);
+		}
+	}
+	
+	
+	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		return inflater.inflate(R.layout.new_item, container, false);
@@ -49,31 +62,7 @@ public class NewItem extends Fragment {
 		super.onActivityCreated(savedInstanceState);
 		
 		dbHelper = new DBHelper(getActivity());
-		Button saveItemButton = (Button)getView().findViewById(R.id.bt_save_item);
-		saveItemButton.setOnClickListener(onSaveClickListener);
 	}
-	
-	
-	View.OnClickListener onSaveClickListener = new OnClickListener() {
-		
-		@Override
-		public void onClick(View v) {
-			dbHelper.insert( createTicket() );
-			
-			if (saveItemListener != null && checkFields()) {
-				saveItemListener.saveItem();
-				Toast t = Toast.makeText(getActivity(), "New ticket has been created",
-						Toast.LENGTH_SHORT);
-				t.setGravity(Gravity.CENTER_HORIZONTAL|Gravity.CENTER, 0, 0);
-				t.show();
-			} else {
-				Toast t = Toast.makeText(getActivity(), "Please fill all mandatory fields",
-						Toast.LENGTH_SHORT);
-				t.setGravity(Gravity.CENTER_HORIZONTAL|Gravity.CENTER, 0, 0);
-				t.show();
-			}
-		}
-	};
 	
 	
 	private Ticket createTicket() {
@@ -100,5 +89,38 @@ public class NewItem extends Fragment {
 		} else {
 			return true; 
 		}
+	}
+	
+	
+	@Override
+	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+	    inflater.inflate(R.menu.menu_new_item, menu);
+	}
+	
+	
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		
+		switch (item.getItemId()) {
+			case R.id.save_item: 
+			
+				dbHelper.insert( createTicket() );
+				
+				if (saveItemListener != null && checkFields()) {
+					saveItemListener.saveItem();
+					Toast t = Toast.makeText(getActivity(), "New ticket has been created",
+							Toast.LENGTH_SHORT);
+					t.setGravity(Gravity.CENTER_HORIZONTAL|Gravity.CENTER, 0, 0);
+					t.show();
+				} else {
+					Toast t = Toast.makeText(getActivity(), "Please fill all mandatory fields",
+							Toast.LENGTH_SHORT);
+					t.setGravity(Gravity.CENTER_HORIZONTAL|Gravity.CENTER, 0, 0);
+					t.show();
+				}
+				
+			break;
+		}
+		return super.onOptionsItemSelected(item);
 	}
 }
