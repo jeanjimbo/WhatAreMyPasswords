@@ -94,10 +94,6 @@ public class NewItem extends Fragment {
 
 	
 	private boolean checkFields() {
-		if (title == null || login == null || password == null) {
-			throw new IllegalArgumentException();
-		}
-		
 		if (title.getText().toString().equals("") || login.getText().toString().equals("")
 				|| password.getText().toString().equals("")) {
 			return  false;

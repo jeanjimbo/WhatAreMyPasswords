@@ -20,7 +20,7 @@ import android.widget.TextView;
 import ebeletskiy.gmail.com.passwords.R;
 import ebeletskiy.gmail.com.passwords.R.id;
 import ebeletskiy.gmail.com.passwords.R.layout;
-import ebeletskiy.gmail.com.passwords.interfaces.AddNewItemBtnListener;
+import ebeletskiy.gmail.com.passwords.interfaces.SaveNewItem;
 import ebeletskiy.gmail.com.passwords.interfaces.ListItemClickListener;
 import ebeletskiy.gmail.com.passwords.models.Ticket;
 import ebeletskiy.gmail.com.passwords.utils.DBHelper;
@@ -33,7 +33,7 @@ public class ItemsList extends ListFragment {
 	private MAdapter mAdapter;
 	private Cursor cursor;
 	private ListItemClickListener itemClickListener;
-	private AddNewItemBtnListener newItemBtnListener;
+	private SaveNewItem newItemBtnListener;
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -63,7 +63,7 @@ public class ItemsList extends ListFragment {
 		super.onAttach(activity);
 		
 		itemClickListener = (ListItemClickListener)activity;
-		newItemBtnListener = (AddNewItemBtnListener)activity;
+		newItemBtnListener = (SaveNewItem)activity;
 	}
 	
 	// test method

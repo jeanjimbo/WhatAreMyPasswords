@@ -8,7 +8,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.util.Log;
-import ebeletskiy.gmail.com.passwords.interfaces.AddNewItemBtnListener;
+import ebeletskiy.gmail.com.passwords.interfaces.SaveNewItem;
 import ebeletskiy.gmail.com.passwords.interfaces.DeleteItemListener;
 import ebeletskiy.gmail.com.passwords.interfaces.ListItemClickListener;
 import ebeletskiy.gmail.com.passwords.interfaces.SaveItemListener;
@@ -16,7 +16,7 @@ import ebeletskiy.gmail.com.passwords.models.Ticket;
 
 public class MainActivity extends Activity implements 
 												ListItemClickListener, 
-												AddNewItemBtnListener,
+												SaveNewItem,
 												SaveItemListener,
 												DeleteItemListener{
 	private static final String TAG = "WhatAreMyPasswordsActivity";
