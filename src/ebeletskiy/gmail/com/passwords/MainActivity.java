@@ -42,12 +42,6 @@ public class MainActivity extends Activity implements
         	.commit();
     }
     
-    private void addItemsDescrItem(Ticket ticket) {
-    	Fragment fg = new ItemsDescription(ticket);
-        FragmentTransaction ft = getFragmentManager().beginTransaction();
-        ft.setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_right);
-        ft.replace(R.id.right_frag, fg).commit();
-    }
     
 	private void initActionBar() {
         ActionBar actionBar = getActionBar();
@@ -63,42 +57,44 @@ public class MainActivity extends Activity implements
 
 	@Override
 	public void itemClicked(Ticket ticket) {
-		addItemsDescrItem(ticket);
+		Fragment newFragment = new ItemsDescription(ticket);
+		loadFragment(newFragment);
 	}
 	
 	
 	@Override
 	public void onAddNewItem() {
 		Fragment newFragment = new NewItem();
-		FragmentTransaction transaction = getFragmentManager().beginTransaction();
-		transaction.setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_right);
-		transaction.replace(R.id.right_frag, newFragment);
-		transaction.addToBackStack(null);
-		transaction.commit();
+		loadFragment(newFragment);
+		
+		refreshList();
 	}
 
 	@Override
 	public void saveItem() {
-		((ItemsList)getFragmentManager().findFragmentById(R.id.left_frag)).
-    		refresh();
+		refreshList();
 		
 		Fragment newFragment = new EmptyRightFrag();
-		FragmentTransaction transaction = getFragmentManager().beginTransaction();
-		transaction.setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_right);
-		transaction.replace(R.id.right_frag, newFragment);
-		transaction.addToBackStack(null);
-		transaction.commit();
+		loadFragment(newFragment);
 	}
 
 	@Override
 	public void onDeleteItem() {
+		refreshList();
+		
+		Fragment newFragment = new EmptyRightFrag();
+		loadFragment(newFragment);
+	}
+	
+	private void refreshList() {
 		((ItemsList)getFragmentManager().findFragmentById(R.id.left_frag)).
 		refresh();
+	}
 	
-		Fragment newFragment = new EmptyRightFrag();
+	private void loadFragment(Fragment fragment) {
 		FragmentTransaction transaction = getFragmentManager().beginTransaction();
 		transaction.setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_right);
-		transaction.replace(R.id.right_frag, newFragment);
+		transaction.replace(R.id.right_frag, fragment);
 		transaction.addToBackStack(null);
 		transaction.commit();
 	}
