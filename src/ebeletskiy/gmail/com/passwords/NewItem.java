@@ -65,7 +65,7 @@ public class NewItem extends Fragment {
 	}
 	
 	
-	private Ticket createTicket() {
+	public Ticket createTicket() {
 		Ticket ticket = new Ticket();
 		
 		title = (EditText)getView().findViewById(R.id.et_title);
@@ -82,7 +82,7 @@ public class NewItem extends Fragment {
 	}
 
 	
-	private boolean checkFields() {
+	public boolean checkFields() {
 		if (title.getText().toString().equals("") || login.getText().toString().equals("")
 				|| password.getText().toString().equals("")) {
 			return  false;
