@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.util.Log;
 import ebeletskiy.gmail.com.passwords.interfaces.AddNewItemListener;
 import ebeletskiy.gmail.com.passwords.interfaces.DeleteItemListener;
+import ebeletskiy.gmail.com.passwords.interfaces.EditItemListener;
 import ebeletskiy.gmail.com.passwords.interfaces.ListItemClickListener;
 import ebeletskiy.gmail.com.passwords.interfaces.SaveItemListener;
 import ebeletskiy.gmail.com.passwords.models.Ticket;
@@ -18,7 +19,8 @@ public class MainActivity extends Activity implements
 												ListItemClickListener, 
 												AddNewItemListener,
 												SaveItemListener,
-												DeleteItemListener{
+												DeleteItemListener,
+												EditItemListener {
 	private static final String TAG = "WhatAreMyPasswordsActivity";
 	
     @Override
@@ -84,6 +86,12 @@ public class MainActivity extends Activity implements
 		loadFragment(newFragment);
 	}
 	
+	@Override
+	public void loadEditItem(Ticket ticket) {
+		Fragment newFragment = new EditItem(ticket);
+		loadFragment(newFragment);
+	}
+
 	private void refreshList() {
 		((ItemsList)getFragmentManager().findFragmentById(R.id.left_frag)).
 		refresh();
