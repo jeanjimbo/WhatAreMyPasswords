@@ -2,19 +2,17 @@ package ebeletskiy.gmail.com.passwords;
 
 import android.app.Activity;
 import android.app.Fragment;
-import android.graphics.Rect;
 import android.os.Bundle;
-import android.text.method.PasswordTransformationMethod;
-import android.text.method.TransformationMethod;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.TextView;
 import ebeletskiy.gmail.com.passwords.interfaces.DeleteItemListener;
+import ebeletskiy.gmail.com.passwords.interfaces.EditItemListener;
 import ebeletskiy.gmail.com.passwords.models.Ticket;
 import ebeletskiy.gmail.com.passwords.utils.DBHelper;
 
@@ -25,6 +23,7 @@ public class ItemsDescription extends Fragment {
 	TextView title, login, password, notes;
 	DBHelper dbHelper;
 	DeleteItemListener deleteListener;
+	EditItemListener editItemListener;
 	
 	public ItemsDescription() {
 		
@@ -42,6 +41,7 @@ public class ItemsDescription extends Fragment {
 	public void onAttach(Activity activity) {
 		super.onAttach(activity);
 		deleteListener = (DeleteItemListener)activity;
+		editItemListener = (EditItemListener)activity;
 	}
 	
 	
@@ -101,9 +101,22 @@ public class ItemsDescription extends Fragment {
 				deleteListener.onDeleteItem();
 				break;
 			
+			case R.id.edit_item:
+				editItemListener.loadEditItem( createTicket() );
 			default: break;
 		}
 		return super.onOptionsItemSelected(item);
 		
+	}
+
+	private Ticket createTicket() {
+		Ticket ticket = new Ticket();
+		
+		ticket.setTitle( (title.getText()).toString() );
+		ticket.setLogin( (login.getText()).toString() );
+		ticket.setPassword( (password.getText()).toString() );
+		ticket.setNotes( (notes.getText()).toString() );
+		
+		return ticket;
 	}
 }
