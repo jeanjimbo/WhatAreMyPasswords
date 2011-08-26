@@ -3,13 +3,13 @@ package ebeletskiy.gmail.com.passwords;
 import android.app.Activity;
 import android.app.Fragment;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
 import android.widget.TextView;
 import ebeletskiy.gmail.com.passwords.interfaces.DeleteItemListener;
 import ebeletskiy.gmail.com.passwords.interfaces.EditItemListener;
@@ -34,7 +34,8 @@ public class ItemsDescription extends Fragment {
 			throw new IllegalArgumentException();
 		}
 		
-		this.ticket = ticket;		
+		this.ticket = ticket;	
+		Log.i(TAG, "ticket.getId() = " + ticket.getId());
 	}
 	
 	@Override
@@ -102,21 +103,11 @@ public class ItemsDescription extends Fragment {
 				break;
 			
 			case R.id.edit_item:
-				editItemListener.loadEditItem( createTicket() );
+				editItemListener.loadEditItem( ticket );
 			default: break;
 		}
 		return super.onOptionsItemSelected(item);
 		
 	}
 
-	private Ticket createTicket() {
-		Ticket ticket = new Ticket();
-		
-		ticket.setTitle( (title.getText()).toString() );
-		ticket.setLogin( (login.getText()).toString() );
-		ticket.setPassword( (password.getText()).toString() );
-		ticket.setNotes( (notes.getText()).toString() );
-		
-		return ticket;
-	}
 }
