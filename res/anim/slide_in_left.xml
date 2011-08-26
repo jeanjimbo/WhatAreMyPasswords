@@ -5,5 +5,5 @@
     android:valueType="floatType"
     android:valueFrom="1280"
     android:valueTo="0" 
-    android:duration="150"/>
+    android:duration="300"/>
 </set>

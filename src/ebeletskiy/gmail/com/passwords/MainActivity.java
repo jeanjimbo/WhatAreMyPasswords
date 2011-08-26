@@ -44,8 +44,9 @@ public class MainActivity extends Activity implements
     
     private void addItemsDescrItem(Ticket ticket) {
     	Fragment fg = new ItemsDescription(ticket);
-        getFragmentManager().beginTransaction().replace(R.id.right_frag, fg)
-        	.commit();
+        FragmentTransaction ft = getFragmentManager().beginTransaction();
+        ft.setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_right);
+        ft.replace(R.id.right_frag, fg).commit();
     }
     
 	private void initActionBar() {
@@ -58,7 +59,6 @@ public class MainActivity extends Activity implements
 				R.drawable.action_bar_background));
 		background.setTileModeX(android.graphics.Shader.TileMode.REPEAT);
 		actionBar.setBackgroundDrawable(background);
-//        Log.i(TAG, "height " + actionBar.getHeight());
 	}
 
 	@Override
@@ -71,6 +71,7 @@ public class MainActivity extends Activity implements
 	public void onAddNewItem() {
 		Fragment newFragment = new NewItem();
 		FragmentTransaction transaction = getFragmentManager().beginTransaction();
+		transaction.setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_right);
 		transaction.replace(R.id.right_frag, newFragment);
 		transaction.addToBackStack(null);
 		transaction.commit();
@@ -83,6 +84,7 @@ public class MainActivity extends Activity implements
 		
 		Fragment newFragment = new EmptyRightFrag();
 		FragmentTransaction transaction = getFragmentManager().beginTransaction();
+		transaction.setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_right);
 		transaction.replace(R.id.right_frag, newFragment);
 		transaction.addToBackStack(null);
 		transaction.commit();
@@ -95,6 +97,7 @@ public class MainActivity extends Activity implements
 	
 		Fragment newFragment = new EmptyRightFrag();
 		FragmentTransaction transaction = getFragmentManager().beginTransaction();
+		transaction.setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_right);
 		transaction.replace(R.id.right_frag, newFragment);
 		transaction.addToBackStack(null);
 		transaction.commit();
