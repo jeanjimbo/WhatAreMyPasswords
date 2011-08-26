@@ -1,6 +1,7 @@
 package ebeletskiy.gmail.com.passwords;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.MenuItem;
 import android.widget.EditText;
@@ -9,6 +10,7 @@ import ebeletskiy.gmail.com.passwords.models.Ticket;
 import ebeletskiy.gmail.com.passwords.utils.DBHelper;
 
 public class EditItem extends NewItem {
+	private static final String TAG = "EditItem";
 	
 	private Ticket ticket;
 	
@@ -16,6 +18,7 @@ public class EditItem extends NewItem {
 	
 	public EditItem(Ticket ticket) {
 		this.ticket = ticket;
+		Log.i(TAG, "ticket.getId() = " + ticket.getId());
 	}
 	
 	@Override
@@ -45,7 +48,7 @@ public class EditItem extends NewItem {
 		switch (item.getItemId()) {
 			case R.id.save_item: 
 			
-				dbHelper.insert( createTicket() );
+				dbHelper.updateRow( createTicket() );
 				
 				if (saveItemListener != null && checkFields()) {
 					saveItemListener.saveItem();
@@ -57,6 +60,17 @@ public class EditItem extends NewItem {
 			break;
 		}
 		return true;
+	}
+	
+	
+	public Ticket createTicket() {
+		
+		ticket.setTitle( (title.getText()).toString() );
+		ticket.setLogin( (login.getText()).toString() );
+		ticket.setPassword( (password.getText()).toString() );
+		ticket.setNotes( (notes.getText()).toString() );
+		
+		return ticket;
 	}
 	
 	private void showToast(String string) {
