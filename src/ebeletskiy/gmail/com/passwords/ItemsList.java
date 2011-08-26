@@ -146,6 +146,8 @@ public class ItemsList extends ListFragment {
 	
 	public void refresh() {
 		mAdapter.changeCursor(dbHelper.getAll());
+		getListView().setItemChecked(-1, true);
+		Log.i(TAG, "refresh()");
 	}
 	
 	@Override
