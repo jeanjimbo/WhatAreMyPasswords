@@ -62,8 +62,7 @@ public class DBHelper extends SQLiteOpenHelper {
 						COLUMN_NAME_TITLE + ", " +
 						COLUMN_NAME_LOGIN + ", " +
 						COLUMN_NAME_PASSWORD + ", " +
-						COLUMN_NAME_NOTES + " FROM " + TABLE_NAME + 
-						" ORDER BY title", null)); // TODO: updated 'title'
+						COLUMN_NAME_NOTES + " FROM " + TABLE_NAME, null)); // TODO: updated 'title'
 	}
 	
 	public void deleteRow(int id) {
