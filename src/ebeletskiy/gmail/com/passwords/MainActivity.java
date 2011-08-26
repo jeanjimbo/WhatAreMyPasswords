@@ -66,8 +66,6 @@ public class MainActivity extends Activity implements
 	public void onAddNewItem() {
 		Fragment newFragment = new NewItem();
 		loadFragment(newFragment);
-		
-		refreshList();
 	}
 
 	@Override
@@ -89,6 +87,8 @@ public class MainActivity extends Activity implements
 	private void refreshList() {
 		((ItemsList)getFragmentManager().findFragmentById(R.id.left_frag)).
 		refresh();
+		
+		Log.i(TAG, "refreshList()");
 	}
 	
 	private void loadFragment(Fragment fragment) {
