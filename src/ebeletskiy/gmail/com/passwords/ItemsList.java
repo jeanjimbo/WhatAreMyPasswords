@@ -7,18 +7,24 @@ import android.database.Cursor;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.ActionMode;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.CursorAdapter;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 import ebeletskiy.gmail.com.passwords.R.style;
 import ebeletskiy.gmail.com.passwords.interfaces.AddNewItemListener;
+import ebeletskiy.gmail.com.passwords.interfaces.DeleteItemListener;
+import ebeletskiy.gmail.com.passwords.interfaces.EditItemListener;
 import ebeletskiy.gmail.com.passwords.interfaces.ListItemClickListener;
 import ebeletskiy.gmail.com.passwords.models.Ticket;
 import ebeletskiy.gmail.com.passwords.utils.DBHelper;
@@ -32,6 +38,9 @@ public class ItemsList extends ListFragment {
 	private Cursor cursor;
 	private ListItemClickListener itemClickListener;
 	private AddNewItemListener newItemBtnListener;
+	private DeleteItemListener deleteListener;
+	private EditItemListener editItemListener;
+	private Ticket ticket;
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -52,9 +61,19 @@ public class ItemsList extends ListFragment {
 	
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
-		super.onActivityCreated(savedInstanceState);
+		super.onActivityCreated(savedInstanceState);		
 		
-		
+		getListView().setOnItemLongClickListener(new OnItemLongClickListener() {
+
+			@Override
+			public boolean onItemLongClick(AdapterView<?> parent, View view,
+					int position, long id) {
+				ticket = createView(view);
+				getListView().setItemChecked(position, true);
+				getActivity().startActionMode(mContentSelectionActionModeCallback);
+				return true;
+			}
+		});
 	}
 	
 	
@@ -64,6 +83,8 @@ public class ItemsList extends ListFragment {
 		
 		itemClickListener = (ListItemClickListener)activity;
 		newItemBtnListener = (AddNewItemListener)activity;
+		deleteListener = (DeleteItemListener)activity;
+		editItemListener = (EditItemListener)activity;
 	}
 	
 	// test method
@@ -97,6 +118,12 @@ public class ItemsList extends ListFragment {
 	
 	public void enablePersistentSelection() {
 		getListView().setChoiceMode(ListView.CHOICE_MODE_SINGLE);
+	}
+	
+	private Ticket createView(View v) {
+		ViewHolder viewHolder = (ViewHolder)v.getTag(); 
+		Cursor cursor = dbHelper.getItem(viewHolder.getId());
+		return ticket = DataConverter.convertToTicket(cursor);
 	}
 	
 	private class MAdapter extends CursorAdapter {
@@ -173,4 +200,37 @@ public class ItemsList extends ListFragment {
 		}
 		return super.onOptionsItemSelected(item);
 	}
+
+
+	private ActionMode.Callback mContentSelectionActionModeCallback = new ActionMode.Callback() {
+        public boolean onCreateActionMode(ActionMode actionMode, Menu menu) {
+            actionMode.setTitle("What you want to do with the item?");
+
+            MenuInflater inflater = getActivity().getMenuInflater();
+            inflater.inflate(R.menu.menu_contex_item_long_click, menu);
+            return true;
+        }
+
+        public boolean onPrepareActionMode(ActionMode actionMode, Menu menu) {
+            return false;
+        }
+
+        public boolean onActionItemClicked(ActionMode actionMode, MenuItem menuItem) {
+            switch (menuItem.getItemId()) {
+                case R.id.edit_item:
+                	editItemListener.loadEditItem( ticket );
+                    actionMode.finish();
+                    return true;
+                case R.id.delete_item:
+                	dbHelper.deleteRow(ticket.getId());
+    				deleteListener.onDeleteItem();
+                    actionMode.finish();
+                    return true;
+            }
+            return false;
+        }
+
+        public void onDestroyActionMode(ActionMode actionMode) {
+        }
+    };
 }
