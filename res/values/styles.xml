@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 	<style name="activated_item" parent="android:Theme.Holo">
-		<item name="android:background">?android:attr/activatedBackgroundIndicator</item>
+		<item name="android:background">@drawable/item_light_list</item>
+	</style>
+	
+	<style name="activated_dark_item" parent="android:Theme.Holo">
+		<item name="android:background">@drawable/item_dark_list</item>
 	</style>
 	
 	<style name="items_description_plain">
