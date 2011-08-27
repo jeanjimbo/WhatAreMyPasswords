@@ -60,14 +60,14 @@ public class MainActivity extends Activity implements
 	@Override
 	public void itemClicked(Ticket ticket) {
 		Fragment newFragment = new ItemsDescription(ticket);
-		loadFragment(newFragment);
+		loadFragment(newFragment, false);
 	}
 	
 	
 	@Override
 	public void onAddNewItem() {
 		Fragment newFragment = new NewItem();
-		loadFragment(newFragment);
+		loadFragment(newFragment, true);
 	}
 
 	@Override
@@ -75,7 +75,7 @@ public class MainActivity extends Activity implements
 		refreshList();
 		
 		Fragment newFragment = new EmptyRightFrag();
-		loadFragment(newFragment);
+		loadFragment(newFragment, true);
 	}
 
 	@Override
@@ -83,13 +83,13 @@ public class MainActivity extends Activity implements
 		refreshList();
 		
 		Fragment newFragment = new EmptyRightFrag();
-		loadFragment(newFragment);
+		loadFragment(newFragment, false);
 	}
 	
 	@Override
 	public void loadEditItem(Ticket ticket) {
 		Fragment newFragment = new EditItem(ticket);
-		loadFragment(newFragment);
+		loadFragment(newFragment, true);
 	}
 
 	private void refreshList() {
@@ -99,9 +99,11 @@ public class MainActivity extends Activity implements
 		Log.i(TAG, "refreshList()");
 	}
 	
-	private void loadFragment(Fragment fragment) {
+	private void loadFragment(Fragment fragment, boolean animation) {
 		FragmentTransaction transaction = getFragmentManager().beginTransaction();
-		transaction.setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_right);
+		if (animation) {
+			transaction.setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_right);
+		}
 		transaction.replace(R.id.right_frag, fragment);
 		transaction.addToBackStack(null);
 		transaction.commit();
