@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.ListFragment;
 import android.content.Context;
 import android.database.Cursor;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -11,15 +12,12 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.CursorAdapter;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
-import ebeletskiy.gmail.com.passwords.R;
-import ebeletskiy.gmail.com.passwords.R.id;
-import ebeletskiy.gmail.com.passwords.R.layout;
+import ebeletskiy.gmail.com.passwords.R.style;
 import ebeletskiy.gmail.com.passwords.interfaces.AddNewItemListener;
 import ebeletskiy.gmail.com.passwords.interfaces.ListItemClickListener;
 import ebeletskiy.gmail.com.passwords.models.Ticket;
@@ -55,6 +53,8 @@ public class ItemsList extends ListFragment {
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
+		
+		
 	}
 	
 	
@@ -114,8 +114,13 @@ public class ItemsList extends ListFragment {
 		
 		@Override
 		public View newView(Context ctxt, Cursor c, ViewGroup parent) {
+			View row = null;
 			LayoutInflater inflater=((Activity)ctxt).getLayoutInflater();
-			View row=inflater.inflate(R.layout.row, parent, false);
+			if (c.getInt(0) % 2 == 0) {
+				row=inflater.inflate(R.layout.row, parent, false);
+			} else {
+				row=inflater.inflate(R.layout.row_gray, parent, false);
+			}
 			ViewHolder holder=new ViewHolder(row);
 			
 			row.setTag(holder);
@@ -142,6 +147,7 @@ public class ItemsList extends ListFragment {
 		public int getId() {
 			return id;
 		}
+		
 	}
 	
 	public void refresh() {
