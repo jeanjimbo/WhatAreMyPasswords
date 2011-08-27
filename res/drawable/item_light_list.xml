@@ -1,0 +1,4 @@
+<selector xmlns:android="http://schemas.android.com/apk/res/android"
+        android:exitFadeDuration="@android:integer/config_mediumAnimTime">
+    <item android:state_activated="true" android:drawable="@drawable/list_activated_holo"></item>
+</selector>
