@@ -214,7 +214,7 @@ public class ItemsList extends ListFragment {
 	private ActionMode.Callback mContentSelectionActionModeCallback = new ActionMode.Callback() {
         public boolean onCreateActionMode(ActionMode actionMode, Menu menu) {
             actionMode.setTitle(ticket.getTitle());
-            mView.setBackgroundDrawable(getResources().getDrawable(R.drawable.green_long_press_item));
+            mView.setBackgroundDrawable(getResources().getDrawable(R.drawable.long_press_item_highlight));
 
             MenuInflater inflater = getActivity().getMenuInflater();
             inflater.inflate(R.menu.menu_contex_item_long_click, menu);
