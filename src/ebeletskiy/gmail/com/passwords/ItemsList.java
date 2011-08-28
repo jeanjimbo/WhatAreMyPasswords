@@ -48,12 +48,11 @@ public class ItemsList extends ListFragment {
 		if (savedInstanceState == null) {
 			setHasOptionsMenu(true);
 		}
-		
 		cursor = dbHelper.getAll();
 		mAdapter = new MAdapter(getActivity(), cursor, true);
-
 		setListAdapter(mAdapter);
 	}
+	
 	
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
@@ -95,6 +94,7 @@ public class ItemsList extends ListFragment {
 		return inflater.inflate(R.layout.items_list, container, false);
 	}
 	
+	
 	@Override
 	public void onListItemClick(ListView l, View v, int position, long id) {
 		ViewHolder viewHolder = (ViewHolder)v.getTag(); 
@@ -110,11 +110,13 @@ public class ItemsList extends ListFragment {
 		getListView().setChoiceMode(ListView.CHOICE_MODE_SINGLE);
 	}
 	
+	
 	private Ticket createView(View v) {
 		ViewHolder viewHolder = (ViewHolder)v.getTag(); 
 		Cursor cursor = dbHelper.getItem(viewHolder.getId());
 		return ticket = DataConverter.convertToTicket(cursor);
 	}
+	
 	
 	private class MAdapter extends CursorAdapter {
 		
@@ -147,6 +149,7 @@ public class ItemsList extends ListFragment {
 			holder.populateFrom(c, dbHelper);
 		}
 		
+		
 		@Override
 		public View newView(Context ctxt, Cursor c, ViewGroup parent) {
 			Log.i(TAG, "newView()" + c.getPosition());
@@ -168,6 +171,7 @@ public class ItemsList extends ListFragment {
 		}
 	}
 
+	
 	static class ViewHolder {
 		private TextView title;
 		private int id;
@@ -243,6 +247,7 @@ public class ItemsList extends ListFragment {
         public void onDestroyActionMode(ActionMode actionMode) {
             mView.setBackgroundDrawable(null);
             mCurrentActionMode = null;
+            mAdapter.notifyDataSetChanged();
         }
     };
 }
