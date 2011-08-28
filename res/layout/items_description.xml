@@ -11,7 +11,7 @@
 		
 			<LinearLayout android:layout_height="wrap_content"
 				android:layout_width="wrap_content" android:orientation="vertical"
-				android:padding="120dip">
+				android:padding="80dip">
 			
 				<TableLayout 
 				android:id="@+id/items_description"
