@@ -141,7 +141,7 @@ public class ItemsList extends ListFragment {
 			ViewHolder holder=(ViewHolder)row.getTag();
 			
 			if (c.getPosition() % 2 == 0) {
-				row.setBackgroundDrawable(getResources().getDrawable(R.drawable.mtest));
+				row.setBackgroundDrawable(getResources().getDrawable(R.drawable.dark_item_background));
 			} 
 			
 			holder.populateFrom(c, dbHelper);
