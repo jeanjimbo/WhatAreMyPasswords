@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-	<style name="activated_item" parent="android:Theme.Holo">
-		<item name="android:background">@drawable/item_light_list</item>
+	<style name="activated_item" parent="@android:style/Widget.Holo.Light.ListView">
+		<item name="android:background">?android:attr/activatedBackgroundIndicator</item>
 	</style>
 	
-	<style name="activated_dark_item" parent="android:Theme.Holo">
-		<item name="android:background">@drawable/item_dark_list</item>
-	</style>
+	<!-- <style name="mTest" parent="@android:style/Widget.Holo.Light.ListView">
+		<item name="android:background">@drawable/mtest</item>
+	</style> -->
 	
 	<style name="items_description_plain">
 		<item name="android:textSize">30dip</item>

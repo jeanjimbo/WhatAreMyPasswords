@@ -97,10 +97,6 @@ public class ItemsList extends ListFragment {
 	
 	@Override
 	public void onListItemClick(ListView l, View v, int position, long id) {
-//		v.setBackgroundDrawable(getResources().getDrawable(R.drawable.list_selector_focused_holo_light));
-//		l.setItemChecked(position, true);
-//		l.setFocusableInTouchMode(true);
-		
 		ViewHolder viewHolder = (ViewHolder)v.getTag(); 
 		Cursor cursor = dbHelper.getItem(viewHolder.getId());
 		Ticket ticket = DataConverter.convertToTicket(cursor);
@@ -138,17 +134,14 @@ public class ItemsList extends ListFragment {
 			} else {
 				return 1;
 			}
-			
 		}
 
 		@Override
 		public void bindView(View row, Context ctxt, Cursor c) {
-			Log.i(TAG, "bindView()" + c.getPosition());
 			ViewHolder holder=(ViewHolder)row.getTag();
 			
 			if (c.getPosition() % 2 == 0) {
-				Log.i(TAG, "setting background");
-//				row.setBackgroundDrawable(getResources().getDrawable(R.drawable.background_action_bar));
+				row.setBackgroundDrawable(getResources().getDrawable(R.drawable.mtest));
 			} 
 			
 			holder.populateFrom(c, dbHelper);
@@ -192,7 +185,6 @@ public class ItemsList extends ListFragment {
 		public int getId() {
 			return id;
 		}
-		
 	}
 	
 	public void refresh() {

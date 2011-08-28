@@ -2,4 +2,5 @@
 <resources>
     <color name="row_item_color">#000000</color>
     <color name="action_bar_color">#F0F0F0</color>
+    <color name="dark_item_color">#ff85878a</color>
 </resources>
