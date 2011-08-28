@@ -6,11 +6,11 @@
 	
 	<style name="items_description_plain">
 		<item name="android:textSize">30dip</item>
-		<item name="android:textColor">#3f528b</item>
+		<item name="android:textColor">@color/text_color</item>
 	</style>	
 	
 	<style name="items_description_bold">
 		<item name="android:textSize">30dip</item>
-		<item name="android:textColor">#3f528b</item>
+		<item name="android:textColor">@color/text_color</item>
 	</style>
 </resources>
