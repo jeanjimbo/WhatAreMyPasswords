@@ -1,9 +1,12 @@
 package ebeletskiy.gmail.com.passwords;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.Fragment;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -11,6 +14,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 import ebeletskiy.gmail.com.passwords.interfaces.DeleteItemListener;
 import ebeletskiy.gmail.com.passwords.interfaces.EditItemListener;
 import ebeletskiy.gmail.com.passwords.models.Ticket;
@@ -97,16 +101,42 @@ public class ItemsDescription extends Fragment {
 				break;
 				
 			case R.id.delete_item: 
-				dbHelper.deleteRow(ticket.getId());
-				deleteListener.onDeleteItem();
+				showAlertDialog();
 				break;
-			
 			case R.id.edit_item:
 				editItemListener.loadEditItem( ticket );
 			default: break;
 		}
 		return super.onOptionsItemSelected(item);
 		
+	}
+	
+	private void showAlertDialog() {
+		AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+		builder.setMessage("Are you sure you want to delete the item?")
+		       .setCancelable(false)
+		       .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+		           public void onClick(DialogInterface dialog, int id) {
+		        	   	dbHelper.deleteRow(ticket.getId());
+						deleteListener.onDeleteItem();
+						showToast("Item has been deleted");
+		           }
+		       })
+		       .setNegativeButton("No", new DialogInterface.OnClickListener() {
+		           public void onClick(DialogInterface dialog, int id) {
+		                dialog.cancel();
+		           }
+		       });
+		
+		AlertDialog alert = builder.create();
+		builder.show();
+	}
+	
+	private void showToast(String string) {
+		Toast t = Toast.makeText(getActivity(), string,
+				Toast.LENGTH_SHORT);
+		t.setGravity(Gravity.CENTER_HORIZONTAL|Gravity.CENTER, 0, 0);
+		t.show();
 	}
 
 }

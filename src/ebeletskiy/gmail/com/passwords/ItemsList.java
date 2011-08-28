@@ -1,12 +1,15 @@
 package ebeletskiy.gmail.com.passwords;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.ListFragment;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.ActionMode;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -18,6 +21,7 @@ import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.CursorAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 import ebeletskiy.gmail.com.passwords.interfaces.AddNewItemListener;
 import ebeletskiy.gmail.com.passwords.interfaces.DeleteItemListener;
 import ebeletskiy.gmail.com.passwords.interfaces.EditItemListener;
@@ -214,6 +218,33 @@ public class ItemsList extends ListFragment {
 		return super.onOptionsItemSelected(item);
 	}
 
+	private void showAlertDialog() {
+		AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+		builder.setMessage("Are you sure you want to delete the item?")
+		       .setCancelable(false)
+		       .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+		           public void onClick(DialogInterface dialog, int id) {
+		        	   	dbHelper.deleteRow(ticket.getId());
+						deleteListener.onDeleteItem();
+						showToast("Item has been deleted");
+		           }
+		       })
+		       .setNegativeButton("No", new DialogInterface.OnClickListener() {
+		           public void onClick(DialogInterface dialog, int id) {
+		                dialog.cancel();
+		           }
+		       });
+		
+		AlertDialog alert = builder.create();
+		builder.show();
+	}
+	
+	private void showToast(String string) {
+		Toast t = Toast.makeText(getActivity(), string,
+				Toast.LENGTH_SHORT);
+		t.setGravity(Gravity.CENTER_HORIZONTAL|Gravity.CENTER, 0, 0);
+		t.show();
+	}
 
 	private ActionMode.Callback mContentSelectionActionModeCallback = new ActionMode.Callback() {
         public boolean onCreateActionMode(ActionMode actionMode, Menu menu) {
@@ -236,8 +267,7 @@ public class ItemsList extends ListFragment {
                     actionMode.finish();
                     return true;
                 case R.id.delete_item:
-                	dbHelper.deleteRow(ticket.getId());
-    				deleteListener.onDeleteItem();
+                	showAlertDialog();
                     actionMode.finish();
                     return true;
             }
