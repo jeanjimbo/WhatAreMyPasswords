@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="row_item_color">#000000</color>
-    <color name="action_bar_color">#F0F0F0</color>
-    <color name="dark_item_color">#ff85878a</color>
+    <color name="item_text_color">#000000</color>
+    <color name="item_back_color">#e4e3e3</color>
+    <color name="dark_item_color">#d1d2d4</color>
+    <color name="light_item_color">#eeeff1</color>
 </resources>
