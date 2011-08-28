@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.app.ListFragment;
 import android.content.Context;
 import android.database.Cursor;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.ActionMode;
@@ -17,11 +16,8 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.CursorAdapter;
-import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
-import ebeletskiy.gmail.com.passwords.R.style;
 import ebeletskiy.gmail.com.passwords.interfaces.AddNewItemListener;
 import ebeletskiy.gmail.com.passwords.interfaces.DeleteItemListener;
 import ebeletskiy.gmail.com.passwords.interfaces.EditItemListener;
@@ -41,6 +37,8 @@ public class ItemsList extends ListFragment {
 	private DeleteItemListener deleteListener;
 	private EditItemListener editItemListener;
 	private Ticket ticket;
+	private View mView;
+	private ActionMode mCurrentActionMode;
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -50,8 +48,6 @@ public class ItemsList extends ListFragment {
 		if (savedInstanceState == null) {
 			setHasOptionsMenu(true);
 		}
-		
-//		fillDB(); 
 		
 		cursor = dbHelper.getAll();
 		mAdapter = new MAdapter(getActivity(), cursor, true);
@@ -69,8 +65,13 @@ public class ItemsList extends ListFragment {
 			public boolean onItemLongClick(AdapterView<?> parent, View view,
 					int position, long id) {
 				ticket = createView(view);
-				getListView().setItemChecked(position, true);
-				getActivity().startActionMode(mContentSelectionActionModeCallback);
+				mView = view; 
+				
+				if (mCurrentActionMode != null) {
+					return false;
+				}
+				
+				mCurrentActionMode = getActivity().startActionMode(mContentSelectionActionModeCallback);
 				return true;
 			}
 		});
@@ -87,16 +88,7 @@ public class ItemsList extends ListFragment {
 		editItemListener = (EditItemListener)activity;
 	}
 	
-	// test method
-//	private void fillDB() {
-//		for (int i=0; i < 5; i++) {
-//			dbHelper.insert("Ebay and PayPal " + i, 
-//							"Login " + i, 
-//							"Password " + i,
-//							"Notes " + i);
-//		}
-//	}
-
+	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
@@ -105,7 +97,9 @@ public class ItemsList extends ListFragment {
 	
 	@Override
 	public void onListItemClick(ListView l, View v, int position, long id) {
-		l.setItemChecked(position, true);
+//		v.setBackgroundDrawable(getResources().getDrawable(R.drawable.list_selector_focused_holo_light));
+//		l.setItemChecked(position, true);
+//		l.setFocusableInTouchMode(true);
 		
 		ViewHolder viewHolder = (ViewHolder)v.getTag(); 
 		Cursor cursor = dbHelper.getItem(viewHolder.getId());
@@ -131,23 +125,48 @@ public class ItemsList extends ListFragment {
 		public MAdapter(Context context, Cursor c, boolean autoRequery) {
 			super(context, c, autoRequery);
 		}
+		
+		@Override
+		public int getViewTypeCount() {
+			return 2;
+		}
+		
+		@Override
+		public int getItemViewType(int position) {
+			if (position % 2 == 0) {
+				return 0;
+			} else {
+				return 1;
+			}
+			
+		}
 
 		@Override
 		public void bindView(View row, Context ctxt, Cursor c) {
+			Log.i(TAG, "bindView()" + c.getPosition());
 			ViewHolder holder=(ViewHolder)row.getTag();
+			
+			if (c.getPosition() % 2 == 0) {
+				Log.i(TAG, "setting background");
+//				row.setBackgroundDrawable(getResources().getDrawable(R.drawable.background_action_bar));
+			} 
 			
 			holder.populateFrom(c, dbHelper);
 		}
 		
 		@Override
 		public View newView(Context ctxt, Cursor c, ViewGroup parent) {
+			Log.i(TAG, "newView()" + c.getPosition());
 			View row = null;
 			LayoutInflater inflater=((Activity)ctxt).getLayoutInflater();
-			if (c.getInt(0) % 2 == 0) {
+			
+//			if (getItemViewType(c.getPosition()) == 0) {
+				Log.i(TAG, "inflating 1");
 				row=inflater.inflate(R.layout.row, parent, false);
-			} else {
-				row=inflater.inflate(R.layout.row_gray, parent, false);
-			}
+//			} else {
+//				Log.i(TAG, "inflating 2");
+//				row=inflater.inflate(R.layout.row_gray, parent, false);
+//			}
 			ViewHolder holder=new ViewHolder(row);
 			
 			row.setTag(holder);
@@ -157,17 +176,16 @@ public class ItemsList extends ListFragment {
 	}
 
 	static class ViewHolder {
-		private TextView name;
+		private TextView title;
 		private int id;
 		
 		
 		ViewHolder(View row) {
-			name = (TextView)row.findViewById(R.id.title);
+			title = (TextView)row.findViewById(R.id.title);
 		}
 		
 		void populateFrom(Cursor c, DBHelper helper) {
-			
-			name.setText(helper.getTitle(c));
+			title.setText(helper.getTitle(c));
 			id = helper.getId(c);
 		}
 		
@@ -180,7 +198,6 @@ public class ItemsList extends ListFragment {
 	public void refresh() {
 		mAdapter.changeCursor(dbHelper.getAll());
 		getListView().setItemChecked(-1, true);
-		Log.i(TAG, "refresh()");
 	}
 	
 	@Override
@@ -204,7 +221,8 @@ public class ItemsList extends ListFragment {
 
 	private ActionMode.Callback mContentSelectionActionModeCallback = new ActionMode.Callback() {
         public boolean onCreateActionMode(ActionMode actionMode, Menu menu) {
-            actionMode.setTitle("What you want to do with the item?");
+            actionMode.setTitle(ticket.getTitle());
+            mView.setBackgroundDrawable(getResources().getDrawable(R.drawable.green_long_press_item));
 
             MenuInflater inflater = getActivity().getMenuInflater();
             inflater.inflate(R.menu.menu_contex_item_long_click, menu);
@@ -231,6 +249,8 @@ public class ItemsList extends ListFragment {
         }
 
         public void onDestroyActionMode(ActionMode actionMode) {
+            mView.setBackgroundDrawable(null);
+            mCurrentActionMode = null;
         }
     };
 }
