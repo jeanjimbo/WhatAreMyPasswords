@@ -43,7 +43,6 @@ public class DBHelper extends SQLiteOpenHelper {
 	
 	public void insert(Ticket ticket) {
 
-		Log.i(TAG, "insert()");
 		ContentValues cv=new ContentValues();
 		
 		cv.put(COLUMN_NAME_TITLE, ticket.getTitle());
@@ -52,8 +51,6 @@ public class DBHelper extends SQLiteOpenHelper {
 		cv.put(COLUMN_NAME_NOTES, ticket.getNotes());
 		
 		getWritableDatabase().insert(TABLE_NAME, COLUMN_NAME_TITLE, cv);
-		
-//		getWritableDatabase().close();
 	}
 	
 	public Cursor getAll() {
@@ -72,9 +69,6 @@ public class DBHelper extends SQLiteOpenHelper {
 	public void updateRow(Ticket ticket) {
 		ContentValues cv=new ContentValues();
 		
-		Log.i(TAG, "title = " + ticket.getTitle());
-		Log.i(TAG, "id = " + Integer.toString(ticket.getId()) );
-		
 		cv.put(COLUMN_NAME_TITLE, ticket.getTitle());
 		cv.put(COLUMN_NAME_LOGIN, ticket.getLogin());
 		cv.put(COLUMN_NAME_PASSWORD, ticket.getPassword());
@@ -82,7 +76,6 @@ public class DBHelper extends SQLiteOpenHelper {
 		
 		getWritableDatabase().update(TABLE_NAME, cv, "_id=?", new String[] {Integer.toString(ticket.getId())});
 		
-		Log.i(TAG, "updateRow()");
 	}
 
 	public String getTitle(Cursor c) {

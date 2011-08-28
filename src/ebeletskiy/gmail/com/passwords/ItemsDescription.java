@@ -35,7 +35,6 @@ public class ItemsDescription extends Fragment {
 		}
 		
 		this.ticket = ticket;	
-		Log.i(TAG, "ticket.getId() = " + ticket.getId());
 	}
 	
 	@Override

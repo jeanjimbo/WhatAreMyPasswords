@@ -18,7 +18,6 @@ public class EditItem extends NewItem {
 	
 	public EditItem(Ticket ticket) {
 		this.ticket = ticket;
-		Log.i(TAG, "ticket.getId() = " + ticket.getId());
 	}
 	
 	@Override

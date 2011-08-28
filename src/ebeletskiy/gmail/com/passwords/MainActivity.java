@@ -7,7 +7,6 @@ import android.app.FragmentTransaction;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
-import android.util.Log;
 import ebeletskiy.gmail.com.passwords.interfaces.AddNewItemListener;
 import ebeletskiy.gmail.com.passwords.interfaces.DeleteItemListener;
 import ebeletskiy.gmail.com.passwords.interfaces.EditItemListener;
@@ -21,7 +20,7 @@ public class MainActivity extends Activity implements
 												SaveItemListener,
 												DeleteItemListener,
 												EditItemListener {
-	private static final String TAG = "WhatAreMyPasswordsActivity";
+	private static final String TAG = "MainActivity";
 	
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -30,9 +29,6 @@ public class MainActivity extends Activity implements
         
         initActionBar();
         addEmptyFragment();
-//        DBHelper db = new DBHelper(this);
-//        db.deleteAll();
-        
         
         ((ItemsList)getFragmentManager().findFragmentById(R.id.left_frag))
         	.enablePersistentSelection();
@@ -50,11 +46,12 @@ public class MainActivity extends Activity implements
         actionBar.setTitle("What are my passwords?");
         
         
-		BitmapDrawable background = new BitmapDrawable(
-		BitmapFactory.decodeResource(getResources(),
-				R.drawable.action_bar_background));
-		background.setTileModeX(android.graphics.Shader.TileMode.REPEAT);
-		actionBar.setBackgroundDrawable(background);
+//		BitmapDrawable background = new BitmapDrawable(
+//		BitmapFactory.decodeResource(getResources(),
+//				R.drawable.action_bar_background));
+//		background.setTileModeX(android.graphics.Shader.TileMode.REPEAT);
+//		actionBar.setBackgroundDrawable(background);
+		actionBar.setBackgroundDrawable(getResources().getDrawable(R.drawable.action_bar_background));
 	}
 
 	@Override
@@ -95,8 +92,6 @@ public class MainActivity extends Activity implements
 	private void refreshList() {
 		((ItemsList)getFragmentManager().findFragmentById(R.id.left_frag)).
 		refresh();
-		
-		Log.i(TAG, "refreshList()");
 	}
 	
 	private void loadFragment(Fragment fragment, boolean animation) {

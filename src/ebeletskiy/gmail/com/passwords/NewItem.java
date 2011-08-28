@@ -83,12 +83,12 @@ public class NewItem extends Fragment {
 
 	
 	public boolean checkFields() {
-		if (title.getText().toString().equals("") || login.getText().toString().equals("")
-				|| password.getText().toString().equals("")) {
-			return  false;
-		} else {
+//		if (title.getText().toString().equals("") || login.getText().toString().equals("")
+//				|| password.getText().toString().equals("")) {
+//			return  false;
+//		} else {
 			return true; 
-		}
+//		}
 	}
 	
 	
