@@ -7,6 +7,7 @@ import android.app.FragmentTransaction;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
+import android.util.Log;
 import ebeletskiy.gmail.com.passwords.interfaces.AddNewItemListener;
 import ebeletskiy.gmail.com.passwords.interfaces.DeleteItemListener;
 import ebeletskiy.gmail.com.passwords.interfaces.EditItemListener;
@@ -28,14 +29,16 @@ public class MainActivity extends Activity implements
         setContentView(R.layout.main);
         
         initActionBar();
-        addEmptyFragment();
+        if (savedInstanceState == null) {
+            addEmptyFragment();
+        }
         
         ((ItemsList)getFragmentManager().findFragmentById(R.id.left_frag))
         	.enablePersistentSelection();
     }
 
     private void addEmptyFragment() {
-        Fragment fg = EmptyRightFrag.newInstance();
+        Fragment fg = new EmptyRightFrag();
         getFragmentManager().beginTransaction().add(R.id.right_frag, fg)
         	.commit();
     }

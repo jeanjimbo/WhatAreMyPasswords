@@ -13,7 +13,4 @@ public class EmptyRightFrag extends Fragment {
 		return inflater.inflate(R.layout.empty_right_frag, container, false);
 	}
 	
-	public static Fragment newInstance() {
-		return new EmptyRightFrag();
-	}
 }

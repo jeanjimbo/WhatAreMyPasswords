@@ -22,6 +22,7 @@ import ebeletskiy.gmail.com.passwords.utils.DBHelper;
 
 public class ItemsDescription extends Fragment {
 	private static final String TAG = "ItemsDescription";
+	private boolean menuWasCreated = false;
 	
 	Ticket ticket; 
 	TextView title, login, password, notes;
@@ -52,11 +53,12 @@ public class ItemsDescription extends Fragment {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		
 		dbHelper = new DBHelper(getActivity());
 		
-		if (savedInstanceState == null) {
+		if (!menuWasCreated) {
+			Log.i(TAG, "creating menu");
 			setHasOptionsMenu(true);
+			menuWasCreated = true;
 		}
 	}
 
@@ -69,7 +71,6 @@ public class ItemsDescription extends Fragment {
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
-		
 		if (savedInstanceState == null) {
 			title = (TextView)getView().findViewById(R.id.tv_title);
 			title.setText(ticket.getTitle());
@@ -138,5 +139,5 @@ public class ItemsDescription extends Fragment {
 		t.setGravity(Gravity.CENTER_HORIZONTAL|Gravity.CENTER, 0, 0);
 		t.show();
 	}
-
+	
 }

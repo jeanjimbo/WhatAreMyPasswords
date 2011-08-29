@@ -32,6 +32,7 @@ import ebeletskiy.gmail.com.passwords.utils.DataConverter;
 
 public class ItemsList extends ListFragment {
 	private static final String TAG = "ItemsList";
+	private boolean menuWasCreated = false;
 	
 	private DBHelper dbHelper;
 	private MAdapter mAdapter;
@@ -44,17 +45,22 @@ public class ItemsList extends ListFragment {
 	private View mView;
 	private ActionMode mCurrentActionMode;
 	
+	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		
 		dbHelper = new DBHelper(getActivity());
 		
-		if (savedInstanceState == null) {
-			setHasOptionsMenu(true);
-		}
 		cursor = dbHelper.getAll();
 		mAdapter = new MAdapter(getActivity(), cursor, true);
 		setListAdapter(mAdapter);
+		
+		if (!menuWasCreated) {
+			Log.i(TAG, "creating menu");
+			setHasOptionsMenu(true);
+			menuWasCreated = true;
+		}
 	}
 	
 	
@@ -156,17 +162,9 @@ public class ItemsList extends ListFragment {
 		
 		@Override
 		public View newView(Context ctxt, Cursor c, ViewGroup parent) {
-			Log.i(TAG, "newView()" + c.getPosition());
 			View row = null;
 			LayoutInflater inflater=((Activity)ctxt).getLayoutInflater();
-			
-//			if (getItemViewType(c.getPosition()) == 0) {
-				Log.i(TAG, "inflating 1");
-				row=inflater.inflate(R.layout.row, parent, false);
-//			} else {
-//				Log.i(TAG, "inflating 2");
-//				row=inflater.inflate(R.layout.row_gray, parent, false);
-//			}
+			row=inflater.inflate(R.layout.row, parent, false);
 			ViewHolder holder=new ViewHolder(row);
 			
 			row.setTag(holder);

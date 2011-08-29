@@ -25,6 +25,8 @@ import ebeletskiy.gmail.com.passwords.utils.DBHelper;
 public class NewItem extends Fragment {
 	private static final String TAG = "EditItem";
 	
+	private boolean menuWasCreated = false;
+	
 	DBHelper dbHelper;
 	SaveItemListener saveItemListener;
 	
@@ -44,8 +46,10 @@ public class NewItem extends Fragment {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		
-		if (savedInstanceState == null) {
+		if (!menuWasCreated) {
+			Log.i(TAG, "creating menu");
 			setHasOptionsMenu(true);
+			menuWasCreated = true;
 		}
 	}
 	
