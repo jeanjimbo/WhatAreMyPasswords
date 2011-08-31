@@ -14,7 +14,8 @@
 				android:padding="120dip">
 			
 				<TextView android:id="@+id/tv_empty_frag" android:layout_height="wrap_content"
-				android:layout_width="wrap_content" android:text="Choose an item from the left pane	or create new one by choosing the option from menu."
+				android:layout_width="wrap_content" android:text="Choose an item from the left 
+					pane or create new one by choosing the option from menu."
 				 android:textColor="#000000" android:textSize="25dip"/>
 			
 			</LinearLayout>
