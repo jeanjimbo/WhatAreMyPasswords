@@ -116,7 +116,7 @@ public class NewItem extends Fragment {
 					t.setGravity(Gravity.CENTER_HORIZONTAL|Gravity.CENTER, 0, 0);
 					t.show();
 				} else {
-					Toast t = Toast.makeText(getActivity(), "Please fill all mandatory fields",
+					Toast t = Toast.makeText(getActivity(), "Please fill Title",
 							Toast.LENGTH_SHORT);
 					t.setGravity(Gravity.CENTER_HORIZONTAL|Gravity.CENTER, 0, 0);
 					t.show();
