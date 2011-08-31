@@ -21,7 +21,7 @@
 				
 					<!--  Titles -->
 					<TableRow android:gravity="left">
-						<TextView android:text="Title"
+						<TextView
 							android:id="@+id/tv_title" 
 							android:layout_width="wrap_content" 
 							android:layout_height="wrap_content"
@@ -43,7 +43,7 @@
 							android:layout_height="wrap_content"
 							android:gravity="left"
 							style="@style/items_description_bold"/>
-						<TextView android:text="Put it here"
+						<TextView 
 							android:id="@+id/tv_login_data"
 							android:layout_width="wrap_content"
 							android:layout_height="wrap_content"
@@ -59,7 +59,7 @@
 							android:text="Password"
 							android:gravity="left"
 							style="@style/items_description_bold"/>
-						<TextView android:text="Put it here"
+						<TextView
 							android:id="@+id/tv_password_data"
 							android:layout_width="wrap_content"
 							android:layout_height="wrap_content"
@@ -70,13 +70,14 @@
 					
 					<!-- Notes -->
 					<TableRow>
-						<TextView android:text="Notes"
+						<TextView 
 							android:id="@+id/tv_notes"
 							android:layout_width="wrap_content"
 							android:layout_height="wrap_content"
+							android:text="Notes"
 							android:gravity="left"
 							style="@style/items_description_bold"/>
-						<TextView android:text="Put it here"
+						<TextView
 							android:id="@+id/tv_notes_data"
 							android:layout_width="wrap_content"
 							android:layout_height="wrap_content"

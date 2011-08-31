@@ -5,12 +5,12 @@
 	</style>
 	
 	<style name="items_description_plain">
-		<item name="android:textSize">20dip</item>
+		<item name="android:textSize">30dip</item>
 		<item name="android:textColor">@color/text_color</item>
 	</style>	
 	
 	<style name="items_description_bold">
-		<item name="android:textSize">20dip</item>
+		<item name="android:textSize">30dip</item>
 		<item name="android:textColor">@color/text_color</item>
 	</style>
 </resources>
