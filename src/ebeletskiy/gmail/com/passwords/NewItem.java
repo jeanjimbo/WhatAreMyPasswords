@@ -112,19 +112,20 @@ public class NewItem extends Fragment {
 					imm.hideSoftInputFromWindow(title.getWindowToken(), 0);
 					
 					saveItemListener.saveItem();
-					Toast t = Toast.makeText(getActivity(), "New ticket has been created",
-							Toast.LENGTH_SHORT);
-					t.setGravity(Gravity.CENTER_HORIZONTAL|Gravity.CENTER, 0, 0);
-					t.show();
+					showToast("New ticket has been created");
 				} else {
-					Toast t = Toast.makeText(getActivity(), "Please fill Title",
-							Toast.LENGTH_SHORT);
-					t.setGravity(Gravity.CENTER_HORIZONTAL|Gravity.CENTER, 0, 0);
-					t.show();
+					showToast("Please fill the title");
 				}
 				
 			break;
 		}
 		return super.onOptionsItemSelected(item);
+	}
+	
+	private void showToast(String str) {
+		Toast t = Toast.makeText(getActivity(), s,
+				Toast.LENGTH_SHORT);
+		t.setGravity(Gravity.CENTER_HORIZONTAL|Gravity.CENTER, 0, 0);
+		t.show();
 	}
 }
