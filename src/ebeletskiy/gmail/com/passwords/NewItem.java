@@ -2,6 +2,7 @@ package ebeletskiy.gmail.com.passwords;
 
 import android.app.Activity;
 import android.app.Fragment;
+import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
@@ -10,14 +11,10 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.ViewGroup;
-import android.widget.Button;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.Toast;
-import ebeletskiy.gmail.com.passwords.R;
-import ebeletskiy.gmail.com.passwords.R.id;
-import ebeletskiy.gmail.com.passwords.R.layout;
 import ebeletskiy.gmail.com.passwords.interfaces.SaveItemListener;
 import ebeletskiy.gmail.com.passwords.models.Ticket;
 import ebeletskiy.gmail.com.passwords.utils.DBHelper;
@@ -110,6 +107,10 @@ public class NewItem extends Fragment {
 				dbHelper.insert( createTicket() );
 				
 				if (saveItemListener != null && checkFields()) {
+					InputMethodManager imm =  (InputMethodManager) getActivity().
+						getSystemService(Context.INPUT_METHOD_SERVICE);
+					imm.hideSoftInputFromWindow(title.getWindowToken(), 0);
+					
 					saveItemListener.saveItem();
 					Toast t = Toast.makeText(getActivity(), "New ticket has been created",
 							Toast.LENGTH_SHORT);
