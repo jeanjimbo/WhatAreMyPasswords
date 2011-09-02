@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
 	android:background="@drawable/right_back" android:layout_width="match_parent"
-	android:layout_height="match_parent" android:padding="120dip"
-	android:orientation="horizontal">
+	android:layout_height="match_parent" android:padding="100dip"
+	android:orientation="vertical">
 
-	<LinearLayout android:padding="20dip" android:orientation="vertical"
+	<LinearLayout android:padding="80dip" android:orientation="vertical"
 		android:background="@drawable/layout_round_corners"
-		android:layout_height="wrap_content" android:layout_width="match_parent"
-		android:layout_gravity="center">
+		android:layout_height="wrap_content" android:layout_width="wrap_content"
+		android:layout_gravity="center_horizontal">
 		
 		<TextView android:layout_weight="1" android:id="@+id/textView1"
 			android:layout_width="wrap_content" android:textColor="@color/text_color"
@@ -17,18 +17,15 @@
 		<EditText android:layout_height="wrap_content" android:id="@+id/editText2"
 			android:layout_weight="1" android:layout_width="match_parent"
 			android:hint="Password"/>
-				<requestFocus></requestFocus>
-				
+			<requestFocus></requestFocus>
+			
 		<EditText android:layout_weight="1" android:layout_height="wrap_content"
 			android:id="@+id/editText1" android:layout_width="match_parent"
 			android:hint="Type your password again"/>
 
 		<Button android:layout_weight="1" android:id="@+id/button1"
 			android:text="Create Account For Me" android:layout_height="wrap_content"
-			android:layout_width="wrap_content" android:layout_gravity="center_horizontal"></Button>
-
-
-
+			android:layout_width="wrap_content" android:layout_gravity="center_horizontal"/>
 
 	</LinearLayout>
 
