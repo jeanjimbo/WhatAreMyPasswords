@@ -123,8 +123,7 @@ public class NewItem extends Fragment {
 	}
 	
 	private void showToast(String str) {
-		Toast t = Toast.makeText(getActivity(), s,
-				Toast.LENGTH_SHORT);
+		Toast t = Toast.makeText(getActivity(), str, Toast.LENGTH_SHORT);
 		t.setGravity(Gravity.CENTER_HORIZONTAL|Gravity.CENTER, 0, 0);
 		t.show();
 	}
