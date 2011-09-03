@@ -8,4 +8,5 @@ public final class MyConfigs {
 	
 	public static final String PREFS_NAME = "MyPrefsFile";
 	public static final String FIRST_RUN = "FirstRun";
+	public static final String USER_PASSWORD = "UserPassword";
 }
