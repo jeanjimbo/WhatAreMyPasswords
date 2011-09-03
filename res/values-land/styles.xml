@@ -13,4 +13,18 @@
 		<item name="android:textSize">30dip</item>
 		<item name="android:textColor">@color/text_color</item>
 	</style>
+	
+	<style name="layout_landscape">
+		<item name="android:background">@drawable/layout_round_corners</item>
+		<item name="android:orientation">vertical</item>
+		<item name="android:padding">40dip</item>
+	</style>
+	
+	<style name="layout_landscape_head">
+		<item name="android:background">@drawable/right_back</item>
+		<item name="android:orientation">horizontal</item>
+		<item name="android:padding">80dip</item>
+	</style>
+	
+	
 </resources>

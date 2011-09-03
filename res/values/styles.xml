@@ -5,12 +5,25 @@
 	</style>
 	
 	<style name="items_description_plain">
-		<item name="android:textSize">20dip</item>
+		<item name="android:textSize">25dip</item>
 		<item name="android:textColor">@color/text_color</item>
 	</style>	
 	
 	<style name="items_description_bold">
-		<item name="android:textSize">20dip</item>
+		<item name="android:textSize">25dip</item>
 		<item name="android:textColor">@color/text_color</item>
 	</style>
+	
+	<style name="layout_portrait">
+		<item name="android:background">@drawable/layout_round_corners</item>
+		<item name="android:orientation">vertical</item>
+		<item name="android:padding">40dip</item>
+	</style>
+	
+	<style name="layout_portrait_head">
+		<item name="android:background">@drawable/right_back</item>
+		<item name="android:orientation">horizontal</item>
+		<item name="android:padding">40dip</item>
+	</style>
+	
 </resources>

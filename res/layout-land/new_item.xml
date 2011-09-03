@@ -1,75 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
 	android:id="@+id/empty_right_frag" android:layout_height="match_parent"
-	android:layout_width="match_parent" android:padding="80dip"
-	android:stretchColumns="1" android:background="@drawable/right_back"
-	android:orientation="vertical">
-	
-		<LinearLayout android:layout_height="wrap_content" 
-		android:layout_width="wrap_content" android:background="@drawable/paper_land"
-		android:orientation="vertical">
-		
-			<LinearLayout android:layout_height="wrap_content"
-				android:layout_width="wrap_content" android:orientation="vertical"
-				android:padding="120dip">
-			
-				<LinearLayout
-					android:orientation="vertical" android:layout_width="match_parent"
-					android:layout_height="match_parent">
-					
-					<TableLayout android:layout_height="wrap_content"
-						android:layout_width="wrap_content" android:stretchColumns="1">
-				
-						<!-- Titles -->
-						<TableRow android:gravity="left">
-							<TextView android:text="Title" android:id="@+id/tv_title"
-								android:layout_width="wrap_content" android:layout_height="wrap_content"
-								style="@style/items_description_plain" />
-							<EditText android:layout_width="wrap_content"
-								android:gravity="right" android:id="@+id/et_title" style="@style/items_description_plain"
-								android:layout_height="wrap_content" android:hint="Your title">
-							</EditText>
-						</TableRow>
-				
-						<!-- Login -->
-						<TableRow>
-							<TextView android:text="Login" android:id="@+id/tv_login"
-								android:layout_width="wrap_content" android:layout_height="wrap_content"
-								android:gravity="left" style="@style/items_description_plain" />
-							<EditText android:id="@+id/et_login_data"
-								android:layout_width="wrap_content" android:layout_height="wrap_content"
-								android:gravity="right" style="@style/items_description_plain"
-								android:hint="Your login">
-							</EditText>
-						</TableRow>
-				
-						<!-- Password -->
-						<TableRow>
-							<TextView android:id="@+id/tv_password"
-								android:layout_height="wrap_content" android:layout_width="wrap_content"
-								android:text="Password" android:gravity="left"
-								style="@style/items_description_plain" />
-							<EditText android:hint="Your password" android:id="@+id/et_password_data"
-								android:layout_width="wrap_content" android:layout_height="wrap_content"
-								android:gravity="right"	style="@style/items_description_plain" />
-						</TableRow>
-				
-						<!-- Notes -->
-						<TableRow>
-							<TextView android:text="Notes" android:id="@+id/tv_notes"
-								android:layout_width="wrap_content" android:layout_height="wrap_content"
-								android:gravity="left" style="@style/items_description_plain" />
-							<EditText android:hint="Your Notes" android:id="@+id/et_notes_data"
-								android:layout_width="wrap_content" android:layout_height="wrap_content"
-								android:gravity="right" style="@style/items_description_plain" />
-						</TableRow>
-				
-					</TableLayout>
-					
-			</LinearLayout>
-			
-			</LinearLayout>
-		
-		</LinearLayout>
+	android:layout_width="match_parent" style="@style/layout_landscape_head">
+
+	<LinearLayout android:layout_height="wrap_content"
+		android:layout_width="match_parent" style="@style/layout_landscape"
+		android:layout_gravity="center_vertical">
+
+		<EditText android:layout_width="match_parent"
+			android:id="@+id/et_title" style="@style/items_description_plain"
+			android:layout_height="wrap_content" android:hint="Title" 
+			android:singleLine="true"/>
+
+		<EditText android:id="@+id/et_login_data"
+			android:layout_width="match_parent" android:layout_height="wrap_content"
+			style="@style/items_description_plain"
+			android:hint="Login" android:singleLine="true"/>
+
+		<EditText android:hint="Password" android:id="@+id/et_password_data"
+			android:layout_width="match_parent" android:layout_height="wrap_content"
+			style="@style/items_description_plain" android:singleLine="true"/>
+
+		<EditText android:hint="Notes" android:id="@+id/et_notes_data"
+			android:layout_width="match_parent" android:layout_height="wrap_content"
+			style="@style/items_description_plain" android:singleLine="true"/>
+
+	</LinearLayout>
 
 </LinearLayout>
