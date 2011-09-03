@@ -14,9 +14,9 @@
             </intent-filter>
         </activity>
         
-        <activity android:name="FirstTimeActivity"></activity>
+        <activity android:name="FirstTimeActivity" android:windowSoftInputMode="adjustPan"></activity>
         <activity android:name="MainActivity" android:windowSoftInputMode="adjustPan"></activity>
-		<activity android:name="CheckPassword"></activity>
+		<activity android:name="CheckPassword" android:windowSoftInputMode="adjustPan"></activity>
 
     </application>
 </manifest>
