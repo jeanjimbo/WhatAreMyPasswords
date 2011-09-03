@@ -7,13 +7,16 @@
 
     <application android:icon="@drawable/icon" android:label="MyPasswords" 
     android:debuggable="true"  android:theme="@android:style/Theme.Holo.Light">
-        <activity android:name=".MainActivity"
+        <activity android:name=".LaunchActivityManager"
                   android:windowSoftInputMode="adjustPan">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        
+        <activity android:name="FirstTimeActivity"></activity>
+        <activity android:name="MainActivity"></activity>
 
     </application>
 </manifest>
