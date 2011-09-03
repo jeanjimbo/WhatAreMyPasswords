@@ -13,11 +13,11 @@ public class LaunchActivityManager extends Activity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		SharedPreferences sharedPreferences = getSharedPreferences(MyConfigs.PREFS_NAME, 0);
-		if( sharedPreferences.getBoolean(MyConfigs.FIRST_RUN, false) ) {
-			runMainActivity();
+		if( sharedPreferences.getBoolean(MyConfigs.FIRST_RUN, true) ) {
+			runFirstTimeActivity();
 			finish();
 		} else {
-			runFirstTimeActivity();
+			runMainActivity();
 			finish();
 		}
 	}

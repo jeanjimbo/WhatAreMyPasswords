@@ -10,49 +10,37 @@ import android.widget.EditText;
 import android.widget.Toast;
 import ebeletskiy.gmail.com.passwords.utils.MyConfigs;
 
-public class FirstTimeActivity extends Activity {
-	
-	private String password;
-	
+public class CheckPassword extends Activity {
+
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.first_time_screen);
+		setContentView(R.layout.check_password);
 	}
 	
 	
 	public void onButtonClick(View v) {
-		if(checkFields()) {
-			savePassword();
+		SharedPreferences sharedPreferences = getSharedPreferences(MyConfigs.PREFS_NAME, 0);
+		String userPassword = sharedPreferences.getString(MyConfigs.USER_PASSWORD, "");
+		
+		String providedPassword = 
+			( (EditText)findViewById(R.id.edt_checkpassword_password) ).getText().toString();
+		
+		if (providedPassword.equals(userPassword)) {
 			updateSharedPreferences();
 			launchMainActivity();
 		} else {
-			showToast("Fields both fields and make sure passwords match");
+			showToast("Incorrect Password");
 		}
 	}
 	
-
 	private void updateSharedPreferences() {
 		SharedPreferences sharedPreferences = 
 			getSharedPreferences(MyConfigs.PREFS_NAME, 0);
 		SharedPreferences.Editor editor = sharedPreferences.edit();
-		editor.putBoolean(MyConfigs.FIRST_RUN, false);
+		editor.putBoolean(MyConfigs.FIRST_RUN_MAIN, true);
 		editor.commit();
 	}
-
-
-	private void savePassword() {
-		if (password.equals("")) {
-			throw new IllegalArgumentException("Password field is empty");
-		}
-		
-		SharedPreferences sharedPreferences = 
-			getSharedPreferences(MyConfigs.PREFS_NAME, 0);
-		SharedPreferences.Editor editor = sharedPreferences.edit();
-		editor.putString(MyConfigs.USER_PASSWORD, password);
-		editor.commit();
-	}
-	
 	
 	private void launchMainActivity() {
 		Intent i = new Intent(this, MainActivity.class);
@@ -60,26 +48,11 @@ public class FirstTimeActivity extends Activity {
 		finish();
 	}
 
-	
-	private boolean checkFields() {
-		String firstField = ( (EditText)findViewById
-				(R.id.edt_firsttimeactivity_first_field) ).getText().toString();
-		
-		String secondField = ( (EditText)findViewById
-				(R.id.edt_firsttimeactivity_second_field) ).getText().toString();
-		
-		
-		if (firstField.equals(secondField)) {
-			password = firstField;
-			return true;
-		} else {
-			return false;
-		}
-	}
-	
+
 	private void showToast(String str) {
 		Toast t = Toast.makeText(this, str, Toast.LENGTH_SHORT);
 		t.setGravity(Gravity.CENTER_HORIZONTAL|Gravity.CENTER, 0, 0);
 		t.show();
 	}
+	
 }

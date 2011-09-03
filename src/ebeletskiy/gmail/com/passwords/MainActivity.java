@@ -4,8 +4,8 @@ import android.app.ActionBar;
 import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
-import android.graphics.BitmapFactory;
-import android.graphics.drawable.BitmapDrawable;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import ebeletskiy.gmail.com.passwords.interfaces.AddNewItemListener;
@@ -14,6 +14,7 @@ import ebeletskiy.gmail.com.passwords.interfaces.EditItemListener;
 import ebeletskiy.gmail.com.passwords.interfaces.ListItemClickListener;
 import ebeletskiy.gmail.com.passwords.interfaces.SaveItemListener;
 import ebeletskiy.gmail.com.passwords.models.Ticket;
+import ebeletskiy.gmail.com.passwords.utils.MyConfigs;
 
 public class MainActivity extends Activity implements 
 												ListItemClickListener, 
@@ -37,7 +38,38 @@ public class MainActivity extends Activity implements
         	.enablePersistentSelection();
     }
 
-    private void addEmptyFragment() {
+    
+    @Override
+	public void onStart() {
+    	super.onStart();
+    	
+    	SharedPreferences sharedPreferences = getSharedPreferences(MyConfigs.PREFS_NAME, 0);
+    	
+    	if( sharedPreferences.getBoolean(MyConfigs.FIRST_RUN_MAIN, true) ) {
+    		updateSharedPreferences();
+		} else {
+			Intent i = new Intent(this, CheckPassword.class);
+			startActivity(i);
+			finish();
+		}
+	}
+   
+	private void updateSharedPreferences() {
+		SharedPreferences sharedPreferences = 
+			getSharedPreferences(MyConfigs.PREFS_NAME, 0);
+		SharedPreferences.Editor editor = sharedPreferences.edit();
+		editor.putBoolean(MyConfigs.FIRST_RUN_MAIN, false);
+		editor.commit();
+	}
+    
+    @Override
+    protected void onStop() {
+    	super.onStop();
+    	//TODO: implement me
+    }
+
+
+	private void addEmptyFragment() {
         Fragment fg = new EmptyRightFrag();
         getFragmentManager().beginTransaction().add(R.id.right_frag, fg)
         	.commit();
@@ -47,16 +79,10 @@ public class MainActivity extends Activity implements
 	private void initActionBar() {
         ActionBar actionBar = getActionBar();
         actionBar.setTitle("What are my passwords?");
-        
-        
-//		BitmapDrawable background = new BitmapDrawable(
-//		BitmapFactory.decodeResource(getResources(),
-//				R.drawable.action_bar_background));
-//		background.setTileModeX(android.graphics.Shader.TileMode.REPEAT);
-//		actionBar.setBackgroundDrawable(background);
 		actionBar.setBackgroundDrawable(getResources().getDrawable(R.drawable.action_bar_background));
 	}
 
+	
 	@Override
 	public void itemClicked(Ticket ticket) {
 		Fragment newFragment = new ItemsDescription(ticket);
@@ -70,6 +96,7 @@ public class MainActivity extends Activity implements
 		loadFragment(newFragment, true);
 	}
 
+	
 	@Override
 	public void saveItem() {
 		refreshList();
@@ -78,6 +105,7 @@ public class MainActivity extends Activity implements
 		loadFragment(newFragment, true);
 	}
 
+	
 	@Override
 	public void onDeleteItem() {
 		refreshList();
@@ -86,16 +114,19 @@ public class MainActivity extends Activity implements
 		loadFragment(newFragment, false);
 	}
 	
+	
 	@Override
 	public void loadEditItem(Ticket ticket) {
 		Fragment newFragment = new EditItem(ticket);
 		loadFragment(newFragment, true);
 	}
 
+	
 	private void refreshList() {
 		((ItemsList)getFragmentManager().findFragmentById(R.id.left_frag)).
 		refresh();
 	}
+	
 	
 	private void loadFragment(Fragment fragment, boolean animation) {
 		FragmentTransaction transaction = getFragmentManager().beginTransaction();
@@ -106,4 +137,5 @@ public class MainActivity extends Activity implements
 		transaction.addToBackStack(null);
 		transaction.commit();
 	}
+	
 }

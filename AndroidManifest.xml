@@ -16,6 +16,7 @@
         
         <activity android:name="FirstTimeActivity"></activity>
         <activity android:name="MainActivity" android:windowSoftInputMode="adjustPan"></activity>
+		<activity android:name="CheckPassword"></activity>
 
     </application>
 </manifest>
