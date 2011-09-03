@@ -1,9 +1,11 @@
 package ebeletskiy.gmail.com.passwords;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.MenuItem;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.Toast;
 import ebeletskiy.gmail.com.passwords.models.Ticket;
@@ -50,10 +52,14 @@ public class EditItem extends NewItem {
 				dbHelper.updateRow( createTicket() );
 				
 				if (saveItemListener != null && checkFields()) {
+					InputMethodManager imm =  (InputMethodManager) getActivity().
+					getSystemService(Context.INPUT_METHOD_SERVICE);
+					imm.hideSoftInputFromWindow(title.getWindowToken(), 0);
+					
 					saveItemListener.saveItem();
 					showToast("Ticket has been updated");
 				} else {
-					showToast("Please fill all mandatory fields");
+					showToast("Please fill Title");
 				}
 				
 			break;
