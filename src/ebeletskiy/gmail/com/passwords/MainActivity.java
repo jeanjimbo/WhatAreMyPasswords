@@ -7,7 +7,9 @@ import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.Display;
 import android.view.MenuItem;
+import android.view.WindowManager;
 import ebeletskiy.gmail.com.passwords.interfaces.AddNewItemListener;
 import ebeletskiy.gmail.com.passwords.interfaces.DeleteItemListener;
 import ebeletskiy.gmail.com.passwords.interfaces.EditItemListener;
@@ -23,6 +25,8 @@ public class MainActivity extends Activity implements
 												DeleteItemListener,
 												EditItemListener {
 	private static final String TAG = "MainActivity";
+	
+	private int mCurrentOrientation = -1;
 	
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -42,17 +46,30 @@ public class MainActivity extends Activity implements
     @Override
 	public void onStart() {
     	super.onStart();
-    	
-    	SharedPreferences sharedPreferences = getSharedPreferences(MyConfigs.PREFS_NAME, 0);
-    	
-    	if( sharedPreferences.getBoolean(MyConfigs.FIRST_RUN_MAIN, true) ) {
-    		updateSharedPreferences();
-		} else {
-			Intent i = new Intent(this, CheckPassword.class);
-			startActivity(i);
-			finish();
-		}
+    	    	
+    	int oldOrientation = mCurrentOrientation;
+    	mCurrentOrientation = getCurrentOrientation();
+	    if ((oldOrientation == -1) && (oldOrientation == mCurrentOrientation))
+    	    {
+    	      	SharedPreferences sharedPreferences = 
+    	    		getSharedPreferences(MyConfigs.PREFS_NAME, 0);
+    	    	
+    	    	if( sharedPreferences.getBoolean(MyConfigs.FIRST_RUN_MAIN, true) ) {
+    	    		updateSharedPreferences();
+    			} else {
+    				Intent i = new Intent(this, CheckPassword.class);
+    				startActivity(i);
+    				finish();
+    			}
+    	   }
 	}
+    
+    private int getCurrentOrientation() {
+       	Display display = ((WindowManager) getSystemService(WINDOW_SERVICE))
+		.getDefaultDisplay();
+       	
+       	return display.getOrientation();
+    }
    
 	private void updateSharedPreferences() {
 		SharedPreferences sharedPreferences = 
