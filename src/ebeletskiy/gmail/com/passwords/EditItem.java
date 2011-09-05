@@ -36,10 +36,10 @@ public class EditItem extends NewItem {
 		login.setText(ticket.getLogin());
 		
 		password = (EditText)getView().findViewById(R.id.et_password_data);
-		password.setText(ticket.getTitle());
+		password.setText(ticket.getPassword());
 		
 		notes = (EditText)getView().findViewById(R.id.et_notes_data);
-		notes.setText(ticket.getTitle());
+		notes.setText(ticket.getNotes());
 	}
 	
 	
