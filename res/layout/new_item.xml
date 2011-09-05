@@ -7,22 +7,22 @@
 		android:layout_width="match_parent" style="@style/layout_portrait"
 		android:layout_gravity="center_vertical">
 
-		<EditText android:layout_width="match_parent"
-			android:id="@+id/et_title" style="@style/items_description_plain"
-			android:layout_height="wrap_content" android:hint="Title" />
+		<EditText android:layout_width="match_parent" android:id="@+id/et_title"
+			style="@style/items_description_plain" android:layout_height="wrap_content"
+			android:hint="Title" android:singleLine="true" />
 
 		<EditText android:id="@+id/et_login_data"
 			android:layout_width="match_parent" android:layout_height="wrap_content"
-			style="@style/items_description_plain"
-			android:hint="Login" />
+			style="@style/items_description_plain" android:hint="Login"
+			android:singleLine="true" />
 
 		<EditText android:hint="Password" android:id="@+id/et_password_data"
 			android:layout_width="match_parent" android:layout_height="wrap_content"
-			style="@style/items_description_plain" />
+			style="@style/items_description_plain" android:singleLine="true" />
 
 		<EditText android:hint="Notes" android:id="@+id/et_notes_data"
 			android:layout_width="match_parent" android:layout_height="wrap_content"
-			style="@style/items_description_plain" />
+			style="@style/items_description_plain" android:singleLine="true"/>
 
 	</LinearLayout>
 
