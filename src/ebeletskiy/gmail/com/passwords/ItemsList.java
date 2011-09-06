@@ -281,4 +281,11 @@ public class ItemsList extends ListFragment {
             mAdapter.notifyDataSetChanged();
         }
     };
+    
+    public void onDestroy() {
+    	super.onDestroy();
+    	if (dbHelper != null) {
+    		dbHelper.close();
+    	}
+    }
 }

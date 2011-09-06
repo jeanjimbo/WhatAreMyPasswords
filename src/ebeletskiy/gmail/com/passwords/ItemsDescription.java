@@ -57,7 +57,6 @@ public class ItemsDescription extends Fragment {
 		dbHelper = new DBHelper(getActivity());
 		
 		if (!menuWasCreated) {
-			Log.i(TAG, "creating menu");
 			setHasOptionsMenu(true);
 			menuWasCreated = true;
 		}
@@ -158,5 +157,11 @@ public class ItemsDescription extends Fragment {
 			notes.setText(ticket.getNotes());
 		}
 	}
-	
+
+    public void onDestroy() {
+    	super.onDestroy();
+    	if (dbHelper != null) {
+    		dbHelper.close();
+    	}
+    }
 }

@@ -127,4 +127,11 @@ public class NewItem extends Fragment {
 		t.setGravity(Gravity.CENTER_HORIZONTAL|Gravity.CENTER, 0, 0);
 		t.show();
 	}
+	
+    public void onDestroy() {
+    	super.onDestroy();
+    	if (dbHelper != null) {
+    		dbHelper.close();
+    	}
+    }
 }
