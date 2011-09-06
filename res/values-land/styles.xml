@@ -14,6 +14,7 @@
 		<item name="android:textColor">@color/text_color</item>
 	</style>
 	
+	<!--  Right pane -->
 	<style name="layout_portrait">
 		<item name="android:background">@drawable/layout_round_corners</item>
 		<item name="android:orientation">vertical</item>

@@ -19,6 +19,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.CursorAdapter;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -84,6 +85,8 @@ public class ItemsList extends ListFragment {
 				return true;
 			}
 		});
+		
+		getListView().setEmptyView(getView().findViewById(R.id.ll_empty_left));
 	}
 	
 	
