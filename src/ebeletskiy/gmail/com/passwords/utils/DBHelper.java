@@ -110,7 +110,7 @@ public class DBHelper extends SQLiteOpenHelper {
 	
 	public Cursor getItemByTitle(String str) {
 		return (getReadableDatabase()
-				.rawQuery("SELECT " + 
+				.rawQuery("SELECT _id" + ", " +
 				COLUMN_NAME_TITLE + 
 				" FROM " + TABLE_NAME + 
 				" WHERE " + COLUMN_NAME_TITLE + " = " + str, null));
