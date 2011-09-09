@@ -110,10 +110,9 @@ public class DBHelper extends SQLiteOpenHelper {
 	
 	public Cursor getItemByTitle(String str) {
 		return (getReadableDatabase()
-				.rawQuery("SELECT _id" + ", " +
-				COLUMN_NAME_TITLE + 
+				.rawQuery("SELECT *" +
 				" FROM " + TABLE_NAME + 
-				" WHERE " + COLUMN_NAME_TITLE + " = " + str, null));
+				" WHERE " + COLUMN_NAME_TITLE + " = " + "\'" + str + "\'", null));
 	}
 	
 	public void deleteAll() {
