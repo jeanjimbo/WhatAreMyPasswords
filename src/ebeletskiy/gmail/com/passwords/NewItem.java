@@ -3,6 +3,7 @@ package ebeletskiy.gmail.com.passwords;
 import android.app.Activity;
 import android.app.Fragment;
 import android.content.Context;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
@@ -94,9 +95,14 @@ public class NewItem extends Fragment {
 		}
 	}
 
-	public boolean isDuplicate() {
+	public boolean isDuplicate(String str) {
 
-		return false;
+		Cursor c = dbHelper.getItemByTitle(str);
+		if (c.getCount() == 0) {
+			return false;
+		} else {
+			return true;
+		}
 	}
 
 	@Override
@@ -111,7 +117,7 @@ public class NewItem extends Fragment {
 		case R.id.save_item:
 
 			if (checkFields()) {
-				if (!isDuplicate()) {
+				if (!isDuplicate((title.getText()).toString())) {
 					createNewItem();
 					hideKeyboard();
 					saveItemListener.saveItem();

@@ -108,6 +108,14 @@ public class DBHelper extends SQLiteOpenHelper {
 		return(c.getString(3));
 	}
 	
+	public Cursor getItemByTitle(String str) {
+		return (getReadableDatabase()
+				.rawQuery("SELECT " + 
+				COLUMN_NAME_TITLE + 
+				" FROM " + TABLE_NAME + 
+				" WHERE " + COLUMN_NAME_TITLE + " = " + str, null));
+	}
+	
 	public void deleteAll() {
 		getReadableDatabase().execSQL("DELETE FROM " + TABLE_NAME);
 	}
