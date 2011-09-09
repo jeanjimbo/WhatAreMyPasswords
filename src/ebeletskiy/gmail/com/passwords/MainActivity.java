@@ -122,7 +122,6 @@ public class MainActivity extends Activity implements ListItemClickListener,
 					R.anim.slide_out_right);
 		}
 		transaction.replace(R.id.right_frag, fragment);
-		transaction.addToBackStack(null);
 		transaction.commit();
 	}
 
