@@ -6,20 +6,20 @@ import android.app.Fragment;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.text.method.PasswordTransformationMethod;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.View.OnLongClickListener;
 import android.view.ViewGroup;
-import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 import ebeletskiy.gmail.com.passwords.interfaces.DeleteItemListener;
 import ebeletskiy.gmail.com.passwords.interfaces.EditItemListener;
 import ebeletskiy.gmail.com.passwords.models.Ticket;
+import ebeletskiy.gmail.com.passwords.utils.Clipboard;
 import ebeletskiy.gmail.com.passwords.utils.DBHelper;
 
 public class ItemsDescription extends Fragment {
@@ -32,6 +32,7 @@ public class ItemsDescription extends Fragment {
 	private DBHelper dbHelper;
 	private DeleteItemListener deleteListener;
 	private EditItemListener editItemListener;
+	private Clipboard clipBoard;
 
 	public ItemsDescription() {
 
@@ -80,7 +81,21 @@ public class ItemsDescription extends Fragment {
 			password.setText((String) savedInstanceState.get("password"));
 			notes.setText((String) savedInstanceState.get("notes"));
 		}
+		
+		password.setOnLongClickListener(tListener);
 	}
+	
+	OnLongClickListener tListener = new OnLongClickListener() {
+		
+		@Override
+		public boolean onLongClick(View v) {
+			clipBoard = new Clipboard(getActivity());
+			clipBoard.copyText(password.getText().toString());
+			Toast.makeText(getActivity(), "Password copied to clipboard",
+					Toast.LENGTH_SHORT).show();
+			return false;
+		}
+	};
 
 	@Override
 	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
