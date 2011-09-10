@@ -7,16 +7,16 @@ import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.Display;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.WindowManager;
 import ebeletskiy.gmail.com.passwords.interfaces.AddNewItemListener;
 import ebeletskiy.gmail.com.passwords.interfaces.DeleteItemListener;
 import ebeletskiy.gmail.com.passwords.interfaces.EditItemListener;
 import ebeletskiy.gmail.com.passwords.interfaces.ListItemClickListener;
 import ebeletskiy.gmail.com.passwords.interfaces.SaveItemListener;
 import ebeletskiy.gmail.com.passwords.models.Ticket;
+import ebeletskiy.gmail.com.passwords.prefs.ApplicationPreferences;
 import ebeletskiy.gmail.com.passwords.utils.MyConfigs;
 
 public class MainActivity extends Activity implements ListItemClickListener,
@@ -124,6 +124,13 @@ public class MainActivity extends Activity implements ListItemClickListener,
 		transaction.replace(R.id.right_frag, fragment);
 		transaction.commit();
 	}
+	
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		MenuInflater inflater = getMenuInflater();
+		inflater.inflate(R.menu.menu_main_activity, menu);
+		return true;
+	}
 
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
@@ -131,6 +138,9 @@ public class MainActivity extends Activity implements ListItemClickListener,
 			Intent intent = new Intent(this, MainActivity.class);
 			intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 			startActivity(intent);
+			return true;
+		case R.id.show_preferences:
+			startActivity(new Intent(this, ApplicationPreferences.class)); 
 			return true;
 		default:
 			return super.onOptionsItemSelected(item);
