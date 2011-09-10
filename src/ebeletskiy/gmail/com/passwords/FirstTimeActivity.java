@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 import ebeletskiy.gmail.com.passwords.utils.MyConfigs;
+import ebeletskiy.gmail.com.passwords.utils.ShowToast;
 
 public class FirstTimeActivity extends Activity {
 	
@@ -27,7 +28,8 @@ public class FirstTimeActivity extends Activity {
 			updateSharedPreferences();
 			launchMainActivity();
 		} else {
-			showToast("Fields both fields and make sure passwords match");
+			ShowToast.showToast(this,
+					"Fields both fields and make sure passwords match.");
 		}
 	}
 	
@@ -75,11 +77,5 @@ public class FirstTimeActivity extends Activity {
 		} else {
 			return false;
 		}
-	}
-	
-	private void showToast(String str) {
-		Toast t = Toast.makeText(this, str, Toast.LENGTH_SHORT);
-		t.setGravity(Gravity.CENTER_HORIZONTAL|Gravity.CENTER, 0, 0);
-		t.show();
 	}
 }

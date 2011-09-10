@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 import ebeletskiy.gmail.com.passwords.utils.MyConfigs;
+import ebeletskiy.gmail.com.passwords.utils.ShowToast;
 
 public class CheckPassword extends Activity {
 
@@ -30,7 +31,7 @@ public class CheckPassword extends Activity {
 			updateSharedPreferences();
 			launchMainActivity();
 		} else {
-			showToast("Incorrect Password");
+			ShowToast.showToast(this, "Incorrect Passwrod");
 		}
 	}
 	
@@ -47,12 +48,4 @@ public class CheckPassword extends Activity {
 		startActivity(i);
 		finish();
 	}
-
-
-	private void showToast(String str) {
-		Toast t = Toast.makeText(this, str, Toast.LENGTH_SHORT);
-		t.setGravity(Gravity.CENTER_HORIZONTAL|Gravity.CENTER, 0, 0);
-		t.show();
-	}
-	
 }

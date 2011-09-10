@@ -6,7 +6,6 @@ import android.content.Context;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -15,10 +14,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
-import android.widget.Toast;
 import ebeletskiy.gmail.com.passwords.interfaces.SaveItemListener;
 import ebeletskiy.gmail.com.passwords.models.Ticket;
 import ebeletskiy.gmail.com.passwords.utils.DBHelper;
+import ebeletskiy.gmail.com.passwords.utils.ShowToast;
 
 public class NewItem extends Fragment {
 	private static final String TAG = "EditItem";
@@ -122,10 +121,12 @@ public class NewItem extends Fragment {
 					hideKeyboard();
 					saveItemListener.saveItem();
 				} else {
-					showToast("The item with such name already exists.");
+					ShowToast.showToast(getActivity(),
+							"The item wich such name already exists.");
 				}
 			} else {
-				showToast("Please fill the title.");
+				ShowToast.showToast(getActivity(),
+						"Please fill the title.");
 			}
 			break;
 		}
@@ -140,12 +141,6 @@ public class NewItem extends Fragment {
 
 	private void createNewItem() {
 		dbHelper.insert(createTicket());
-	}
-
-	private void showToast(String str) {
-		Toast t = Toast.makeText(getActivity(), str, Toast.LENGTH_SHORT);
-		t.setGravity(Gravity.CENTER_HORIZONTAL | Gravity.CENTER, 0, 0);
-		t.show();
 	}
 
 	public void onDestroy() {

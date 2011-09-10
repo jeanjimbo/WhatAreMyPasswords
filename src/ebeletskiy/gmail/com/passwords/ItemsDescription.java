@@ -21,6 +21,7 @@ import ebeletskiy.gmail.com.passwords.interfaces.EditItemListener;
 import ebeletskiy.gmail.com.passwords.models.Ticket;
 import ebeletskiy.gmail.com.passwords.utils.Clipboard;
 import ebeletskiy.gmail.com.passwords.utils.DBHelper;
+import ebeletskiy.gmail.com.passwords.utils.ShowToast;
 
 public class ItemsDescription extends Fragment {
 	private static final String TAG = "ItemsDescription";
@@ -91,8 +92,7 @@ public class ItemsDescription extends Fragment {
 		public boolean onLongClick(View v) {
 			clipBoard = new Clipboard(getActivity());
 			clipBoard.copyText(password.getText().toString());
-			Toast.makeText(getActivity(), "Password copied to clipboard",
-					Toast.LENGTH_SHORT).show();
+			ShowToast.showToast(getActivity(), "Password copied to clipboard");
 			return false;
 		}
 	};
@@ -149,7 +149,8 @@ public class ItemsDescription extends Fragment {
 							public void onClick(DialogInterface dialog, int id) {
 								dbHelper.deleteRow(ticket.getId());
 								deleteListener.onDeleteItem();
-								showToast("Item has been deleted");
+								ShowToast.showToast(getActivity(),
+										"Item has been deleted");
 							}
 						})
 				.setNegativeButton("No", new DialogInterface.OnClickListener() {
@@ -160,12 +161,6 @@ public class ItemsDescription extends Fragment {
 
 		AlertDialog alert = builder.create();
 		builder.show();
-	}
-
-	private void showToast(String string) {
-		Toast t = Toast.makeText(getActivity(), string, Toast.LENGTH_SHORT);
-		t.setGravity(Gravity.CENTER_HORIZONTAL | Gravity.CENTER, 0, 0);
-		t.show();
 	}
 
 	public void onSaveInstanceState(Bundle outState) {

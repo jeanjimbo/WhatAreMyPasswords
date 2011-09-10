@@ -10,6 +10,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 import ebeletskiy.gmail.com.passwords.models.Ticket;
 import ebeletskiy.gmail.com.passwords.utils.DBHelper;
+import ebeletskiy.gmail.com.passwords.utils.ShowToast;
 
 public class EditItem extends NewItem {
 	private static final String TAG = "EditItem";
@@ -45,23 +46,23 @@ public class EditItem extends NewItem {
 	
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
-		
+
 		switch (item.getItemId()) {
-			case R.id.save_item: 
-			
-				dbHelper.updateRow( createTicket() );
-				
-				if (saveItemListener != null && checkFields()) {
-					InputMethodManager imm =  (InputMethodManager) getActivity().
-					getSystemService(Context.INPUT_METHOD_SERVICE);
-					imm.hideSoftInputFromWindow(title.getWindowToken(), 0);
-					
-					saveItemListener.saveItem();
-					showToast("Ticket has been updated");
-				} else {
-					showToast("Please fill Title");
-				}
-				
+		case R.id.save_item:
+
+			dbHelper.updateRow(createTicket());
+
+			if (saveItemListener != null && checkFields()) {
+				InputMethodManager imm = (InputMethodManager) getActivity()
+						.getSystemService(Context.INPUT_METHOD_SERVICE);
+				imm.hideSoftInputFromWindow(title.getWindowToken(), 0);
+
+				saveItemListener.saveItem();
+				ShowToast.showToast(getActivity(), "Ticket has been updated.");
+			} else {
+				ShowToast.showToast(getActivity(), "Please fill Title.");
+			}
+
 			break;
 		}
 		return true;
@@ -77,12 +78,4 @@ public class EditItem extends NewItem {
 		
 		return ticket;
 	}
-	
-	private void showToast(String string) {
-		Toast t = Toast.makeText(getActivity(), string,
-				Toast.LENGTH_SHORT);
-		t.setGravity(Gravity.CENTER_HORIZONTAL|Gravity.CENTER, 0, 0);
-		t.show();
-	}
-	
 }

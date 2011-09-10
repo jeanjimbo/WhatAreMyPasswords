@@ -30,6 +30,7 @@ import ebeletskiy.gmail.com.passwords.interfaces.ListItemClickListener;
 import ebeletskiy.gmail.com.passwords.models.Ticket;
 import ebeletskiy.gmail.com.passwords.utils.DBHelper;
 import ebeletskiy.gmail.com.passwords.utils.DataConverter;
+import ebeletskiy.gmail.com.passwords.utils.ShowToast;
 
 public class ItemsList extends ListFragment {
 	private static final String TAG = "ItemsList";
@@ -222,31 +223,26 @@ public class ItemsList extends ListFragment {
 	private void showAlertDialog() {
 		AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 		builder.setMessage("Are you sure you want to delete the item?")
-		       .setCancelable(false)
-		       .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-		           public void onClick(DialogInterface dialog, int id) {
-		        	   	dbHelper.deleteRow(ticket.getId());
-						deleteListener.onDeleteItem();
-						showToast("Item has been deleted");
-		           }
-		       })
-		       .setNegativeButton("No", new DialogInterface.OnClickListener() {
-		           public void onClick(DialogInterface dialog, int id) {
-		                dialog.cancel();
-		           }
-		       });
+				.setCancelable(false)
+				.setPositiveButton("Yes",
+						new DialogInterface.OnClickListener() {
+							public void onClick(DialogInterface dialog, int id) {
+								dbHelper.deleteRow(ticket.getId());
+								deleteListener.onDeleteItem();
+								ShowToast.showToast(getActivity(),
+										"Item has been deleted.");
+							}
+						})
+				.setNegativeButton("No", new DialogInterface.OnClickListener() {
+					public void onClick(DialogInterface dialog, int id) {
+						dialog.cancel();
+					}
+				});
 		
 		AlertDialog alert = builder.create();
 		builder.show();
 	}
 	
-	private void showToast(String string) {
-		Toast t = Toast.makeText(getActivity(), string,
-				Toast.LENGTH_SHORT);
-		t.setGravity(Gravity.CENTER_HORIZONTAL|Gravity.CENTER, 0, 0);
-		t.show();
-	}
-
 	private ActionMode.Callback mContentSelectionActionModeCallback = new ActionMode.Callback() {
         public boolean onCreateActionMode(ActionMode actionMode, Menu menu) {
             actionMode.setTitle(ticket.getTitle());
