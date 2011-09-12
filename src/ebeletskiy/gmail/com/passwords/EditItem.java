@@ -67,15 +67,4 @@ public class EditItem extends NewItem {
 		}
 		return true;
 	}
-	
-	
-	public Ticket createTicket() {
-		
-		ticket.setTitle( (title.getText()).toString() );
-		ticket.setLogin( (login.getText()).toString() );
-		ticket.setPassword( (password.getText()).toString() );
-		ticket.setNotes( (notes.getText()).toString() );
-		
-		return ticket;
-	}
 }
