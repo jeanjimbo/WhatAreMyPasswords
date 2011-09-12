@@ -2,20 +2,23 @@ package ebeletskiy.gmail.com.passwords;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
-import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
-import android.widget.Toast;
 import ebeletskiy.gmail.com.passwords.models.Ticket;
-import ebeletskiy.gmail.com.passwords.utils.DBHelper;
 import ebeletskiy.gmail.com.passwords.utils.ShowToast;
 
 public class EditItem extends NewItem {
 	private static final String TAG = "EditItem";
 	
+	private boolean titleChanged = false; 	
 	private Ticket ticket;
+	
+	private String beforeTextChanged;
+	private String afterTextChanged;
 	
 	public EditItem() {};
 	
@@ -27,8 +30,34 @@ public class EditItem extends NewItem {
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
 		initUIelements();
+		beforeTextChanged = title.getText().toString();
+		
+		title.addTextChangedListener(new TextWatcher() {
+
+			@Override
+			public void onTextChanged(CharSequence s, int start, int before,
+					int count) {
+			}
+
+			@Override
+			public void beforeTextChanged(CharSequence s, int start, int count,
+					int after) {
+			}
+
+			@Override
+			public void afterTextChanged(Editable s) {
+				afterTextChanged = title.getText().toString();
+
+				if (beforeTextChanged.equals(afterTextChanged)) {
+					titleChanged = false;
+				} else {
+					titleChanged = true;
+				}
+
+			}
+		});
 	}
-	
+
 	private void initUIelements() {
 		title = (EditText)getView().findViewById(R.id.et_title);
 		title.setText(ticket.getTitle());
@@ -50,21 +79,56 @@ public class EditItem extends NewItem {
 		switch (item.getItemId()) {
 		case R.id.save_item:
 
-			dbHelper.updateRow(createTicket());
+			Log.i("Dev", "Save menu cliked");
 
-			if (saveItemListener != null && checkFields()) {
-				InputMethodManager imm = (InputMethodManager) getActivity()
-						.getSystemService(Context.INPUT_METHOD_SERVICE);
-				imm.hideSoftInputFromWindow(title.getWindowToken(), 0);
+			if (titleChanged) {
+				Log.i("Dev", "menu: title changed");
 
-				saveItemListener.saveItem();
-				ShowToast.showToast(getActivity(), "Ticket has been updated.");
+				if (isDuplicate(title.getText().toString())) {
+					Log.i("Dev", "menu: title is duplicate");
+					ShowToast.showToast(getActivity(),
+							"The item wich such name already exists.");
+				} else {
+					Log.i("Dev", "menu: title is not duplicate -> updateData()");
+					updateData();
+				}
+
 			} else {
-				ShowToast.showToast(getActivity(), "Please fill Title.");
+				Log.i("Dev", "menu: title not changed && is not duplicate");
+				if (saveItemListener != null && checkFields()) {
+					Log.i("Dev", "menu: fields are ok");
+					updateData();
+				} else {
+					ShowToast.showToast(getActivity(), "Please fill Title.");
+				}
 			}
 
 			break;
 		}
 		return true;
+	}
+
+	private void updateData() {
+		dbHelper.updateRow(createTicket());
+		hideKeyboard();
+		saveItemListener.saveItem();
+		ShowToast.showToast(getActivity(),
+				"Ticket has been updated.");
+	}
+	
+	private void hideKeyboard() {
+		InputMethodManager imm = (InputMethodManager) getActivity()
+				.getSystemService(Context.INPUT_METHOD_SERVICE);
+		imm.hideSoftInputFromWindow(title.getWindowToken(), 0);
+	}
+	
+	public Ticket createTicket() {
+
+		ticket.setTitle((title.getText()).toString().trim());
+		ticket.setLogin((login.getText()).toString().trim());
+		ticket.setPassword((password.getText()).toString().trim());
+		ticket.setNotes((notes.getText()).toString().trim());
+
+		return ticket;
 	}
 }
