@@ -4,20 +4,24 @@
 	android:layout_width="match_parent" style="@style/layout_portrait_head">
 
 	<LinearLayout android:layout_height="wrap_content"
-		android:layout_width="wrap_content" android:layout_gravity="center_vertical"
+		android:layout_width="match_parent" android:layout_gravity="center_vertical"
 		style="@style/layout_portrait">
 
+	<TextView android:id="@+id/tv_title" android:layout_width="wrap_content"
+		android:layout_height="wrap_content" android:textStyle="bold"
+		android:textSize="35dip" android:textColor="#FF909090"
+		android:typeface="monospace" />
 		<TableLayout android:id="@+id/items_description"
 			android:layout_height="match_parent" android:layout_width="match_parent"
 			android:stretchColumns="1">
 
 			<!-- Titles -->
-			<TableRow android:gravity="left">
+		<!-- 	<TableRow android:gravity="left">
 				<TextView android:id="@+id/tv_title" android:layout_width="wrap_content"
 					android:layout_height="wrap_content" android:textStyle="bold"
 					android:textSize="35dip" android:textColor="#FF909090"
 					android:typeface="monospace" />
-			</TableRow>
+			</TableRow> -->
 
 			<View android:layout_height="2dip" android:background="#FF909090" />
 
