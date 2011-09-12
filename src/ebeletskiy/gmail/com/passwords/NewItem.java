@@ -74,10 +74,10 @@ public class NewItem extends Fragment {
 	public Ticket createTicket() {
 		if (ticket != null) {
 
-			ticket.setTitle((title.getText()).toString());
-			ticket.setLogin((login.getText()).toString());
-			ticket.setPassword((password.getText()).toString());
-			ticket.setNotes((notes.getText()).toString());
+			ticket.setTitle((title.getText()).toString().trim());
+			ticket.setLogin((login.getText()).toString().trim());
+			ticket.setPassword((password.getText()).toString().trim());
+			ticket.setNotes((notes.getText()).toString().trim());
 
 			return ticket;
 		} else {
@@ -116,7 +116,7 @@ public class NewItem extends Fragment {
 		case R.id.save_item:
 
 			if (checkFields()) {
-				if (!isDuplicate((title.getText()).toString())) {
+				if (!isDuplicate((title.getText()).toString().trim())) {
 					createNewItem();
 					hideKeyboard();
 					saveItemListener.saveItem();
