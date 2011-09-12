@@ -25,6 +25,7 @@ import ebeletskiy.gmail.com.passwords.utils.ShowToast;
 
 public class ItemsDescription extends Fragment {
 	private static final String TAG = "ItemsDescription";
+	private static final int EYE_ICON = 4; // menu eye icon
 	private boolean menuWasCreated = false;
 	private boolean passwordShown = true;
 
@@ -83,10 +84,10 @@ public class ItemsDescription extends Fragment {
 			notes.setText((String) savedInstanceState.get("notes"));
 		}
 		
-		password.setOnLongClickListener(tListener);
+		password.setOnLongClickListener(longClickListener);
 	}
 	
-	OnLongClickListener tListener = new OnLongClickListener() {
+	OnLongClickListener longClickListener = new OnLongClickListener() {
 		
 		@Override
 		public boolean onLongClick(View v) {
@@ -105,7 +106,7 @@ public class ItemsDescription extends Fragment {
 	@Override
 	public void onPrepareOptionsMenu(Menu menu) {
 		super.onPrepareOptionsMenu(menu);
-		MenuItem showPassItem = menu.getItem(3);
+		MenuItem showPassItem = menu.getItem(EYE_ICON);
 
 		if (password != null) {
 			if (password.getText().toString().equals("")) {
