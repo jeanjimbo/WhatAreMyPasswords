@@ -9,18 +9,18 @@
 
 		<EditText android:layout_width="match_parent" android:id="@+id/et_title"
 			style="@style/items_description_plain" android:layout_height="wrap_content"
-			android:hint="Title" android:singleLine="true" android:capitalize="sentences"/>
+			android:hint="@string/title" android:singleLine="true" android:capitalize="sentences"/>
 
 		<EditText android:id="@+id/et_login_data"
 			android:layout_width="match_parent" android:layout_height="wrap_content"
-			style="@style/items_description_plain" android:hint="Login"
+			style="@style/items_description_plain" android:hint="@string/log_in"
 			android:singleLine="true" />
 
-		<EditText android:hint="Password" android:id="@+id/et_password_data"
+		<EditText android:hint="@string/password" android:id="@+id/et_password_data"
 			android:layout_width="match_parent" android:layout_height="wrap_content"
 			style="@style/items_description_plain" android:singleLine="true" />
 
-		<EditText android:hint="Notes" android:id="@+id/et_notes_data"
+		<EditText android:hint="@string/notes" android:id="@+id/et_notes_data"
 			android:layout_width="match_parent" android:layout_height="wrap_content"
 			style="@style/items_description_plain" android:singleLine="true"/>
 

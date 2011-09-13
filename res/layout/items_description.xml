@@ -9,25 +9,17 @@
 
 	<TextView android:id="@+id/tv_title" android:layout_width="wrap_content"
 		android:layout_height="wrap_content" android:textStyle="bold"
-		android:textSize="35dip" android:textColor="#FF909090"
+		android:textSize="35dip" android:textColor="@color/title_color"
 		android:typeface="monospace" />
 		<TableLayout android:id="@+id/items_description"
 			android:layout_height="match_parent" android:layout_width="match_parent"
 			android:stretchColumns="1">
 
-			<!-- Titles -->
-		<!-- 	<TableRow android:gravity="left">
-				<TextView android:id="@+id/tv_title" android:layout_width="wrap_content"
-					android:layout_height="wrap_content" android:textStyle="bold"
-					android:textSize="35dip" android:textColor="#FF909090"
-					android:typeface="monospace" />
-			</TableRow> -->
-
-			<View android:layout_height="2dip" android:background="#FF909090" />
+			<View android:layout_height="2dip" android:background="@color/title_color" />
 
 			<!-- Login -->
 			<TableRow android:paddingTop="30dip">
-				<TextView android:text="Login" android:id="@+id/tv_login"
+				<TextView android:text="@string/log_in" android:id="@+id/tv_login"
 					android:layout_width="wrap_content" android:layout_height="wrap_content"
 					android:gravity="left" style="@style/items_description_bold" />
 				<TextView android:id="@+id/tv_login_data"
@@ -39,7 +31,7 @@
 			<TableRow>
 				<TextView android:id="@+id/tv_password"
 					android:layout_height="wrap_content" android:layout_width="wrap_content"
-					android:text="Password" android:gravity="left"
+					android:text="@string/password" android:gravity="left"
 					style="@style/items_description_bold" />
 				<TextView android:id="@+id/tv_password_data"
 					android:layout_width="wrap_content" android:layout_height="wrap_content"
@@ -50,7 +42,7 @@
 			<!-- Notes -->
 			<TableRow>
 				<TextView android:id="@+id/tv_notes" android:layout_width="wrap_content"
-					android:layout_height="wrap_content" android:text="Notes"
+					android:layout_height="wrap_content" android:text="@string/notes"
 					android:gravity="left" style="@style/items_description_bold" />
 				<TextView android:id="@+id/tv_notes_data"
 					android:layout_width="wrap_content" android:layout_height="wrap_content"

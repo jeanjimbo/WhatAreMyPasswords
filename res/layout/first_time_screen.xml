@@ -8,27 +8,26 @@
 		android:background="@drawable/layout_round_corners"
 		android:layout_height="wrap_content" android:layout_width="match_parent"
 		android:layout_gravity="center">
-		
+
 		<TextView android:layout_weight="1" android:id="@+id/textView1"
 			android:layout_width="wrap_content" android:textColor="@color/text_color"
 			android:layout_height="wrap_content" android:textAppearance="?android:attr/textAppearanceMedium"
-			android:text="This is your first launch of the application. You need to define password you will use to access to your data" />
-			
-		<EditText android:layout_height="wrap_content" android:id="@+id/edt_firsttimeactivity_first_field"
+			android:text="@string/welcome_text" />
+
+		<EditText android:layout_height="wrap_content"
+			android:id="@+id/edt_firsttimeactivity_first_field"
 			android:layout_weight="1" android:layout_width="match_parent"
-			android:hint="Password" android:singleLine="true"/>
-				<requestFocus></requestFocus>
-				
-		<EditText android:layout_height="wrap_content" android:id="@+id/edt_firsttimeactivity_second_field"
+			android:hint="@string/password" android:singleLine="true" />
+		<requestFocus></requestFocus>
+
+		<EditText android:layout_height="wrap_content"
+			android:id="@+id/edt_firsttimeactivity_second_field"
 			android:layout_width="match_parent" android:singleLine="true"
-			android:hint="Type your password again"/>
+			android:hint="@string/type_your_password_again" />
 
-		<Button android:text="Create Account For Me" android:layout_height="wrap_content"
-			android:layout_width="wrap_content" android:layout_gravity="center_horizontal"
-			android:onClick="onButtonClick"/>
-	
-
-
+		<Button android:text="@string/create_account_for_me"
+			android:layout_height="wrap_content" android:layout_width="wrap_content"
+			android:layout_gravity="center_horizontal" android:onClick="onButtonClick" />
 
 	</LinearLayout>
 

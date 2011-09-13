@@ -8,5 +8,6 @@
     <color name="round_layout_color">#3a3a3a</color>
     
 <!--  Right fragment, i.e. Items Description -->
-	<color name="text_color">#2f2e2e</color>	    
+	<color name="text_color">#2f2e2e</color>	 
+	<color name="title_color">#FF909090</color>   
 </resources>

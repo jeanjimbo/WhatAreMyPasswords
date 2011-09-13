@@ -9,7 +9,7 @@
 
 		<TextView android:id="@+id/tv_empty_frag"
 			android:layout_height="wrap_content" android:layout_width="wrap_content"
-			android:text="Choose an item from the left pane	or create new one by choosing the option from menu."
+			android:text="@string/empty_screen"
 			android:textColor="@color/text_color" android:layout_gravity="center_horizontal" />
 
 	</LinearLayout>
