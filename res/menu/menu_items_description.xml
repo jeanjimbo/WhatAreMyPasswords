@@ -9,8 +9,4 @@
 		android:title="@string/delete" android:showAsAction="ifRoom" 
 		android:icon="@drawable/ic_menu_delete"></item>
 		
-	<item android:visible="true" android:enabled="true" android:id="@+id/show_pass"
-		android:title="@string/show_password" android:showAsAction="ifRoom"
-		android:icon="@drawable/ic_menu_view"></item>
-
 </menu>

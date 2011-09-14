@@ -6,16 +6,15 @@ import android.app.Fragment;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.text.method.PasswordTransformationMethod;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.View.OnLongClickListener;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 import ebeletskiy.gmail.com.passwords.interfaces.DeleteItemListener;
 import ebeletskiy.gmail.com.passwords.interfaces.EditItemListener;
 import ebeletskiy.gmail.com.passwords.models.Ticket;
@@ -25,7 +24,7 @@ import ebeletskiy.gmail.com.passwords.utils.ShowToast;
 
 public class ItemsDescription extends Fragment {
 	private static final String TAG = "ItemsDescription";
-	private static final int EYE_ICON = 4; // menu eye icon
+	private static final int EYE_ICON = 3; // menu eye icon
 	private boolean menuWasCreated = false;
 	private boolean passwordShown = true;
 
@@ -83,12 +82,27 @@ public class ItemsDescription extends Fragment {
 			password.setText((String) savedInstanceState.get("password"));
 			notes.setText((String) savedInstanceState.get("notes"));
 		}
-		
+
 		password.setOnLongClickListener(longClickListener);
+		password.setOnClickListener(shortClickListener);
 	}
-	
+
+	OnClickListener shortClickListener = new OnClickListener() {
+
+		@Override
+		public void onClick(View v) {
+			if (passwordShown) {
+				password.setTransformationMethod(null);
+				passwordShown = false;
+			} else {
+				password.setTransformationMethod(new PasswordTransformationMethod());
+				passwordShown = true;
+			}
+		}
+	};
+
 	OnLongClickListener longClickListener = new OnLongClickListener() {
-		
+
 		@Override
 		public boolean onLongClick(View v) {
 			clipBoard = new Clipboard(getActivity());
@@ -118,16 +132,6 @@ public class ItemsDescription extends Fragment {
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
-
-		case R.id.show_pass:
-			if (passwordShown) {
-				password.setTransformationMethod(null);
-				passwordShown = false;
-			} else {
-				password.setTransformationMethod(new PasswordTransformationMethod());
-				passwordShown = true;
-			}
-			break;
 
 		case R.id.delete_item:
 			showAlertDialog();
