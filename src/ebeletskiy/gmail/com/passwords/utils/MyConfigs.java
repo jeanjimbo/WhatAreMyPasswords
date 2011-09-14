@@ -5,6 +5,7 @@ public final class MyConfigs {
 	}
 	
 	public static final boolean DEBUG = true; 
+	public static final int DESTROY_APP_AFTER = 10000; //milliseconds
 	
 	public static final String PREFS_NAME = "MyPrefsFile";
 	public static final String FIRST_RUN = "FirstRun";
