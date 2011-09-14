@@ -1,4 +1,4 @@
-package ebeletskiy.gmail.com.passwords.utils;
+package ebeletskiy.gmail.com.passwords.usage.utils;
 
 public final class MyConfigs {
 	private MyConfigs() {

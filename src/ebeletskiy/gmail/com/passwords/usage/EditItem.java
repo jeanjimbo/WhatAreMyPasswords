@@ -1,4 +1,4 @@
-package ebeletskiy.gmail.com.passwords;
+package ebeletskiy.gmail.com.passwords.usage;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -8,8 +8,8 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
-import ebeletskiy.gmail.com.passwords.models.Ticket;
-import ebeletskiy.gmail.com.passwords.utils.ShowToast;
+import ebeletskiy.gmail.com.passwords.usage.models.Ticket;
+import ebeletskiy.gmail.com.passwords.usage.utils.ShowToast;
 
 public class EditItem extends NewItem {
 	private static final String TAG = "EditItem";

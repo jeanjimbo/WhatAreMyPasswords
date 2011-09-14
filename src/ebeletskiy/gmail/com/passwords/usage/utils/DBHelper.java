@@ -1,4 +1,4 @@
-package ebeletskiy.gmail.com.passwords.utils;
+package ebeletskiy.gmail.com.passwords.usage.utils;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -6,7 +6,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
-import ebeletskiy.gmail.com.passwords.models.Ticket;
+import ebeletskiy.gmail.com.passwords.usage.models.Ticket;
 
 public class DBHelper extends SQLiteOpenHelper {
 	

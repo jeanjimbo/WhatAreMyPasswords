@@ -1,11 +1,9 @@
-package ebeletskiy.gmail.com.passwords.prefs;
+package ebeletskiy.gmail.com.passwords.usage.prefs;
 
 import java.util.List;
 
-import ebeletskiy.gmail.com.passwords.R;
-import ebeletskiy.gmail.com.passwords.R.xml;
-
 import android.preference.PreferenceActivity;
+import ebeletskiy.gmail.com.passwords.usage.R;
 
 public class ApplicationPreferences extends PreferenceActivity {
 

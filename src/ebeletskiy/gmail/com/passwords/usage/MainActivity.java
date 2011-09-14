@@ -1,4 +1,4 @@
-package ebeletskiy.gmail.com.passwords;
+package ebeletskiy.gmail.com.passwords.usage;
 
 import android.app.ActionBar;
 import android.app.Activity;
@@ -9,18 +9,17 @@ import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.os.Bundle;
 import android.os.Handler;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import ebeletskiy.gmail.com.passwords.interfaces.AddNewItemListener;
-import ebeletskiy.gmail.com.passwords.interfaces.DeleteItemListener;
-import ebeletskiy.gmail.com.passwords.interfaces.EditItemListener;
-import ebeletskiy.gmail.com.passwords.interfaces.ListItemClickListener;
-import ebeletskiy.gmail.com.passwords.interfaces.SaveItemListener;
-import ebeletskiy.gmail.com.passwords.models.Ticket;
-import ebeletskiy.gmail.com.passwords.prefs.ApplicationPreferences;
-import ebeletskiy.gmail.com.passwords.utils.MyConfigs;
+import ebeletskiy.gmail.com.passwords.usage.interfaces.AddNewItemListener;
+import ebeletskiy.gmail.com.passwords.usage.interfaces.DeleteItemListener;
+import ebeletskiy.gmail.com.passwords.usage.interfaces.EditItemListener;
+import ebeletskiy.gmail.com.passwords.usage.interfaces.ListItemClickListener;
+import ebeletskiy.gmail.com.passwords.usage.interfaces.SaveItemListener;
+import ebeletskiy.gmail.com.passwords.usage.models.Ticket;
+import ebeletskiy.gmail.com.passwords.usage.prefs.ApplicationPreferences;
+import ebeletskiy.gmail.com.passwords.usage.utils.MyConfigs;
 
 public class MainActivity extends Activity implements ListItemClickListener,
 		AddNewItemListener, SaveItemListener, DeleteItemListener,

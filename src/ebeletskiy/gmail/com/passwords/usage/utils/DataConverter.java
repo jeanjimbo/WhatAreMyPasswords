@@ -1,7 +1,7 @@
-package ebeletskiy.gmail.com.passwords.utils;
+package ebeletskiy.gmail.com.passwords.usage.utils;
 
 import android.database.Cursor;
-import ebeletskiy.gmail.com.passwords.models.Ticket;
+import ebeletskiy.gmail.com.passwords.usage.models.Ticket;
 
 public class DataConverter {
 	private static final String TAG = "DataConverter";

@@ -1,15 +1,13 @@
-package ebeletskiy.gmail.com.passwords;
+package ebeletskiy.gmail.com.passwords.usage;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.view.Gravity;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.Toast;
-import ebeletskiy.gmail.com.passwords.utils.MyConfigs;
-import ebeletskiy.gmail.com.passwords.utils.ShowToast;
+import ebeletskiy.gmail.com.passwords.usage.utils.MyConfigs;
+import ebeletskiy.gmail.com.passwords.usage.utils.ShowToast;
 
 public class CheckPassword extends Activity {
 

@@ -1,4 +1,4 @@
-package ebeletskiy.gmail.com.passwords;
+package ebeletskiy.gmail.com.passwords.usage;
 
 import android.app.Activity;
 import android.app.Fragment;
@@ -14,10 +14,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
-import ebeletskiy.gmail.com.passwords.interfaces.SaveItemListener;
-import ebeletskiy.gmail.com.passwords.models.Ticket;
-import ebeletskiy.gmail.com.passwords.utils.DBHelper;
-import ebeletskiy.gmail.com.passwords.utils.ShowToast;
+import ebeletskiy.gmail.com.passwords.usage.interfaces.SaveItemListener;
+import ebeletskiy.gmail.com.passwords.usage.models.Ticket;
+import ebeletskiy.gmail.com.passwords.usage.utils.DBHelper;
+import ebeletskiy.gmail.com.passwords.usage.utils.ShowToast;
 
 public class NewItem extends Fragment {
 	private static final String TAG = "EditItem";

@@ -1,11 +1,11 @@
-package ebeletskiy.gmail.com.passwords;
+package ebeletskiy.gmail.com.passwords.usage;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
-import ebeletskiy.gmail.com.passwords.utils.MyConfigs;
+import ebeletskiy.gmail.com.passwords.usage.utils.MyConfigs;
 
 public class LaunchActivityManager extends Activity {
 	

@@ -1,4 +1,4 @@
-package ebeletskiy.gmail.com.passwords.prefs;
+package ebeletskiy.gmail.com.passwords.usage.prefs;
 
 import android.os.Bundle;
 import android.preference.PreferenceFragment;

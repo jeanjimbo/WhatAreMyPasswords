@@ -1,4 +1,4 @@
-package ebeletskiy.gmail.com.passwords.models;
+package ebeletskiy.gmail.com.passwords.usage.models;
 
 public class Ticket implements DataModel {
 	private int id;

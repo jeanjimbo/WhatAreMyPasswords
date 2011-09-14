@@ -1,4 +1,4 @@
-package ebeletskiy.gmail.com.passwords;
+package ebeletskiy.gmail.com.passwords.usage;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -9,7 +9,6 @@ import android.database.Cursor;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.ActionMode;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -19,18 +18,16 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.CursorAdapter;
-import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
-import ebeletskiy.gmail.com.passwords.interfaces.AddNewItemListener;
-import ebeletskiy.gmail.com.passwords.interfaces.DeleteItemListener;
-import ebeletskiy.gmail.com.passwords.interfaces.EditItemListener;
-import ebeletskiy.gmail.com.passwords.interfaces.ListItemClickListener;
-import ebeletskiy.gmail.com.passwords.models.Ticket;
-import ebeletskiy.gmail.com.passwords.utils.DBHelper;
-import ebeletskiy.gmail.com.passwords.utils.DataConverter;
-import ebeletskiy.gmail.com.passwords.utils.ShowToast;
+import ebeletskiy.gmail.com.passwords.usage.interfaces.AddNewItemListener;
+import ebeletskiy.gmail.com.passwords.usage.interfaces.DeleteItemListener;
+import ebeletskiy.gmail.com.passwords.usage.interfaces.EditItemListener;
+import ebeletskiy.gmail.com.passwords.usage.interfaces.ListItemClickListener;
+import ebeletskiy.gmail.com.passwords.usage.models.Ticket;
+import ebeletskiy.gmail.com.passwords.usage.utils.DBHelper;
+import ebeletskiy.gmail.com.passwords.usage.utils.DataConverter;
+import ebeletskiy.gmail.com.passwords.usage.utils.ShowToast;
 
 public class ItemsList extends ListFragment {
 	private static final String TAG = "ItemsList";

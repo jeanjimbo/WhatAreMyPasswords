@@ -1,4 +1,4 @@
-package ebeletskiy.gmail.com.passwords.interfaces;
+package ebeletskiy.gmail.com.passwords.usage.interfaces;
 
 public interface DeleteItemListener {
 	void onDeleteItem();

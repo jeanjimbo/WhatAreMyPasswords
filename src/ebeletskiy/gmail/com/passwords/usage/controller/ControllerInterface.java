@@ -1,7 +1,7 @@
-package ebeletskiy.gmail.com.passwords.controller;
+package ebeletskiy.gmail.com.passwords.usage.controller;
 
 import android.database.Cursor;
-import ebeletskiy.gmail.com.passwords.models.DataModel;
+import ebeletskiy.gmail.com.passwords.usage.models.DataModel;
 
 public interface ControllerInterface {
 	/**

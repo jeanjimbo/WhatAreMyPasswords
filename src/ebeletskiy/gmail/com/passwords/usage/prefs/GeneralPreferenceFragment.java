@@ -1,9 +1,8 @@
-package ebeletskiy.gmail.com.passwords.prefs;
+package ebeletskiy.gmail.com.passwords.usage.prefs;
 
-import ebeletskiy.gmail.com.passwords.R;
-import ebeletskiy.gmail.com.passwords.R.xml;
 import android.os.Bundle;
 import android.preference.PreferenceFragment;
+import ebeletskiy.gmail.com.passwords.usage.R;
 
 public class GeneralPreferenceFragment extends PreferenceFragment {
 	

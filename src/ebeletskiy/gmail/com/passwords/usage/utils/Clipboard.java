@@ -1,4 +1,4 @@
-package ebeletskiy.gmail.com.passwords.utils;
+package ebeletskiy.gmail.com.passwords.usage.utils;
 
 import android.content.ClipData;
 import android.content.ClipboardManager;
