@@ -9,6 +9,7 @@ import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -36,7 +37,8 @@ public class MainActivity extends Activity implements ListItemClickListener,
 		@Override
 		public void run() {
 			prefsEditor = getApplicationContext().getSharedPreferences(
-					"myPrefs", 0).edit();
+					MyConfigs.PREFS_NAME, 0).edit();
+			Log.i("Dev", "runnable triggered");
 			prefsEditor.putBoolean("finishThread", true).commit();
 
 			finish();
