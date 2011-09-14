@@ -9,6 +9,7 @@ import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -36,8 +37,8 @@ public class MainActivity extends Activity implements ListItemClickListener,
 		@Override
 		public void run() {
 			prefsEditor = getApplicationContext().getSharedPreferences(
-					"myPrefs", 0).edit();
-			prefsEditor.putBoolean("finishThread", true).commit();
+					MyConfigs.PREFS_NAME, 0).edit();
+					prefsEditor.putBoolean("finishThread", true).commit();
 
 			finish();
 		}
@@ -77,6 +78,7 @@ public class MainActivity extends Activity implements ListItemClickListener,
 
 			if (fromOrientation) {
 				// do not check for password
+				prefsEditor.putBoolean("fromOrient", false).commit();
 			} else {
 				startActivity(new Intent(this, CheckPassword.class));
 				finish();
@@ -107,6 +109,7 @@ public class MainActivity extends Activity implements ListItemClickListener,
 			prefsEditor.putBoolean("finishThread", false).commit();
 		}
 	}
+		
 
 	private void updateSharedPreferences() {
 		SharedPreferences sharedPreferences = getSharedPreferences(
