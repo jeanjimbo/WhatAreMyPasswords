@@ -6,7 +6,9 @@ import android.app.Fragment;
 import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -24,6 +26,23 @@ public class MainActivity extends Activity implements ListItemClickListener,
 		EditItemListener {
 	private static final String TAG = "MainActivity";
 
+	protected boolean fromOrientation = false;
+	protected SharedPreferences sharedPreferences;
+	protected Editor prefsEditor;
+
+	protected Handler handler;
+	protected Runnable finishRunnable = new Runnable() {
+
+		@Override
+		public void run() {
+			prefsEditor = getApplicationContext().getSharedPreferences(
+					"myPrefs", 0).edit();
+			prefsEditor.putBoolean("finishThread", true).commit();
+
+			finish();
+		}
+	};
+
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -34,23 +53,63 @@ public class MainActivity extends Activity implements ListItemClickListener,
 			addEmptyFragment();
 		}
 
+		sharedPreferences = getSharedPreferences(MyConfigs.PREFS_NAME, 0);
+		prefsEditor = sharedPreferences.edit();
+
 		((ItemsList) getFragmentManager().findFragmentById(R.id.left_frag))
 				.enablePersistentSelection();
+
 	}
 
 	@Override
 	public void onStart() {
 		super.onStart();
 
-		SharedPreferences sharedPreferences = getSharedPreferences(
-				MyConfigs.PREFS_NAME, 0);
+		if (handler != null) {
+			handler.removeCallbacks(finishRunnable);
+			prefsEditor.putBoolean("finishThread", false).commit();
+		}
 
 		if (sharedPreferences.getBoolean(MyConfigs.FIRST_RUN_MAIN, true)) {
 			updateSharedPreferences();
 		} else {
-			Intent i = new Intent(this, CheckPassword.class);
-			startActivity(i);
-			finish();
+			fromOrientation = sharedPreferences.getBoolean("fromOrient", false);
+
+			if (fromOrientation) {
+				// do not check for password
+				prefsEditor.putBoolean("fromOrient", false).commit();
+			} else {
+				startActivity(new Intent(this, CheckPassword.class));
+				finish();
+			}
+		}
+	}
+
+	@Override
+	public Object onRetainNonConfigurationInstance() {
+		prefsEditor.putBoolean("fromOrient", true);
+		prefsEditor.commit();
+		return null;
+	}
+
+	@Override
+	protected void onStop() {
+		super.onStop();
+
+		if (!sharedPreferences.getBoolean("finishThread", false)) {
+			handler = new Handler();
+			handler.postDelayed(finishRunnable, MyConfigs.DESTROY_APP_AFTER);
+
+			prefsEditor.putBoolean("finishThread", true).commit();
+		}
+	}
+
+	@Override
+	protected void onDestroy() {
+		super.onDestroy();
+		if (handler != null) {
+			handler.removeCallbacks(finishRunnable);
+			prefsEditor.putBoolean("finishThread", false).commit();
 		}
 	}
 
@@ -124,7 +183,7 @@ public class MainActivity extends Activity implements ListItemClickListener,
 		transaction.replace(R.id.right_frag, fragment);
 		transaction.commit();
 	}
-	
+
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		MenuInflater inflater = getMenuInflater();
@@ -140,7 +199,7 @@ public class MainActivity extends Activity implements ListItemClickListener,
 			startActivity(intent);
 			return true;
 		case R.id.show_preferences:
-			startActivity(new Intent(this, ApplicationPreferences.class)); 
+			startActivity(new Intent(this, ApplicationPreferences.class));
 			return true;
 		default:
 			return super.onOptionsItemSelected(item);
