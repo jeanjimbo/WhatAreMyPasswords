@@ -108,7 +108,7 @@ public class ItemsDescription extends Fragment {
 			clipBoard = new Clipboard(getActivity());
 			clipBoard.copyText(password.getText().toString());
 			ShowToast.showToast(getActivity(), "Password copied to clipboard");
-			return false;
+			return true;
 		}
 	};
 
