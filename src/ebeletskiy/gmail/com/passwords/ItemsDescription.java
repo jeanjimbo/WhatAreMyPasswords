@@ -99,13 +99,13 @@ public class ItemsDescription extends Fragment
       FontManager.applyTypewriter(title);
     }
     if (login != null) {
-      FontManager.applyHandmadeTypeface(login);
+      FontManager.applyTypewriter(login);
     }
     if (password != null) {
-      FontManager.applyHandmadeTypeface(password);
+      FontManager.applyTypewriter(password);
     }
     if (notes != null) {
-      FontManager.applyHandmadeTypeface(notes);
+      FontManager.applyTypewriter(notes);
     }
 
     TextView login_t = (TextView) getView().findViewById(R.id.tv_login);

@@ -181,7 +181,7 @@ public class ItemsList extends ListFragment
 
     ViewHolder(View row) {
       title = (TextView) row.findViewById(R.id.title);
-      FontManager.applyTypewriter(title);
+//      FontManager.applyTypewriter(title);
     }
 
     void populateFrom(Cursor c, DBHelper helper) {
