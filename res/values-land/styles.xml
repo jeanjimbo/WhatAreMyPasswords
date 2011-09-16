@@ -9,11 +9,6 @@
 		<item name="android:textColor">@color/text_color</item>
 	</style>	
 	
-	<style name="items_description_bold">
-		<item name="android:textSize">30dip</item>
-		<item name="android:textColor">@color/text_color</item>
-	</style>
-	
 	<!--  Right pane -->
 	<style name="layout_portrait">
 		<item name="android:background">@drawable/layout_round_corners</item>

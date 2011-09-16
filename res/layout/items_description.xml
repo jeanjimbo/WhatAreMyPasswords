@@ -8,10 +8,10 @@
 		style="@style/layout_portrait">
 
 	<TextView android:id="@+id/tv_title" android:layout_width="wrap_content"
-		android:layout_height="wrap_content" android:textStyle="bold"
-		android:textSize="35dip" android:textColor="@color/title_color"
-		android:typeface="monospace" />
-		<TableLayout android:id="@+id/items_description"
+		android:layout_height="wrap_content"
+		android:textSize="35dip" android:textColor="@color/title_color"/>
+		
+		<TableLayout android:id="@+id/items_description_plain"
 			android:layout_height="match_parent" android:layout_width="match_parent"
 			android:stretchColumns="1">
 
@@ -21,7 +21,7 @@
 			<TableRow android:paddingTop="30dip">
 				<TextView android:text="@string/log_in" android:id="@+id/tv_login"
 					android:layout_width="wrap_content" android:layout_height="wrap_content"
-					android:gravity="left" style="@style/items_description_bold" />
+					android:gravity="left" style="@style/items_description_plain" />
 				<TextView android:id="@+id/tv_login_data"
 					android:layout_width="wrap_content" android:layout_height="wrap_content"
 					android:gravity="right" style="@style/items_description_plain" />
@@ -32,7 +32,7 @@
 				<TextView android:id="@+id/tv_password"
 					android:layout_height="wrap_content" android:layout_width="wrap_content"
 					android:text="@string/password" android:gravity="left"
-					style="@style/items_description_bold" />
+					style="@style/items_description_plain" />
 				<TextView android:id="@+id/tv_password_data"
 					android:layout_width="wrap_content" android:layout_height="wrap_content"
 					android:gravity="right" android:password="true"
@@ -44,7 +44,7 @@
 			<TableRow>
 				<TextView android:id="@+id/tv_notes" android:layout_width="wrap_content"
 					android:layout_height="wrap_content" android:text="@string/notes"
-					android:gravity="left" style="@style/items_description_bold" />
+					android:gravity="left" style="@style/items_description_plain" />
 				<TextView android:id="@+id/tv_notes_data"
 					android:layout_width="wrap_content" android:layout_height="wrap_content"
 					android:gravity="right" style="@style/items_description_plain" />

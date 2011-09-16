@@ -29,240 +29,254 @@ import ebeletskiy.gmail.com.passwords.usage.models.Ticket;
 import ebeletskiy.gmail.com.passwords.usage.utils.DBHelper;
 import ebeletskiy.gmail.com.passwords.usage.utils.DataConverter;
 import ebeletskiy.gmail.com.passwords.usage.utils.ShowToast;
+import ebeletskiy.gmail.com.passwords.usage.utils.FontManager;
 
-public class ItemsList extends ListFragment {
-	private static final String TAG = "ItemsList";
-	private boolean menuWasCreated = false;
+public class ItemsList extends ListFragment
+{
+  private static final String TAG = "ItemsList";
+  private boolean menuWasCreated = false;
 
-	private DBHelper dbHelper;
-	private MAdapter mAdapter;
-	private Cursor cursor;
-	private ListItemClickListener itemClickListener;
-	private AddNewItemListener newItemBtnListener;
-	private DeleteItemListener deleteListener;
-	private EditItemListener editItemListener;
-	private Ticket ticket;
-	private View mView;
-	private ActionMode mCurrentActionMode;
+  private DBHelper dbHelper;
+  private MAdapter mAdapter;
+  private Cursor cursor;
+  private ListItemClickListener itemClickListener;
+  private AddNewItemListener newItemBtnListener;
+  private DeleteItemListener deleteListener;
+  private EditItemListener editItemListener;
+  private Ticket ticket;
+  private View mView;
+  private ActionMode mCurrentActionMode;
 
-	@Override
-	public void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
+  @Override
+  public void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
 
-		dbHelper = new DBHelper(getActivity());
-		cursor = dbHelper.getAll();
+    dbHelper = new DBHelper(getActivity());
+    cursor = dbHelper.getAll();
 
-		if (!menuWasCreated) {
-			Log.i(TAG, "creating menu");
-			setHasOptionsMenu(true);
-			menuWasCreated = true;
-		}
-		
-		mAdapter = new MAdapter(getActivity(), cursor, true);
-		setListAdapter(mAdapter);
-	}
+    if (!menuWasCreated) {
+      Log.i(TAG, "creating menu");
+      setHasOptionsMenu(true);
+      menuWasCreated = true;
+    }
 
-	@Override
-	public void onActivityCreated(Bundle savedInstanceState) {
-		super.onActivityCreated(savedInstanceState);
+    mAdapter = new MAdapter(getActivity(), cursor, true);
+    setListAdapter(mAdapter);
+  }
 
-		getListView().setOnItemLongClickListener(new OnItemLongClickListener() {
+  @Override
+  public void onActivityCreated(Bundle savedInstanceState) {
+    super.onActivityCreated(savedInstanceState);
 
-			@Override
-			public boolean onItemLongClick(AdapterView<?> parent, View view,
-					int position, long id) {
-				ticket = createView(view);
-				mView = view;
+    getListView().setOnItemLongClickListener(new OnItemLongClickListener() {
 
-				if (mCurrentActionMode != null) {
-					return false;
-				}
+      @Override
+      public boolean onItemLongClick(AdapterView<?> parent, View view,
+          int position, long id) {
+        ticket = createView(view);
+        mView = view;
 
-				mCurrentActionMode = getActivity().startActionMode(
-						mContentSelectionActionModeCallback);
-				return true;
-			}
-		});
+        if (mCurrentActionMode != null) {
+          return false;
+        }
 
-		getListView().setEmptyView(getView().findViewById(R.id.ll_empty_left));
-	}
+        mCurrentActionMode = getActivity().startActionMode(
+            mContentSelectionActionModeCallback);
+        return true;
+      }
+    });
 
-	@Override
-	public void onAttach(Activity activity) {
-		super.onAttach(activity);
+    getListView().setEmptyView(getView().findViewById(R.id.ll_empty_left));
+  }
 
-		itemClickListener = (ListItemClickListener) activity;
-		newItemBtnListener = (AddNewItemListener) activity;
-		deleteListener = (DeleteItemListener) activity;
-		editItemListener = (EditItemListener) activity;
-	}
+  @Override
+  public void onAttach(Activity activity) {
+    super.onAttach(activity);
 
-	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container,
-			Bundle savedInstanceState) {
-		return inflater.inflate(R.layout.items_list, container, false);
-	}
+    itemClickListener = (ListItemClickListener) activity;
+    newItemBtnListener = (AddNewItemListener) activity;
+    deleteListener = (DeleteItemListener) activity;
+    editItemListener = (EditItemListener) activity;
+  }
 
-	@Override
-	public void onListItemClick(ListView l, View v, int position, long id) {
-		ViewHolder viewHolder = (ViewHolder) v.getTag();
-		Cursor cursor = dbHelper.getItem(viewHolder.getId());
-		Ticket ticket = DataConverter.convertToTicket(cursor);
+  @Override
+  public View onCreateView(LayoutInflater inflater, ViewGroup container,
+      Bundle savedInstanceState) {
+    return inflater.inflate(R.layout.items_list, container, false);
+  }
 
-		if (itemClickListener != null) {
-			itemClickListener.itemClicked(ticket);
-		}
-	}
+  @Override
+  public void onListItemClick(ListView l, View v, int position, long id) {
+    ViewHolder viewHolder = (ViewHolder) v.getTag();
+    Cursor cursor = dbHelper.getItem(viewHolder.getId());
+    Ticket ticket = DataConverter.convertToTicket(cursor);
 
-	public void enablePersistentSelection() {
-		getListView().setChoiceMode(ListView.CHOICE_MODE_SINGLE);
-	}
+    if (itemClickListener != null) {
+      itemClickListener.itemClicked(ticket);
+    }
+  }
 
-	private Ticket createView(View v) {
-		ViewHolder viewHolder = (ViewHolder) v.getTag();
-		Cursor cursor = dbHelper.getItem(viewHolder.getId());
-		return ticket = DataConverter.convertToTicket(cursor);
-	}
+  public void enablePersistentSelection() {
+    getListView().setChoiceMode(ListView.CHOICE_MODE_SINGLE);
+  }
 
-	private class MAdapter extends CursorAdapter {
+  private Ticket createView(View v) {
+    ViewHolder viewHolder = (ViewHolder) v.getTag();
+    Cursor cursor = dbHelper.getItem(viewHolder.getId());
+    return ticket = DataConverter.convertToTicket(cursor);
+  }
 
-		private Drawable defaultDrawable;
+  private class MAdapter extends CursorAdapter
+  {
 
-		public MAdapter(Context context, Cursor c, boolean autoRequery) {
-			super(context, c, autoRequery);
-		}
+    private Drawable defaultDrawable;
 
-		@Override
-		public void bindView(View row, Context ctxt, Cursor c) {
-			ViewHolder holder = (ViewHolder) row.getTag();
-			if (c.getPosition() % 2 == 0
-					&& row.getBackground() == defaultDrawable) {
-				row.setBackgroundDrawable(getResources().getDrawable(
-						R.drawable.dark_item_background));
-			}
+    public MAdapter(Context context, Cursor c, boolean autoRequery) {
+      super(context, c, autoRequery);
+    }
 
-			holder.populateFrom(c, dbHelper);
-		}
+    @Override
+    public int getViewTypeCount() {
+      return 2;
+    }
 
-		@Override
-		public View newView(Context ctxt, Cursor c, ViewGroup parent) {
-			View row = null;
-			LayoutInflater inflater = ((Activity) ctxt).getLayoutInflater();
-			row = inflater.inflate(R.layout.row, parent, false);
-			this.defaultDrawable = row.getBackground();
-			ViewHolder holder = new ViewHolder(row);
+    @Override
+    public int getItemViewType(int position) {
+      if (position % 2 == 0) {
+        return 0;
+      } else {
+        return 1;
+      }
+    }
 
-			row.setTag(holder);
+    @Override
+    public void bindView(View row, Context ctxt, Cursor c) {
+      ViewHolder holder = (ViewHolder) row.getTag();
+      if (c.getPosition() % 2 == 0 && row.getBackground() == defaultDrawable) {
+        row.setBackgroundDrawable(getResources().getDrawable(
+            R.drawable.dark_item_background));
+      }
 
-			return (row);
-		}
-	}
+      holder.populateFrom(c, dbHelper);
+    }
 
-	static class ViewHolder {
-		private TextView title;
-		private int id;
+    @Override
+    public View newView(Context ctxt, Cursor c, ViewGroup parent) {
+      View row = null;
+      LayoutInflater inflater = ((Activity) ctxt).getLayoutInflater();
+      row = inflater.inflate(R.layout.row, parent, false);
+      this.defaultDrawable = row.getBackground();
+      ViewHolder holder = new ViewHolder(row);
 
-		ViewHolder(View row) {
-			title = (TextView) row.findViewById(R.id.title);
-		}
+      row.setTag(holder);
 
-		void populateFrom(Cursor c, DBHelper helper) {
-			title.setText(helper.getTitle(c));
-			id = helper.getId(c);
-		}
+      return (row);
+    }
+  }
 
-		public int getId() {
-			return id;
-		}
-	}
+  static class ViewHolder
+  {
+    private TextView title;
+    private int id;
 
-	public void refresh() {
-		mAdapter.changeCursor(dbHelper.getAll());
-		getListView().setItemChecked(-1, true);
-	}
+    ViewHolder(View row) {
+      title = (TextView) row.findViewById(R.id.title);
+      FontManager.applyTypewriter(title);
+    }
 
-	@Override
-	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-		inflater.inflate(R.menu.menu_items_list, menu);
-	}
+    void populateFrom(Cursor c, DBHelper helper) {
+      title.setText(helper.getTitle(c));
+      id = helper.getId(c);
+    }
 
-	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
+    public int getId() {
+      return id;
+    }
+  }
 
-		switch (item.getItemId()) {
-		case R.id.add_item:
-			if (newItemBtnListener != null) {
-				newItemBtnListener.onAddNewItem();
-			}
-			break;
-		}
-		return super.onOptionsItemSelected(item);
-	}
+  public void refresh() {
+    mAdapter.changeCursor(dbHelper.getAll());
+    getListView().setItemChecked(-1, true);
+  }
 
-	private void showAlertDialog() {
-		AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-		builder.setMessage("Are you sure you want to delete the item?")
-				.setCancelable(false)
-				.setPositiveButton("Yes",
-						new DialogInterface.OnClickListener() {
-							public void onClick(DialogInterface dialog, int id) {
-								dbHelper.deleteRow(ticket.getId());
-								deleteListener.onDeleteItem();
-								ShowToast.showToast(getActivity(),
-										"Item has been deleted.");
-							}
-						})
-				.setNegativeButton("No", new DialogInterface.OnClickListener() {
-					public void onClick(DialogInterface dialog, int id) {
-						dialog.cancel();
-					}
-				});
+  @Override
+  public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+    inflater.inflate(R.menu.menu_items_list, menu);
+  }
 
-		AlertDialog alert = builder.create();
-		builder.show();
-	}
+  @Override
+  public boolean onOptionsItemSelected(MenuItem item) {
 
-	private ActionMode.Callback mContentSelectionActionModeCallback = new ActionMode.Callback() {
-		public boolean onCreateActionMode(ActionMode actionMode, Menu menu) {
-			actionMode.setTitle(ticket.getTitle());
-			mView.setBackgroundDrawable(getResources().getDrawable(
-					R.drawable.long_press_item_highlight));
+    switch (item.getItemId()) {
+    case R.id.add_item:
+      if (newItemBtnListener != null) {
+        newItemBtnListener.onAddNewItem();
+      }
+      break;
+    }
+    return super.onOptionsItemSelected(item);
+  }
 
-			MenuInflater inflater = getActivity().getMenuInflater();
-			inflater.inflate(R.menu.menu_contex_item_long_click, menu);
-			return true;
-		}
+  private void showAlertDialog() {
+    AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+    builder.setMessage("Are you sure you want to delete the item?")
+        .setCancelable(false)
+        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+          public void onClick(DialogInterface dialog, int id) {
+            dbHelper.deleteRow(ticket.getId());
+            deleteListener.onDeleteItem();
+            ShowToast.showToast(getActivity(), "Item has been deleted.");
+          }
+        }).setNegativeButton("No", new DialogInterface.OnClickListener() {
+          public void onClick(DialogInterface dialog, int id) {
+            dialog.cancel();
+          }
+        });
 
-		public boolean onPrepareActionMode(ActionMode actionMode, Menu menu) {
-			return false;
-		}
+    AlertDialog alert = builder.create();
+    builder.show();
+  }
 
-		public boolean onActionItemClicked(ActionMode actionMode,
-				MenuItem menuItem) {
-			switch (menuItem.getItemId()) {
-			case R.id.edit_item:
-				editItemListener.loadEditItem(ticket);
-				actionMode.finish();
-				return true;
-			case R.id.delete_item:
-				showAlertDialog();
-				actionMode.finish();
-				return true;
-			}
-			return false;
-		}
+  private ActionMode.Callback mContentSelectionActionModeCallback = new ActionMode.Callback() {
+    public boolean onCreateActionMode(ActionMode actionMode, Menu menu) {
+      actionMode.setTitle(ticket.getTitle());
+      mView.setBackgroundDrawable(getResources().getDrawable(
+          R.drawable.long_press_item_highlight));
 
-		public void onDestroyActionMode(ActionMode actionMode) {
-			mView.setBackgroundDrawable(null);
-			mCurrentActionMode = null;
-			mAdapter.notifyDataSetChanged();
-		}
-	};
+      MenuInflater inflater = getActivity().getMenuInflater();
+      inflater.inflate(R.menu.menu_contex_item_long_click, menu);
+      return true;
+    }
 
-	public void onDestroy() {
-		super.onDestroy();
-		if (dbHelper != null) {
-			dbHelper.close();
-		}
-	}
+    public boolean onPrepareActionMode(ActionMode actionMode, Menu menu) {
+      return false;
+    }
+
+    public boolean onActionItemClicked(ActionMode actionMode, MenuItem menuItem) {
+      switch (menuItem.getItemId()) {
+      case R.id.edit_item:
+        editItemListener.loadEditItem(ticket);
+        actionMode.finish();
+        return true;
+      case R.id.delete_item:
+        showAlertDialog();
+        actionMode.finish();
+        return true;
+      }
+      return false;
+    }
+
+    public void onDestroyActionMode(ActionMode actionMode) {
+      mView.setBackgroundDrawable(null);
+      mCurrentActionMode = null;
+      mAdapter.notifyDataSetChanged();
+    }
+  };
+
+  public void onDestroy() {
+    super.onDestroy();
+    if (dbHelper != null) {
+      dbHelper.close();
+    }
+  }
 }
