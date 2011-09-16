@@ -22,6 +22,7 @@ import ebeletskiy.gmail.com.passwords.interfaces.EditItemListener;
 import ebeletskiy.gmail.com.passwords.models.Ticket;
 import ebeletskiy.gmail.com.passwords.utils.Clipboard;
 import ebeletskiy.gmail.com.passwords.utils.DBHelper;
+import ebeletskiy.gmail.com.passwords.utils.FontManager;
 import ebeletskiy.gmail.com.passwords.utils.ShowToast;
 
 public class ItemsDescription extends Fragment
@@ -73,6 +74,7 @@ public class ItemsDescription extends Fragment
   public void onActivityCreated(Bundle savedInstanceState) {
     super.onActivityCreated(savedInstanceState);
     initUI();
+    applyFonts();
 
     if (!menuWasCreated) {
       setHasOptionsMenu(true);
@@ -88,14 +90,35 @@ public class ItemsDescription extends Fragment
 
     password.setOnLongClickListener(longClickListener);
     password.setOnClickListener(shortClickListener);
-    
+
     applyFonts();
   }
 
   private void applyFonts() {
     if (title != null) {
-      Typeface face = Typeface.createFromAsset(getResources().getAssets(), "fonts/typewriter.ttf");
-      title.setTypeface(face);
+      FontManager.applyTypewriter(title);
+    }
+    if (login != null) {
+      FontManager.applyHandmadeTypeface(login);
+    }
+    if (password != null) {
+      FontManager.applyHandmadeTypeface(password);
+    }
+    if (notes != null) {
+      FontManager.applyHandmadeTypeface(notes);
+    }
+
+    TextView login_t = (TextView) getView().findViewById(R.id.tv_login);
+    if (login_t != null) {
+      FontManager.applyTypewriter(login_t);
+    }
+    TextView password_t = (TextView) getView().findViewById(R.id.tv_password);
+    if (password_t != null) {
+      FontManager.applyTypewriter(password_t);
+    }
+    TextView notes_t = (TextView) getView().findViewById(R.id.tv_notes);
+    if (notes_t != null) {
+      FontManager.applyTypewriter(notes_t);
     }
   }
 
