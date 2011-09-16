@@ -125,7 +125,7 @@ public class ItemsList extends ListFragment
     Cursor cursor = dbHelper.getItem(viewHolder.getId());
     return ticket = DataConverter.convertToTicket(cursor);
   }
-  
+
   private class MAdapter extends CursorAdapter
   {
 
@@ -133,6 +133,20 @@ public class ItemsList extends ListFragment
 
     public MAdapter(Context context, Cursor c, boolean autoRequery) {
       super(context, c, autoRequery);
+    }
+
+    @Override
+    public int getViewTypeCount() {
+      return 2;
+    }
+
+    @Override
+    public int getItemViewType(int position) {
+      if (position % 2 == 0) {
+        return 0;
+      } else {
+        return 1;
+      }
     }
 
     @Override
