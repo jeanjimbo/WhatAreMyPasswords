@@ -8,9 +8,9 @@
 		style="@style/layout_portrait">
 
 	<TextView android:id="@+id/tv_title" android:layout_width="wrap_content"
-		android:layout_height="wrap_content" android:textStyle="bold"
-		android:textSize="35dip" android:textColor="@color/title_color"
-		android:typeface="monospace" />
+		android:layout_height="wrap_content"
+		android:textSize="35dip" android:textColor="@color/title_color"/>
+		
 		<TableLayout android:id="@+id/items_description"
 			android:layout_height="match_parent" android:layout_width="match_parent"
 			android:stretchColumns="1">

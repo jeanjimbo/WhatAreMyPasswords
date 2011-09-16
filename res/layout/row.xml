@@ -18,8 +18,7 @@
 		android:layout_height="wrap_content"
 		android:textColor="@color/item_text_color"
 		android:layout_gravity="center_vertical|right"
-		android:textAppearance="?android:attr/textAppearanceMedium"
-		android:typeface="normal"
+		android:textAppearance="?android:attr/textAppearanceLarge"
 		/>
 
 </LinearLayout>
