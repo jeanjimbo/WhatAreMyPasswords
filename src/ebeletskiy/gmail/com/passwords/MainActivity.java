@@ -125,7 +125,6 @@ public class MainActivity extends Activity implements ListItemClickListener,
 
 	private void initActionBar() {
 		ActionBar actionBar = getActionBar();
-		actionBar.setTitle("What are my passwords?");
 		actionBar.setBackgroundDrawable(getResources().getDrawable(
 				R.drawable.action_bar_background));
 	}
