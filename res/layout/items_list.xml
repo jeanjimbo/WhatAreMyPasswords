@@ -14,11 +14,11 @@
 
 		<LinearLayout android:layout_width="match_parent"
 			android:layout_height="wrap_content" style="@style/layout_no_items"
-			android:layout_gravity="center_vertical">
+			android:layout_gravity="center_vertical" android:orientation="vertical">
 
-			<TextView android:layout_width="wrap_content"
-				android:layout_height="wrap_content" android:text="@string/you_do_not_have_any_passwords_yet_"
-				style="@style/no_items_text" android:layout_gravity="center_horizontal" />
+		  <TextView android:layout_width="wrap_content"
+        android:layout_height="wrap_content" android:text="@string/you_do_not_have_any_passwords_yet_"
+        style="@style/no_items_text" android:layout_gravity="center_horizontal" />
 
 		</LinearLayout>
 
