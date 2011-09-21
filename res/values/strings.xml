@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <string name="appname">Keep Passwords</string>
+
 <!--  Check password  -->
     <string name="log_in">Login</string>
     
@@ -8,10 +10,10 @@
     <string name="empty_screen">Choose an item from the left pane or create new one by choosing the option from menu.</string>
     
 <!--  First time screen -->
-    <string name="welcome_text">This is your first launch of the application. You need to define password you will use to access to your data.</string>
+    <string name="welcome_text">This is your first launch of the application. You need to define password you will use to access your data.</string>
     <string name="password">Password</string>
     <string name="type_your_password_again">Type your password again</string>
-    <string name="create_account_for_me">Create Account For Me</string>
+    <string name="create_account_for_me">Create Account</string>
     
 <!-- Items description -->
     <string name="notes">Notes</string>
@@ -19,7 +21,6 @@
 <!-- Items list -->
     <string name="you_do_not_have_any_passwords_yet_">You do not have any passwords yet.</string>
     <string name="title">Title</string>
-    <string name="mypasswords">MyPasswords</string>
     
 <!-- Menu long menu -->
     <string name="edit_item">Edit Item</string>
