@@ -44,7 +44,6 @@ public class NewItem extends Fragment {
 		super.onCreate(savedInstanceState);
 
 		if (!menuWasCreated) {
-			Log.i(TAG, "creating menu");
 			setHasOptionsMenu(true);
 			menuWasCreated = true;
 		}

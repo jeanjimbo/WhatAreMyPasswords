@@ -79,24 +79,17 @@ public class EditItem extends NewItem
     switch (item.getItemId()) {
     case R.id.save_item:
 
-      Log.i("Dev", "Save menu cliked");
-
       if (titleChanged) {
-        Log.i("Dev", "menu: title changed");
 
         if (isDuplicate(title.getText().toString())) {
-          Log.i("Dev", "menu: title is duplicate");
           ShowToast.showToast(getActivity(),
               "The item wich such name already exists.");
         } else {
-          Log.i("Dev", "menu: title is not duplicate -> updateData()");
           updateData();
         }
 
       } else {
-        Log.i("Dev", "menu: title not changed && is not duplicate");
         if (saveItemListener != null && checkFields()) {
-          Log.i("Dev", "menu: fields are ok");
           updateData();
         } else {
           ShowToast.showToast(getActivity(), "Please fill Title.");
