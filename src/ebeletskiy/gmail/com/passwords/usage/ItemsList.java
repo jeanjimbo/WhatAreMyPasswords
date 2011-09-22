@@ -55,7 +55,6 @@ public class ItemsList extends ListFragment
     cursor = dbHelper.getAll();
 
     if (!menuWasCreated) {
-      Log.i(TAG, "creating menu");
       setHasOptionsMenu(true);
       menuWasCreated = true;
     }
