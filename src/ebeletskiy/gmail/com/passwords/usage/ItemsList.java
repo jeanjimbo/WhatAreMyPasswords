@@ -238,8 +238,10 @@ public class ItemsList extends ListFragment
   }
 
   private ActionMode.Callback mContentSelectionActionModeCallback = new ActionMode.Callback() {
+    Drawable viewBackground; 
     public boolean onCreateActionMode(ActionMode actionMode, Menu menu) {
       actionMode.setTitle(ticket.getTitle());
+      viewBackground = mView.getBackground();
       mView.setBackgroundDrawable(getResources().getDrawable(
           R.drawable.long_press_item_highlight));
 
@@ -270,6 +272,7 @@ public class ItemsList extends ListFragment
       mView.setBackgroundDrawable(null);
       mCurrentActionMode = null;
       mAdapter.notifyDataSetChanged();
+      mView.setBackgroundDrawable(viewBackground);
     }
   };
 

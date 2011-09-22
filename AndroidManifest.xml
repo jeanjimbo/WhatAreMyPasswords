@@ -4,22 +4,18 @@
 	android:versionName="1.0">
 	<uses-sdk android:minSdkVersion="11" android:targetSdkVersion="11" />
 
-	<application android:icon="@drawable/icon" android:label="@string/mypasswords"
-		android:debuggable="true" android:theme="@android:style/Theme.Holo.Light">
-		<activity android:name=".LaunchActivityManager">
-			<intent-filter>
-				<action android:name="android.intent.action.MAIN" />
-				<category android:name="android.intent.category.LAUNCHER" />
-			</intent-filter>
-		</activity>
+	<application android:icon="@drawable/icon" android:label="@string/appname"
+    android:debuggable="true"  android:theme="@android:style/Theme.Holo.Light">
+        <activity android:name=".LaunchActivityManager">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        
+        <activity android:name="FirstTimeActivity" android:windowSoftInputMode="adjustPan"></activity>
+        <activity android:name="MainActivity" android:windowSoftInputMode="adjustPan"></activity>
+		<activity android:name="CheckPassword" android:windowSoftInputMode="adjustPan"></activity>
 
-		<activity android:name=".FirstTimeActivity"
-			android:windowSoftInputMode="adjustPan"></activity>
-		<activity android:name=".MainActivity"
-			android:windowSoftInputMode="adjustPan"></activity>
-		<activity android:name=".CheckPassword"
-			android:windowSoftInputMode="adjustPan"></activity>
-		<activity android:name=".prefs.ApplicationPreferences"></activity>
-
-	</application>
+    </application>
 </manifest>

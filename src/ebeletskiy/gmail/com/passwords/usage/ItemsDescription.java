@@ -28,7 +28,7 @@ import ebeletskiy.gmail.com.passwords.usage.utils.FontManager;
 public class ItemsDescription extends Fragment
 {
   private static final String TAG = "ItemsDescription";
-  private static final int EYE_ICON = 3; // menu eye icon
+  private static final int EYE_ICON = 2; // menu eye icon
   private boolean menuWasCreated = false;
   private boolean passwordShown = true;
 
