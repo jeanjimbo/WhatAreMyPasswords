@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="appname">Remember Password</string>
+    <string name="appname">Remember Passwords</string>
 
 <!--  Check password  -->
     <string name="log_in">Login</string>
