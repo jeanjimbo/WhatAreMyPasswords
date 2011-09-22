@@ -3,10 +3,10 @@
       package="ebeletskiy.gmail.com.passwords"
       android:versionCode="1"
       android:versionName="1.0">
-    <uses-sdk android:minSdkVersion="12" android:targetSdkVersion="11"/>
+    <uses-sdk android:minSdkVersion="11" android:targetSdkVersion="11"/>
 
 	<application android:icon="@drawable/icon" android:label="@string/appname"
-    android:debuggable="true"  android:theme="@android:style/Theme.Holo.Light">
+    android:theme="@android:style/Theme.Holo.Light" android:debuggable="false">
         <activity android:name=".LaunchActivityManager">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
