@@ -1,14 +1,11 @@
 package ebeletskiy.gmail.com.passwords;
 
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.app.ListFragment;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.database.Cursor;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.ActionMode;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -28,8 +25,7 @@ import ebeletskiy.gmail.com.passwords.interfaces.ListItemClickListener;
 import ebeletskiy.gmail.com.passwords.models.Ticket;
 import ebeletskiy.gmail.com.passwords.utils.DBHelper;
 import ebeletskiy.gmail.com.passwords.utils.DataConverter;
-import ebeletskiy.gmail.com.passwords.utils.FontManager;
-import ebeletskiy.gmail.com.passwords.utils.ShowToast;
+import ebeletskiy.gmail.com.passwords.utils.MyCustomAlertDialog;
 
 public class ItemsList extends ListFragment {
     private static final String TAG = "ItemsList";
@@ -212,22 +208,7 @@ public class ItemsList extends ListFragment {
     }
 
     private void showAlertDialog() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        builder.setMessage("Are you sure you want to delete the item?").setCancelable(false)
-                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-                        mDbHelper.deleteRow(mTicket.getId());
-                        mDeleteListener.onDeleteItem();
-                        ShowToast.showToast(getActivity(), "Item has been deleted.");
-                    }
-                }).setNegativeButton("No", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-                        dialog.cancel();
-                    }
-                });
-
-        AlertDialog alert = builder.create();
-        builder.show();
+        new MyCustomAlertDialog(mTicket.getId()).show(getFragmentManager(), "tag");
     }
 
     private ActionMode.Callback mContentSelectionActionModeCallback = new ActionMode.Callback() {

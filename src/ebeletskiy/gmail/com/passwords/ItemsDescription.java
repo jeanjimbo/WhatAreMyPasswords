@@ -1,11 +1,7 @@
 package ebeletskiy.gmail.com.passwords;
 
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.app.Fragment;
-import android.content.DialogInterface;
-import android.content.res.AssetManager;
-import android.graphics.Typeface;
 import android.os.Bundle;
 import android.text.method.PasswordTransformationMethod;
 import android.view.LayoutInflater;
@@ -23,6 +19,7 @@ import ebeletskiy.gmail.com.passwords.models.Ticket;
 import ebeletskiy.gmail.com.passwords.utils.Clipboard;
 import ebeletskiy.gmail.com.passwords.utils.DBHelper;
 import ebeletskiy.gmail.com.passwords.utils.FontManager;
+import ebeletskiy.gmail.com.passwords.utils.MyCustomAlertDialog;
 import ebeletskiy.gmail.com.passwords.utils.ShowToast;
 
 public class ItemsDescription extends Fragment {
@@ -166,24 +163,7 @@ public class ItemsDescription extends Fragment {
     }
 
     private void showAlertDialog() {
-        // params: getActivity() and mTicket.getId();
-        // new DeleteDialog(getActivity(), mTicket.getId());
-        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        builder.setMessage("Are you sure you want to delete the item?").setCancelable(false)
-                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-                        mDbHelper.deleteRow(mTicket.getId());
-                        mDeleteListener.onDeleteItem();
-                        ShowToast.showToast(getActivity(), "Item has been deleted");
-                    }
-                }).setNegativeButton("No", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-                        dialog.cancel();
-                    }
-                });
-
-        AlertDialog alert = builder.create();
-        builder.show();
+        new MyCustomAlertDialog(mTicket.getId()).show(getFragmentManager(), "tag");
     }
 
     public void onSaveInstanceState(Bundle outState) {
