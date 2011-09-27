@@ -27,7 +27,7 @@ public class FirstTimeActivity extends Activity {
             updateSharedPreferences();
             launchMainActivity();
         } else {
-            ShowToast.showToast(this, "Fields both fields and make sure passwords match.");
+            ShowToast.showToast(this, getString(R.string.fill_both_fields_passwords_match));
         }
     }
 
@@ -40,7 +40,7 @@ public class FirstTimeActivity extends Activity {
 
     private void savePassword() {
         if (mPassword.equals("")) {
-            throw new IllegalArgumentException("Password field is empty");
+            throw new IllegalArgumentException(getString(R.string.password_field_is_empty));
         }
 
         SharedPreferences sharedPreferences = getSharedPreferences(MyConfigs.PREFS_NAME, 0);

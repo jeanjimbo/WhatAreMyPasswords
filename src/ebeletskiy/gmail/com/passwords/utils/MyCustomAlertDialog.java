@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import ebeletskiy.gmail.com.passwords.R;
 import ebeletskiy.gmail.com.passwords.interfaces.DeleteItemListener;
 
 public class MyCustomAlertDialog extends DialogFragment {
@@ -50,14 +51,14 @@ public class MyCustomAlertDialog extends DialogFragment {
         mDeleteListener = (DeleteItemListener) getActivity();
 
         return new AlertDialog.Builder(getActivity())
-                .setMessage("Are you sure you want to delete the item?").setCancelable(false)
-                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                .setMessage(getString(R.string.sure_you_want_to_delete)).setCancelable(false)
+                .setPositiveButton(getString(R.string.yes), new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         mDbHelper.deleteRow(mTicketId);
                         mDeleteListener.onDeleteItem();
-                        ShowToast.showToast(getActivity(), "Item has been deleted.");
+                        ShowToast.showToast(getActivity(), getString(R.string.item_has_been_deleted));
                     }
-                }).setNegativeButton("No", new DialogInterface.OnClickListener() {
+                }).setNegativeButton(getString(R.string.no), new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         dialog.cancel();
                     }

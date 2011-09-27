@@ -118,10 +118,10 @@ public class NewItem extends Fragment {
                     hideKeyboard();
                     saveItemListener.saveItem();
                 } else {
-                    ShowToast.showToast(getActivity(), "The item wich such name already exists.");
+                    ShowToast.showToast(getActivity(), getString(R.string.item_already_exists));
                 }
             } else {
-                ShowToast.showToast(getActivity(), "Please fill the title.");
+                ShowToast.showToast(getActivity(), getString(R.string.fill_the_title));
             }
             break;
         }

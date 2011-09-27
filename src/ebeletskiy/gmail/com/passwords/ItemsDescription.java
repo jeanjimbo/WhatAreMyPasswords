@@ -136,7 +136,7 @@ public class ItemsDescription extends Fragment {
         public boolean onLongClick(View v) {
             mClipBoard = new Clipboard(getActivity());
             mClipBoard.copyText(mPassword.getText().toString());
-            ShowToast.showToast(getActivity(), "Password copied to clipboard");
+            ShowToast.showToast(getActivity(), getString(R.string.password_copied_to_clipboard));
             return true;
         }
     };
