@@ -30,7 +30,7 @@ public class CheckPassword extends Activity {
             updateSharedPreferences();
             launchMainActivity();
         } else {
-            ShowToast.showToast(this, "Incorrect Passwrod");
+            ShowToast.showToast(this, getString(R.string.incorrect_password));
         }
     }
 
