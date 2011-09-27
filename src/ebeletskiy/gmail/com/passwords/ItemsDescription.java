@@ -30,7 +30,6 @@ public class ItemsDescription extends Fragment {
     private Ticket mTicket;
     private TextView mTitle, mLogin, mPassword, mNotes;
     private DBHelper mDbHelper;
-    private DeleteItemListener mDeleteListener;
     private EditItemListener mEditItemListener;
     private Clipboard mClipBoard;
 
@@ -49,7 +48,6 @@ public class ItemsDescription extends Fragment {
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
-        mDeleteListener = (DeleteItemListener) activity;
         mEditItemListener = (EditItemListener) activity;
     }
 
