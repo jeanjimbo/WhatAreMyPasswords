@@ -35,14 +35,14 @@ public class ItemsList extends ListFragment {
     private static final String TAG = "ItemsList";
     private boolean menuWasCreated = false;
 
-    private DBHelper dbHelper;
+    private DBHelper mDbHelper;
     private MAdapter mAdapter;
-    private Cursor cursor;
-    private ListItemClickListener itemClickListener;
-    private AddNewItemListener newItemBtnListener;
-    private DeleteItemListener deleteListener;
-    private EditItemListener editItemListener;
-    private Ticket ticket;
+    private Cursor mCursor;
+    private ListItemClickListener mItemClickListener;
+    private AddNewItemListener mNewItemBtnListener;
+    private DeleteItemListener mDeleteListener;
+    private EditItemListener mEditItemListener;
+    private Ticket mTicket;
     private View mView;
     private ActionMode mCurrentActionMode;
 
@@ -50,15 +50,15 @@ public class ItemsList extends ListFragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        dbHelper = new DBHelper(getActivity());
-        cursor = dbHelper.getAll();
+        mDbHelper = new DBHelper(getActivity());
+        mCursor = mDbHelper.getAll();
 
         if (!menuWasCreated) {
             setHasOptionsMenu(true);
             menuWasCreated = true;
         }
 
-        mAdapter = new MAdapter(getActivity(), cursor, true);
+        mAdapter = new MAdapter(getActivity(), mCursor, true);
         setListAdapter(mAdapter);
     }
 
@@ -70,7 +70,7 @@ public class ItemsList extends ListFragment {
 
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-                ticket = createView(view);
+                mTicket = createView(view);
                 mView = view;
 
                 if (mCurrentActionMode != null) {
@@ -90,10 +90,10 @@ public class ItemsList extends ListFragment {
     public void onAttach(Activity activity) {
         super.onAttach(activity);
 
-        itemClickListener = (ListItemClickListener) activity;
-        newItemBtnListener = (AddNewItemListener) activity;
-        deleteListener = (DeleteItemListener) activity;
-        editItemListener = (EditItemListener) activity;
+        mItemClickListener = (ListItemClickListener) activity;
+        mNewItemBtnListener = (AddNewItemListener) activity;
+        mDeleteListener = (DeleteItemListener) activity;
+        mEditItemListener = (EditItemListener) activity;
     }
 
     @Override
@@ -104,11 +104,11 @@ public class ItemsList extends ListFragment {
     @Override
     public void onListItemClick(ListView l, View v, int position, long id) {
         ViewHolder viewHolder = (ViewHolder) v.getTag();
-        Cursor cursor = dbHelper.getItem(viewHolder.getId());
+        Cursor cursor = mDbHelper.getItem(viewHolder.getId());
         Ticket ticket = DataConverter.convertToTicket(cursor);
 
-        if (itemClickListener != null) {
-            itemClickListener.itemClicked(ticket);
+        if (mItemClickListener != null) {
+            mItemClickListener.itemClicked(ticket);
         }
     }
 
@@ -118,8 +118,8 @@ public class ItemsList extends ListFragment {
 
     private Ticket createView(View v) {
         ViewHolder viewHolder = (ViewHolder) v.getTag();
-        Cursor cursor = dbHelper.getItem(viewHolder.getId());
-        return ticket = DataConverter.convertToTicket(cursor);
+        Cursor cursor = mDbHelper.getItem(viewHolder.getId());
+        return mTicket = DataConverter.convertToTicket(cursor);
     }
 
     private class MAdapter extends CursorAdapter {
@@ -152,7 +152,7 @@ public class ItemsList extends ListFragment {
                         R.drawable.dark_item_background));
             }
 
-            holder.populateFrom(c, dbHelper);
+            holder.populateFrom(c, mDbHelper);
         }
 
         @Override
@@ -189,7 +189,7 @@ public class ItemsList extends ListFragment {
     }
 
     public void refresh() {
-        mAdapter.changeCursor(dbHelper.getAll());
+        mAdapter.changeCursor(mDbHelper.getAll());
         getListView().setItemChecked(-1, true);
     }
 
@@ -203,8 +203,8 @@ public class ItemsList extends ListFragment {
 
         switch (item.getItemId()) {
         case R.id.add_item:
-            if (newItemBtnListener != null) {
-                newItemBtnListener.onAddNewItem();
+            if (mNewItemBtnListener != null) {
+                mNewItemBtnListener.onAddNewItem();
             }
             break;
         }
@@ -216,8 +216,8 @@ public class ItemsList extends ListFragment {
         builder.setMessage("Are you sure you want to delete the item?").setCancelable(false)
                 .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
-                        dbHelper.deleteRow(ticket.getId());
-                        deleteListener.onDeleteItem();
+                        mDbHelper.deleteRow(mTicket.getId());
+                        mDeleteListener.onDeleteItem();
                         ShowToast.showToast(getActivity(), "Item has been deleted.");
                     }
                 }).setNegativeButton("No", new DialogInterface.OnClickListener() {
@@ -234,7 +234,7 @@ public class ItemsList extends ListFragment {
         Drawable viewBackground;
 
         public boolean onCreateActionMode(ActionMode actionMode, Menu menu) {
-            actionMode.setTitle(ticket.getTitle());
+            actionMode.setTitle(mTicket.getTitle());
             viewBackground = mView.getBackground();
             mView.setBackgroundDrawable(getResources().getDrawable(
                     R.drawable.long_press_item_highlight));
@@ -251,7 +251,7 @@ public class ItemsList extends ListFragment {
         public boolean onActionItemClicked(ActionMode actionMode, MenuItem menuItem) {
             switch (menuItem.getItemId()) {
             case R.id.edit_item:
-                editItemListener.loadEditItem(ticket);
+                mEditItemListener.loadEditItem(mTicket);
                 actionMode.finish();
                 return true;
             case R.id.delete_item:
@@ -272,8 +272,8 @@ public class ItemsList extends ListFragment {
 
     public void onDestroy() {
         super.onDestroy();
-        if (dbHelper != null) {
-            dbHelper.close();
+        if (mDbHelper != null) {
+            mDbHelper.close();
         }
     }
 }

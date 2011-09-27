@@ -4,7 +4,6 @@ import android.content.Context;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
@@ -14,24 +13,24 @@ import ebeletskiy.gmail.com.passwords.utils.ShowToast;
 public class EditItem extends NewItem {
     private static final String TAG = "EditItem";
 
-    private boolean titleChanged = false;
-    private Ticket ticket;
+    private boolean mTitleChanged = false;
+    private Ticket mTicket;
 
-    private String beforeTextChanged;
-    private String afterTextChanged;
+    private String mBeforeTextChanged;
+    private String mAfterTextChanged;
 
     public EditItem() {
     };
 
     public EditItem(Ticket ticket) {
-        this.ticket = ticket;
+        this.mTicket = ticket;
     }
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         initUIelements();
-        beforeTextChanged = title.getText().toString();
+        mBeforeTextChanged = title.getText().toString();
 
         title.addTextChangedListener(new TextWatcher() {
 
@@ -45,12 +44,12 @@ public class EditItem extends NewItem {
 
             @Override
             public void afterTextChanged(Editable s) {
-                afterTextChanged = title.getText().toString();
+                mAfterTextChanged = title.getText().toString();
 
-                if (beforeTextChanged.equals(afterTextChanged)) {
-                    titleChanged = false;
+                if (mBeforeTextChanged.equals(mAfterTextChanged)) {
+                    mTitleChanged = false;
                 } else {
-                    titleChanged = true;
+                    mTitleChanged = true;
                 }
 
             }
@@ -63,11 +62,11 @@ public class EditItem extends NewItem {
         password = (EditText) getView().findViewById(R.id.et_password_data);
         notes = (EditText) getView().findViewById(R.id.et_notes_data);
 
-        if (ticket != null) {
-            title.setText(ticket.getTitle());
-            login.setText(ticket.getLogin());
-            password.setText(ticket.getPassword());
-            notes.setText(ticket.getNotes());
+        if (mTicket != null) {
+            title.setText(mTicket.getTitle());
+            login.setText(mTicket.getLogin());
+            password.setText(mTicket.getPassword());
+            notes.setText(mTicket.getNotes());
         }
     }
 
@@ -77,7 +76,7 @@ public class EditItem extends NewItem {
         switch (item.getItemId()) {
         case R.id.save_item:
 
-            if (titleChanged) {
+            if (mTitleChanged) {
 
                 if (isDuplicate(title.getText().toString())) {
                     ShowToast.showToast(getActivity(), "The item wich such name already exists.");
@@ -113,11 +112,11 @@ public class EditItem extends NewItem {
 
     public Ticket createTicket() {
 
-        ticket.setTitle((title.getText()).toString().trim());
-        ticket.setLogin((login.getText()).toString().trim());
-        ticket.setPassword((password.getText()).toString().trim());
-        ticket.setNotes((notes.getText()).toString().trim());
+        mTicket.setTitle((title.getText()).toString().trim());
+        mTicket.setLogin((login.getText()).toString().trim());
+        mTicket.setPassword((password.getText()).toString().trim());
+        mTicket.setNotes((notes.getText()).toString().trim());
 
-        return ticket;
+        return mTicket;
     }
 }

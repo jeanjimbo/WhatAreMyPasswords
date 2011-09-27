@@ -23,17 +23,17 @@ public class MainActivity extends Activity implements ListItemClickListener, Add
     private static final String TAG = "MainActivity";
 
     protected boolean fromOrientation = false;
-    protected SharedPreferences sharedPreferences;
-    protected Editor prefsEditor;
+    protected SharedPreferences mSharedPreferences;
+    protected Editor mPrefsEditor;
 
-    protected Handler handler;
+    protected Handler mHandler;
     protected Runnable finishRunnable = new Runnable() {
 
         @Override
         public void run() {
-            prefsEditor = getApplicationContext().getSharedPreferences(MyConfigs.PREFS_NAME, 0)
+            mPrefsEditor = getApplicationContext().getSharedPreferences(MyConfigs.PREFS_NAME, 0)
                     .edit();
-            prefsEditor.putBoolean("finishThread", true).commit();
+            mPrefsEditor.putBoolean("finishThread", true).commit();
 
             finish();
         }
@@ -49,8 +49,8 @@ public class MainActivity extends Activity implements ListItemClickListener, Add
             addEmptyFragment();
         }
 
-        sharedPreferences = getSharedPreferences(MyConfigs.PREFS_NAME, 0);
-        prefsEditor = sharedPreferences.edit();
+        mSharedPreferences = getSharedPreferences(MyConfigs.PREFS_NAME, 0);
+        mPrefsEditor = mSharedPreferences.edit();
 
         ((ItemsList) getFragmentManager().findFragmentById(R.id.left_frag))
                 .enablePersistentSelection();
@@ -61,19 +61,19 @@ public class MainActivity extends Activity implements ListItemClickListener, Add
     public void onStart() {
         super.onStart();
 
-        if (handler != null) {
-            handler.removeCallbacks(finishRunnable);
-            prefsEditor.putBoolean("finishThread", false).commit();
+        if (mHandler != null) {
+            mHandler.removeCallbacks(finishRunnable);
+            mPrefsEditor.putBoolean("finishThread", false).commit();
         }
 
-        if (sharedPreferences.getBoolean(MyConfigs.FIRST_RUN_MAIN, true)) {
+        if (mSharedPreferences.getBoolean(MyConfigs.FIRST_RUN_MAIN, true)) {
             updateSharedPreferences();
         } else {
-            fromOrientation = sharedPreferences.getBoolean("fromOrient", false);
+            fromOrientation = mSharedPreferences.getBoolean("fromOrient", false);
 
             if (fromOrientation) {
                 // do not check for password
-                prefsEditor.putBoolean("fromOrient", false).commit();
+                mPrefsEditor.putBoolean("fromOrient", false).commit();
             } else {
                 startActivity(new Intent(this, CheckPassword.class));
                 finish();
@@ -83,25 +83,25 @@ public class MainActivity extends Activity implements ListItemClickListener, Add
 
     @Override
     public Object onRetainNonConfigurationInstance() {
-        prefsEditor.putBoolean("fromOrient", true);
-        prefsEditor.commit();
+        mPrefsEditor.putBoolean("fromOrient", true);
+        mPrefsEditor.commit();
         return null;
     }
 
     @Override
     protected void onStop() {
         super.onStop();
-        handler = new Handler();
-        handler.postDelayed(finishRunnable, MyConfigs.DESTROY_APP_AFTER);
-        prefsEditor.putBoolean("finishThread", true).commit();
+        mHandler = new Handler();
+        mHandler.postDelayed(finishRunnable, MyConfigs.DESTROY_APP_AFTER);
+        mPrefsEditor.putBoolean("finishThread", true).commit();
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        if (handler != null) {
-            handler.removeCallbacks(finishRunnable);
-            prefsEditor.putBoolean("finishThread", false).commit();
+        if (mHandler != null) {
+            mHandler.removeCallbacks(finishRunnable);
+            mPrefsEditor.putBoolean("finishThread", false).commit();
         }
     }
 

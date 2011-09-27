@@ -27,15 +27,15 @@ import ebeletskiy.gmail.com.passwords.utils.ShowToast;
 
 public class ItemsDescription extends Fragment {
     private static final String TAG = "ItemsDescription";
-    private boolean menuWasCreated = false;
-    private boolean passwordShown = true;
+    private boolean mMenuWasCreated = false;
+    private boolean mPasswordShown = true;
 
-    private Ticket ticket;
-    private TextView title, login, password, notes;
-    private DBHelper dbHelper;
-    private DeleteItemListener deleteListener;
-    private EditItemListener editItemListener;
-    private Clipboard clipBoard;
+    private Ticket mTicket;
+    private TextView mTitle, mLogin, mPassword, mNotes;
+    private DBHelper mDbHelper;
+    private DeleteItemListener mDeleteListener;
+    private EditItemListener mEditItemListener;
+    private Clipboard mClipBoard;
 
     public ItemsDescription() {
 
@@ -46,20 +46,20 @@ public class ItemsDescription extends Fragment {
             throw new IllegalArgumentException();
         }
 
-        this.ticket = ticket;
+        this.mTicket = ticket;
     }
 
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
-        deleteListener = (DeleteItemListener) activity;
-        editItemListener = (EditItemListener) activity;
+        mDeleteListener = (DeleteItemListener) activity;
+        mEditItemListener = (EditItemListener) activity;
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        dbHelper = new DBHelper(getActivity());
+        mDbHelper = new DBHelper(getActivity());
     }
 
     @Override
@@ -73,36 +73,36 @@ public class ItemsDescription extends Fragment {
         initUI();
         applyFonts();
 
-        if (!menuWasCreated) {
+        if (!mMenuWasCreated) {
             setHasOptionsMenu(true);
-            menuWasCreated = true;
+            mMenuWasCreated = true;
         }
 
         if (savedInstanceState != null) {
-            title.setText((String) savedInstanceState.get("title"));
-            login.setText((String) savedInstanceState.get("login"));
-            password.setText((String) savedInstanceState.get("password"));
-            notes.setText((String) savedInstanceState.get("notes"));
+            mTitle.setText((String) savedInstanceState.get("mTitle"));
+            mLogin.setText((String) savedInstanceState.get("mLogin"));
+            mPassword.setText((String) savedInstanceState.get("mPassword"));
+            mNotes.setText((String) savedInstanceState.get("mNotes"));
         }
 
-        password.setOnLongClickListener(longClickListener);
-        password.setOnClickListener(shortClickListener);
+        mPassword.setOnLongClickListener(longClickListener);
+        mPassword.setOnClickListener(shortClickListener);
 
         applyFonts();
     }
 
     private void applyFonts() {
-        if (title != null) {
-            FontManager.applyTypewriter(title);
+        if (mTitle != null) {
+            FontManager.applyTypewriter(mTitle);
         }
-        if (login != null) {
-            FontManager.applyTypewriter(login);
+        if (mLogin != null) {
+            FontManager.applyTypewriter(mLogin);
         }
-        if (password != null) {
-            FontManager.applyTypewriter(password);
+        if (mPassword != null) {
+            FontManager.applyTypewriter(mPassword);
         }
-        if (notes != null) {
-            FontManager.applyTypewriter(notes);
+        if (mNotes != null) {
+            FontManager.applyTypewriter(mNotes);
         }
 
         TextView login_t = (TextView) getView().findViewById(R.id.tv_login);
@@ -123,12 +123,12 @@ public class ItemsDescription extends Fragment {
 
         @Override
         public void onClick(View v) {
-            if (passwordShown) {
-                password.setTransformationMethod(null);
-                passwordShown = false;
+            if (mPasswordShown) {
+                mPassword.setTransformationMethod(null);
+                mPasswordShown = false;
             } else {
-                password.setTransformationMethod(new PasswordTransformationMethod());
-                passwordShown = true;
+                mPassword.setTransformationMethod(new PasswordTransformationMethod());
+                mPasswordShown = true;
             }
         }
     };
@@ -137,8 +137,8 @@ public class ItemsDescription extends Fragment {
 
         @Override
         public boolean onLongClick(View v) {
-            clipBoard = new Clipboard(getActivity());
-            clipBoard.copyText(password.getText().toString());
+            mClipBoard = new Clipboard(getActivity());
+            mClipBoard.copyText(mPassword.getText().toString());
             ShowToast.showToast(getActivity(), "Password copied to clipboard");
             return true;
         }
@@ -157,7 +157,7 @@ public class ItemsDescription extends Fragment {
             showAlertDialog();
             break;
         case R.id.edit_item:
-            editItemListener.loadEditItem(ticket);
+            mEditItemListener.loadEditItem(mTicket);
         default:
             break;
         }
@@ -166,14 +166,14 @@ public class ItemsDescription extends Fragment {
     }
 
     private void showAlertDialog() {
-        // params: getActivity() and ticket.getId();
-        // new DeleteDialog(getActivity(), ticket.getId());
+        // params: getActivity() and mTicket.getId();
+        // new DeleteDialog(getActivity(), mTicket.getId());
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setMessage("Are you sure you want to delete the item?").setCancelable(false)
                 .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
-                        dbHelper.deleteRow(ticket.getId());
-                        deleteListener.onDeleteItem();
+                        mDbHelper.deleteRow(mTicket.getId());
+                        mDeleteListener.onDeleteItem();
                         ShowToast.showToast(getActivity(), "Item has been deleted");
                     }
                 }).setNegativeButton("No", new DialogInterface.OnClickListener() {
@@ -188,30 +188,30 @@ public class ItemsDescription extends Fragment {
 
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        outState.putString("title", title.getText().toString());
-        outState.putString("login", login.getText().toString());
-        outState.putString("password", password.getText().toString());
-        outState.putString("notes", notes.getText().toString());
+        outState.putString("mTitle", mTitle.getText().toString());
+        outState.putString("mLogin", mLogin.getText().toString());
+        outState.putString("mPassword", mPassword.getText().toString());
+        outState.putString("mNotes", mNotes.getText().toString());
     }
 
     private void initUI() {
-        title = (TextView) getView().findViewById(R.id.tv_title);
-        login = (TextView) getView().findViewById(R.id.tv_login_data);
-        password = (TextView) getView().findViewById(R.id.tv_password_data);
-        notes = (TextView) getView().findViewById(R.id.tv_notes_data);
+        mTitle = (TextView) getView().findViewById(R.id.tv_title);
+        mLogin = (TextView) getView().findViewById(R.id.tv_login_data);
+        mPassword = (TextView) getView().findViewById(R.id.tv_password_data);
+        mNotes = (TextView) getView().findViewById(R.id.tv_notes_data);
 
-        if (ticket != null) {
-            title.setText(ticket.getTitle());
-            login.setText(ticket.getLogin());
-            password.setText(ticket.getPassword());
-            notes.setText(ticket.getNotes());
+        if (mTicket != null) {
+            mTitle.setText(mTicket.getTitle());
+            mLogin.setText(mTicket.getLogin());
+            mPassword.setText(mTicket.getPassword());
+            mNotes.setText(mTicket.getNotes());
         }
     }
 
     public void onDestroy() {
         super.onDestroy();
-        if (dbHelper != null) {
-            dbHelper.close();
+        if (mDbHelper != null) {
+            mDbHelper.close();
         }
     }
 }

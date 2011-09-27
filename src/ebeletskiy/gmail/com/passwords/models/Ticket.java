@@ -2,10 +2,10 @@ package ebeletskiy.gmail.com.passwords.models;
 
 public class Ticket implements DataModel {
     private int id;
-    private String title;
-    private String login;
-    private String password;
-    private String notes;
+    private String mTitle;
+    private String mLogin;
+    private String mPassword;
+    private String mNotes;
 
     public int getId() {
         return id;
@@ -16,35 +16,35 @@ public class Ticket implements DataModel {
     }
 
     public String getTitle() {
-        return title;
+        return mTitle;
     }
 
     public void setTitle(String title) {
-        this.title = title;
+        this.mTitle = title;
     }
 
     public String getLogin() {
-        return login;
+        return mLogin;
     }
 
     public void setLogin(String login) {
-        this.login = login;
+        this.mLogin = login;
     }
 
     public String getPassword() {
-        return password;
+        return mPassword;
     }
 
     public void setPassword(String password) {
-        this.password = password;
+        this.mPassword = password;
     }
 
     public String getNotes() {
-        return notes;
+        return mNotes;
     }
 
     public void setNotes(String notes) {
-        this.notes = notes;
+        this.mNotes = notes;
     }
 
 }

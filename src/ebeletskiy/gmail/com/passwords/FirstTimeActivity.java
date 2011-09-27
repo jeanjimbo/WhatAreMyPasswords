@@ -13,7 +13,7 @@ import ebeletskiy.gmail.com.passwords.utils.ShowToast;
 
 public class FirstTimeActivity extends Activity {
 
-    private String password;
+    private String mPassword;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -39,13 +39,13 @@ public class FirstTimeActivity extends Activity {
     }
 
     private void savePassword() {
-        if (password.equals("")) {
+        if (mPassword.equals("")) {
             throw new IllegalArgumentException("Password field is empty");
         }
 
         SharedPreferences sharedPreferences = getSharedPreferences(MyConfigs.PREFS_NAME, 0);
         SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putString(MyConfigs.USER_PASSWORD, password);
+        editor.putString(MyConfigs.USER_PASSWORD, mPassword);
         editor.commit();
     }
 
@@ -63,7 +63,7 @@ public class FirstTimeActivity extends Activity {
                 .getText().toString();
 
         if (firstField.equals(secondField)) {
-            password = firstField;
+            mPassword = firstField;
             return true;
         } else {
             return false;

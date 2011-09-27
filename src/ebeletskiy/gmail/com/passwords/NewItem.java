@@ -23,14 +23,14 @@ public class NewItem extends Fragment {
 
     private boolean menuWasCreated = false;
 
-    DBHelper dbHelper;
-    SaveItemListener saveItemListener;
+    public DBHelper dbHelper;
+    public SaveItemListener saveItemListener;
 
-    EditText title;
-    EditText login;
-    EditText password;
-    EditText notes;
-    Ticket ticket;
+    public EditText title;
+    public EditText login;
+    public EditText password;
+    public EditText notes;
+    public Ticket ticket;
 
     @Override
     public void onAttach(Activity activity) {
