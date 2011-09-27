@@ -23,6 +23,7 @@
 			android:windowSoftInputMode="adjustPan"></activity>
 		<activity android:name="CheckPassword"
 			android:windowSoftInputMode="adjustPan"></activity>
+		<activity android:name=".prefs.ApplicationPreferences"></activity>
 
 	</application>
 </manifest>
