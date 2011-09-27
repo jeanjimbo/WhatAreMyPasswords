@@ -9,9 +9,7 @@ import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.os.Bundle;
 import android.os.Handler;
-import android.util.Log;
 import android.view.MenuItem;
-import android.view.WindowManager;
 import ebeletskiy.gmail.com.passwords.interfaces.AddNewItemListener;
 import ebeletskiy.gmail.com.passwords.interfaces.DeleteItemListener;
 import ebeletskiy.gmail.com.passwords.interfaces.EditItemListener;
@@ -20,171 +18,167 @@ import ebeletskiy.gmail.com.passwords.interfaces.SaveItemListener;
 import ebeletskiy.gmail.com.passwords.models.Ticket;
 import ebeletskiy.gmail.com.passwords.utils.MyConfigs;
 
-public class MainActivity extends Activity implements ListItemClickListener,
-    AddNewItemListener, SaveItemListener, DeleteItemListener, EditItemListener
-{
-  private static final String TAG = "MainActivity";
+public class MainActivity extends Activity implements ListItemClickListener, AddNewItemListener,
+        SaveItemListener, DeleteItemListener, EditItemListener {
+    private static final String TAG = "MainActivity";
 
-  protected boolean fromOrientation = false;
-  protected SharedPreferences sharedPreferences;
-  protected Editor prefsEditor;
+    protected boolean fromOrientation = false;
+    protected SharedPreferences sharedPreferences;
+    protected Editor prefsEditor;
 
-  protected Handler handler;
-  protected Runnable finishRunnable = new Runnable() {
+    protected Handler handler;
+    protected Runnable finishRunnable = new Runnable() {
+
+        @Override
+        public void run() {
+            prefsEditor = getApplicationContext().getSharedPreferences(MyConfigs.PREFS_NAME, 0)
+                    .edit();
+            prefsEditor.putBoolean("finishThread", true).commit();
+
+            finish();
+        }
+    };
 
     @Override
-    public void run() {
-      prefsEditor = getApplicationContext().getSharedPreferences(
-          MyConfigs.PREFS_NAME, 0).edit();
-      prefsEditor.putBoolean("finishThread", true).commit();
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.main);
 
-      finish();
-    }
-  };
+        initActionBar();
+        if (savedInstanceState == null) {
+            addEmptyFragment();
+        }
 
-  @Override
-  public void onCreate(Bundle savedInstanceState) {
-    super.onCreate(savedInstanceState);
-    setContentView(R.layout.main);
+        sharedPreferences = getSharedPreferences(MyConfigs.PREFS_NAME, 0);
+        prefsEditor = sharedPreferences.edit();
 
-    initActionBar();
-    if (savedInstanceState == null) {
-      addEmptyFragment();
+        ((ItemsList) getFragmentManager().findFragmentById(R.id.left_frag))
+                .enablePersistentSelection();
+
     }
 
-    sharedPreferences = getSharedPreferences(MyConfigs.PREFS_NAME, 0);
-    prefsEditor = sharedPreferences.edit();
+    @Override
+    public void onStart() {
+        super.onStart();
 
-    ((ItemsList) getFragmentManager().findFragmentById(R.id.left_frag))
-        .enablePersistentSelection();
+        if (handler != null) {
+            handler.removeCallbacks(finishRunnable);
+            prefsEditor.putBoolean("finishThread", false).commit();
+        }
 
-  }
+        if (sharedPreferences.getBoolean(MyConfigs.FIRST_RUN_MAIN, true)) {
+            updateSharedPreferences();
+        } else {
+            fromOrientation = sharedPreferences.getBoolean("fromOrient", false);
 
-  @Override
-  public void onStart() {
-    super.onStart();
-
-    if (handler != null) {
-      handler.removeCallbacks(finishRunnable);
-      prefsEditor.putBoolean("finishThread", false).commit();
+            if (fromOrientation) {
+                // do not check for password
+                prefsEditor.putBoolean("fromOrient", false).commit();
+            } else {
+                startActivity(new Intent(this, CheckPassword.class));
+                finish();
+            }
+        }
     }
 
-    if (sharedPreferences.getBoolean(MyConfigs.FIRST_RUN_MAIN, true)) {
-      updateSharedPreferences();
-    } else {
-      fromOrientation = sharedPreferences.getBoolean("fromOrient", false);
-
-      if (fromOrientation) {
-        // do not check for password
-        prefsEditor.putBoolean("fromOrient", false).commit();
-      } else {
-        startActivity(new Intent(this, CheckPassword.class));
-        finish();
-      }
+    @Override
+    public Object onRetainNonConfigurationInstance() {
+        prefsEditor.putBoolean("fromOrient", true);
+        prefsEditor.commit();
+        return null;
     }
-  }
 
-  @Override
-  public Object onRetainNonConfigurationInstance() {
-    prefsEditor.putBoolean("fromOrient", true);
-    prefsEditor.commit();
-    return null;
-  }
-
-  @Override
-  protected void onStop() {
-    super.onStop();
-    handler = new Handler();
-    handler.postDelayed(finishRunnable, MyConfigs.DESTROY_APP_AFTER);
-    prefsEditor.putBoolean("finishThread", true).commit();
-  }
-
-  @Override
-  protected void onDestroy() {
-    super.onDestroy();
-    if (handler != null) {
-      handler.removeCallbacks(finishRunnable);
-      prefsEditor.putBoolean("finishThread", false).commit();
+    @Override
+    protected void onStop() {
+        super.onStop();
+        handler = new Handler();
+        handler.postDelayed(finishRunnable, MyConfigs.DESTROY_APP_AFTER);
+        prefsEditor.putBoolean("finishThread", true).commit();
     }
-  }
 
-  private void updateSharedPreferences() {
-    SharedPreferences sharedPreferences = getSharedPreferences(
-        MyConfigs.PREFS_NAME, 0);
-    SharedPreferences.Editor editor = sharedPreferences.edit();
-    editor.putBoolean(MyConfigs.FIRST_RUN_MAIN, false);
-    editor.commit();
-  }
-
-  private void addEmptyFragment() {
-    Fragment fg = new EmptyRightFrag();
-    getFragmentManager().beginTransaction().add(R.id.right_frag, fg).commit();
-  }
-
-  private void initActionBar() {
-    ActionBar actionBar = getActionBar();
-    actionBar.setBackgroundDrawable(getResources().getDrawable(
-        R.drawable.action_bar_background));
-  }
-
-  @Override
-  public void itemClicked(Ticket ticket) {
-    Fragment newFragment = new ItemsDescription(ticket);
-    loadFragment(newFragment, false);
-  }
-
-  @Override
-  public void onAddNewItem() {
-    Fragment newFragment = new NewItem();
-    loadFragment(newFragment, true);
-  }
-
-  @Override
-  public void saveItem() {
-    refreshList();
-
-    Fragment newFragment = new EmptyRightFrag();
-    loadFragment(newFragment, true);
-  }
-
-  @Override
-  public void onDeleteItem() {
-    refreshList();
-
-    Fragment newFragment = new EmptyRightFrag();
-    loadFragment(newFragment, false);
-  }
-
-  @Override
-  public void loadEditItem(Ticket ticket) {
-    Fragment newFragment = new EditItem(ticket);
-    loadFragment(newFragment, true);
-  }
-
-  private void refreshList() {
-    ((ItemsList) getFragmentManager().findFragmentById(R.id.left_frag))
-        .refresh();
-  }
-
-  private void loadFragment(Fragment fragment, boolean animation) {
-    FragmentTransaction transaction = getFragmentManager().beginTransaction();
-    if (animation) {
-      transaction.setCustomAnimations(R.anim.slide_in_left,
-          R.anim.slide_out_right);
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (handler != null) {
+            handler.removeCallbacks(finishRunnable);
+            prefsEditor.putBoolean("finishThread", false).commit();
+        }
     }
-    transaction.replace(R.id.right_frag, fragment);
-    transaction.commit();
-  }
 
-  public boolean onOptionsItemSelected(MenuItem item) {
-    switch (item.getItemId()) {
-    case android.R.id.home:
-      Intent intent = new Intent(this, MainActivity.class);
-      intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-      startActivity(intent);
-      return true;
-    default:
-      return super.onOptionsItemSelected(item);
+    private void updateSharedPreferences() {
+        SharedPreferences sharedPreferences = getSharedPreferences(MyConfigs.PREFS_NAME, 0);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putBoolean(MyConfigs.FIRST_RUN_MAIN, false);
+        editor.commit();
     }
-  }
+
+    private void addEmptyFragment() {
+        Fragment fg = new EmptyRightFrag();
+        getFragmentManager().beginTransaction().add(R.id.right_frag, fg).commit();
+    }
+
+    private void initActionBar() {
+        ActionBar actionBar = getActionBar();
+        actionBar.setBackgroundDrawable(getResources()
+                .getDrawable(R.drawable.action_bar_background));
+    }
+
+    @Override
+    public void itemClicked(Ticket ticket) {
+        Fragment newFragment = new ItemsDescription(ticket);
+        loadFragment(newFragment, false);
+    }
+
+    @Override
+    public void onAddNewItem() {
+        Fragment newFragment = new NewItem();
+        loadFragment(newFragment, true);
+    }
+
+    @Override
+    public void saveItem() {
+        refreshList();
+
+        Fragment newFragment = new EmptyRightFrag();
+        loadFragment(newFragment, true);
+    }
+
+    @Override
+    public void onDeleteItem() {
+        refreshList();
+
+        Fragment newFragment = new EmptyRightFrag();
+        loadFragment(newFragment, false);
+    }
+
+    @Override
+    public void loadEditItem(Ticket ticket) {
+        Fragment newFragment = new EditItem(ticket);
+        loadFragment(newFragment, true);
+    }
+
+    private void refreshList() {
+        ((ItemsList) getFragmentManager().findFragmentById(R.id.left_frag)).refresh();
+    }
+
+    private void loadFragment(Fragment fragment, boolean animation) {
+        FragmentTransaction transaction = getFragmentManager().beginTransaction();
+        if (animation) {
+            transaction.setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_right);
+        }
+        transaction.replace(R.id.right_frag, fragment);
+        transaction.commit();
+    }
+
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+        case android.R.id.home:
+            Intent intent = new Intent(this, MainActivity.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(intent);
+            return true;
+        default:
+            return super.onOptionsItemSelected(item);
+        }
+    }
 }
