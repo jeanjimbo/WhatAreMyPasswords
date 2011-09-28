@@ -1,34 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-	android:background="@drawable/right_back" android:layout_width="match_parent"
-	android:layout_height="match_parent" android:padding="120dip"
-	android:orientation="horizontal">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/right_back"
+    android:orientation="horizontal"
+    android:padding="120dip" >
 
-	<LinearLayout android:padding="20dip" android:orientation="vertical"
-		android:background="@drawable/layout_round_corners"
-		android:layout_height="wrap_content" android:layout_width="match_parent"
-		android:layout_gravity="center">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:background="@drawable/layout_round_corners"
+        android:orientation="vertical"
+        android:padding="20dip" >
 
-		<TextView android:layout_weight="1" android:id="@+id/textView1"
-			android:layout_width="wrap_content" android:textColor="@color/text_color"
-			android:layout_height="wrap_content" android:textAppearance="?android:attr/textAppearanceMedium"
-			android:text="@string/welcome_text" />
+        <TextView
+            android:id="@+id/textView1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/welcome_text"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="@color/text_color" />
 
-		<EditText android:layout_height="wrap_content"
-			android:id="@+id/edt_firsttimeactivity_first_field"
-			android:layout_weight="1" android:layout_width="match_parent"
-			android:hint="@string/password" android:singleLine="true" />
-		<requestFocus></requestFocus>
+        <EditText
+            android:id="@+id/edt_firsttimeactivity_first_field"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:hint="@string/password"
+            android:singleLine="true" />
 
-		<EditText android:layout_height="wrap_content"
-			android:id="@+id/edt_firsttimeactivity_second_field"
-			android:layout_width="match_parent" android:singleLine="true"
-			android:hint="@string/type_your_password_again" />
+        <requestFocus >
+        </requestFocus>
 
-		<Button android:text="@string/create_account_for_me"
-			android:layout_height="wrap_content" android:layout_width="wrap_content"
-			android:layout_gravity="center_horizontal" android:onClick="onButtonClick" />
+        <EditText
+            android:id="@+id/edt_firsttimeactivity_second_field"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/type_your_password_again"
+            android:singleLine="true" />
 
-	</LinearLayout>
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:onClick="onButtonClick"
+            android:text="@string/create_account_for_me" />
+    </LinearLayout>
 
 </LinearLayout>

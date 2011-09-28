@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
-    
-    <item android:visible="true" android:enabled="true" android:id="@+id/add_item"
-		android:title="@string/add_new_item" android:showAsAction="ifRoom" 
-		android:icon="@drawable/ic_menu_add">
-	</item>
-	
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <item
+        android:id="@+id/add_item"
+        android:enabled="true"
+        android:icon="@drawable/ic_menu_add"
+        android:showAsAction="ifRoom"
+        android:title="@string/add_new_item"
+        android:visible="true"></item>
+
 </menu>

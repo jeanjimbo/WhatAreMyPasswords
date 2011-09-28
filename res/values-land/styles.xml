@@ -1,15 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-	<style name="items_description_plain">
-		<item name="android:textSize">30dip</item>
-		<item name="android:textColor">@color/text_color</item>
-	</style>	
-	
-	<!--  Right pane -->
-	<style name="layout_portrait_head">
-		<item name="android:background">@drawable/right_back</item>
-		<item name="android:orientation">horizontal</item>
-		<item name="android:padding">80dip</item>
-	</style>
-	
+
+    <style name="items_description_plain">
+        <item name="android:textSize">30dip</item>
+        <item name="android:textColor">@color/text_color</item>
+    </style>
+
+    <!-- Right pane -->
+    <style name="layout_portrait_head">
+        <item name="android:background">@drawable/right_back</item>
+        <item name="android:orientation">horizontal</item>
+        <item name="android:padding">80dip</item>
+    </style>
+
 </resources>
