@@ -17,4 +17,6 @@
 #stuff
 .*
 *.orig
+project.properties
+
 bin/*
