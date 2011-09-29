@@ -12,7 +12,7 @@
     <!-- First time screen -->
     <string name="welcome_text">This is your first launch of the application. You need to define password you will use to access your data.</string>
     <string name="password">Password</string>
-    <string name="type_your_password_again">Type your password again</string>
+    <string name="repeat_new_password_again">Repeat new password</string>
     <string name="create_account_for_me">Create Account</string>
 
     <!-- Items description -->
