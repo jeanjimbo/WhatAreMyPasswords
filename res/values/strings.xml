@@ -51,6 +51,11 @@
     <string name="password_field_is_empty">Password field is empty.</string>
     <string name="password_copied_to_clipboard">Password copied to clipboard.</string>
     <string name="incorrect_password">Incorrect password.</string>
+    <string name="cancel">Cancel</string>
+    <string name="ok">OK</string>
+    <string name="change_your_current_password">Change your current password</string>
+    <string name="change_password">Change password</string>
+    <string name="save_new_password">Save new password</string>
     
     
 </resources>

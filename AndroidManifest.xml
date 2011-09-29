@@ -1,29 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-	package="ebeletskiy.gmail.com.passwords" android:versionCode="1"
-	android:versionName="1.0">
-	<uses-sdk android:minSdkVersion="11" android:targetSdkVersion="11" />
+    package="ebeletskiy.gmail.com.passwords"
+    android:versionCode="1"
+    android:versionName="1.0" >
 
-	<supports-screens android:xlargeScreens="true"
-		android:smallScreens="false" android:normalScreens="false"></supports-screens>
+    <uses-sdk
+        android:minSdkVersion="11"
+        android:targetSdkVersion="11" />
 
+    <supports-screens
+        android:normalScreens="false"
+        android:smallScreens="false"
+        android:xlargeScreens="true" >
+    </supports-screens>
 
-	<application android:icon="@drawable/icon" android:label="@string/appname"
-		android:theme="@android:style/Theme.Holo.Light" android:debuggable="false">
-		<activity android:name=".LaunchActivityManager">
-			<intent-filter>
-				<action android:name="android.intent.action.MAIN" />
-				<category android:name="android.intent.category.LAUNCHER" />
-			</intent-filter>
-		</activity>
+    <application
+        android:debuggable="false"
+        android:icon="@drawable/icon"
+        android:label="@string/appname"
+        android:theme="@android:style/Theme.Holo.Light" >
+        <activity android:name=".LaunchActivityManager" >
+            <intent-filter >
+                <action android:name="android.intent.action.MAIN" />
 
-		<activity android:name="FirstTimeActivity"
-			android:windowSoftInputMode="adjustPan"></activity>
-		<activity android:name="MainActivity"
-			android:windowSoftInputMode="adjustPan"></activity>
-		<activity android:name="CheckPassword"
-			android:windowSoftInputMode="adjustPan"></activity>
-		<activity android:name=".prefs.ApplicationPreferences"></activity>
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="FirstTimeActivity"
+            android:windowSoftInputMode="adjustPan" >
+        </activity>
+        <activity
+            android:name="MainActivity"
+            android:windowSoftInputMode="adjustPan" >
+        </activity>
+        <activity
+            android:name="CheckPassword"
+            android:windowSoftInputMode="adjustPan" >
+        </activity>
+        <activity android:name=".prefs.ApplicationPreferences" >
+        </activity>
+        <activity android:name=".ChangePasswordActivity" >
+        </activity>
+    </application>
 
-	</application>
 </manifest>
