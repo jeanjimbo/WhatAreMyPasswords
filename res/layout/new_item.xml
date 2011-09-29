@@ -28,13 +28,32 @@
             android:hint="@string/log_in"
             android:singleLine="true" />
 
-        <EditText
-            android:id="@+id/et_password_data"
-            style="@style/items_description_plain"
+        <LinearLayout
+            android:id="@+id/linearLayout1"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/password"
-            android:singleLine="true" />
+            android:layout_height="match_parent"
+            android:orientation="horizontal" >
+
+            <EditText
+                android:id="@+id/et_password_data"
+                style="@style/items_description_plain"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:hint="@string/password"
+                android:singleLine="true" >
+
+                <requestFocus />
+            </EditText>
+
+            <Button
+                android:id="@+id/button1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="3"
+                android:text="@string/generate_password" />
+
+        </LinearLayout>
 
         <EditText
             android:id="@+id/et_notes_data"
