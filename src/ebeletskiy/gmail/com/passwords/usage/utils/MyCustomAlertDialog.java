@@ -1,4 +1,4 @@
-package ebeletskiy.gmail.com.passwords.utils;
+package ebeletskiy.gmail.com.passwords.usage.utils;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -8,8 +8,8 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import ebeletskiy.gmail.com.passwords.R;
-import ebeletskiy.gmail.com.passwords.interfaces.DeleteItemListener;
+import ebeletskiy.gmail.com.passwords.usage.R;
+import ebeletskiy.gmail.com.passwords.usage.interfaces.DeleteItemListener;
 
 public class MyCustomAlertDialog extends DialogFragment {
 

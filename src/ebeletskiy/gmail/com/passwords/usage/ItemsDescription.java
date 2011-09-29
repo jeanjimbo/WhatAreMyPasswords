@@ -18,9 +18,9 @@ import ebeletskiy.gmail.com.passwords.usage.interfaces.EditItemListener;
 import ebeletskiy.gmail.com.passwords.usage.models.Ticket;
 import ebeletskiy.gmail.com.passwords.usage.utils.Clipboard;
 import ebeletskiy.gmail.com.passwords.usage.utils.DBHelper;
+import ebeletskiy.gmail.com.passwords.usage.utils.MyCustomAlertDialog;
 import ebeletskiy.gmail.com.passwords.usage.utils.ShowToast;
 import ebeletskiy.gmail.com.passwords.usage.utils.FontManager;
-import ebeletskiy.gmail.com.passwords.utils.MyCustomAlertDialog;
 
 public class ItemsDescription extends Fragment {
     private static final String TAG = "ItemsDescription";
