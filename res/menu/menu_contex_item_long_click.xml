@@ -1,15 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu
-  xmlns:android="http://schemas.android.com/apk/res/android">
-    
-      <item android:visible="true" android:enabled="true" android:id="@+id/edit_item"
-		android:title="@string/edit_item" android:showAsAction="ifRoom|withText" 
-		android:icon="@drawable/ic_menu_edit">
-	</item>
-	
-	  <item android:visible="true" android:enabled="true" android:id="@+id/delete_item"
-		android:title="@string/delete_item" android:showAsAction="ifRoom|withText" 
-		android:icon="@drawable/ic_menu_delete">
-	</item>
-    
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <item
+        android:id="@+id/edit_item"
+        android:enabled="true"
+        android:icon="@drawable/ic_menu_edit"
+        android:showAsAction="ifRoom|withText"
+        android:title="@string/edit_item"
+        android:visible="true"></item>
+
+    <item
+        android:id="@+id/delete_item"
+        android:enabled="true"
+        android:icon="@drawable/ic_menu_delete"
+        android:showAsAction="ifRoom|withText"
+        android:title="@string/delete_item"
+        android:visible="true"></item>
+
 </menu>

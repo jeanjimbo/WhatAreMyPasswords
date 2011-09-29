@@ -1,13 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-<!-- Items List -->
+
+    <!-- Items List -->
     <color name="item_text_color">#000000</color>
     <color name="item_back_color">#e4e3e3</color>
     <color name="dark_item_color">#d1d2d4</color>
     <color name="light_item_color">#eeeff1</color>
     <color name="round_layout_color">#3a3a3a</color>
-    
-<!--  Right fragment, i.e. Items Description -->
-	<color name="text_color">#2f2e2e</color>	 
-	<color name="title_color">#FF909090</color>   
+
+    <!-- Right fragment, i.e. Items Description -->
+    <color name="text_color">#2f2e2e</color>
+    <color name="title_color">#FF909090</color>
+
 </resources>

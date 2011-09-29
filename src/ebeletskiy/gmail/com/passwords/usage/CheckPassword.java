@@ -11,39 +11,37 @@ import ebeletskiy.gmail.com.passwords.usage.utils.ShowToast;
 
 public class CheckPassword extends Activity {
 
-	@Override
-	public void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.check_password);
-	}
-	
-	
-	public void onButtonClick(View v) {
-		SharedPreferences sharedPreferences = getSharedPreferences(MyConfigs.PREFS_NAME, 0);
-		String userPassword = sharedPreferences.getString(MyConfigs.USER_PASSWORD, "");
-		
-		String providedPassword = 
-			( (EditText)findViewById(R.id.edt_checkpassword_password) ).getText().toString();
-		
-		if (providedPassword.equals(userPassword)) {
-			updateSharedPreferences();
-			launchMainActivity();
-		} else {
-			ShowToast.showToast(this, "Incorrect Passwrod");
-		}
-	}
-	
-	private void updateSharedPreferences() {
-		SharedPreferences sharedPreferences = 
-			getSharedPreferences(MyConfigs.PREFS_NAME, 0);
-		SharedPreferences.Editor editor = sharedPreferences.edit();
-		editor.putBoolean(MyConfigs.FIRST_RUN_MAIN, true);
-		editor.commit();
-	}
-	
-	private void launchMainActivity() {
-		Intent i = new Intent(this, MainActivity.class);
-		startActivity(i);
-		finish();
-	}
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.check_password);
+    }
+
+    public void onButtonClick(View v) {
+        SharedPreferences sharedPreferences = getSharedPreferences(MyConfigs.PREFS_NAME, 0);
+        String userPassword = sharedPreferences.getString(MyConfigs.USER_PASSWORD, "");
+
+        String providedPassword = ((EditText) findViewById(R.id.edt_checkpassword_password))
+                .getText().toString();
+
+        if (providedPassword.equals(userPassword)) {
+            updateSharedPreferences();
+            launchMainActivity();
+        } else {
+            ShowToast.showToast(this, getString(R.string.incorrect_password));
+        }
+    }
+
+    private void updateSharedPreferences() {
+        SharedPreferences sharedPreferences = getSharedPreferences(MyConfigs.PREFS_NAME, 0);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putBoolean(MyConfigs.FIRST_RUN_MAIN, true);
+        editor.commit();
+    }
+
+    private void launchMainActivity() {
+        Intent i = new Intent(this, MainActivity.class);
+        startActivity(i);
+        finish();
+    }
 }

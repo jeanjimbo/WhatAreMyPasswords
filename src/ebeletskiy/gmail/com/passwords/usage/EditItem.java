@@ -4,123 +4,119 @@ import android.content.Context;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import ebeletskiy.gmail.com.passwords.usage.models.Ticket;
 import ebeletskiy.gmail.com.passwords.usage.utils.ShowToast;
 
-public class EditItem extends NewItem
-{
-  private static final String TAG = "EditItem";
+public class EditItem extends NewItem {
+    private static final String TAG = "EditItem";
 
-  private boolean titleChanged = false;
-  private Ticket ticket;
+    private boolean mTitleChanged = false;
+    private Ticket mTicket;
 
-  private String beforeTextChanged;
-  private String afterTextChanged;
+    private String mBeforeTextChanged;
+    private String mAfterTextChanged;
 
-  public EditItem() {
-  };
+    public EditItem() {
+    };
 
-  public EditItem(Ticket ticket) {
-    this.ticket = ticket;
-  }
-
-  @Override
-  public void onActivityCreated(Bundle savedInstanceState) {
-    super.onActivityCreated(savedInstanceState);
-    initUIelements();
-    beforeTextChanged = title.getText().toString();
-
-    title.addTextChangedListener(new TextWatcher() {
-
-      @Override
-      public void onTextChanged(CharSequence s, int start, int before, int count) {
-      }
-
-      @Override
-      public void beforeTextChanged(CharSequence s, int start, int count,
-          int after) {
-      }
-
-      @Override
-      public void afterTextChanged(Editable s) {
-        afterTextChanged = title.getText().toString();
-
-        if (beforeTextChanged.equals(afterTextChanged)) {
-          titleChanged = false;
-        } else {
-          titleChanged = true;
-        }
-
-      }
-    });
-  }
-
-  private void initUIelements() {
-    title = (EditText) getView().findViewById(R.id.et_title);
-    login = (EditText) getView().findViewById(R.id.et_login_data);
-    password = (EditText) getView().findViewById(R.id.et_password_data);
-    notes = (EditText) getView().findViewById(R.id.et_notes_data);
-
-    if (ticket != null) {
-      title.setText(ticket.getTitle());
-      login.setText(ticket.getLogin());
-      password.setText(ticket.getPassword());
-      notes.setText(ticket.getNotes());
+    public EditItem(Ticket ticket) {
+        this.mTicket = ticket;
     }
-  }
 
-  @Override
-  public boolean onOptionsItemSelected(MenuItem item) {
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        initUIelements();
+        mBeforeTextChanged = title.getText().toString();
 
-    switch (item.getItemId()) {
-    case R.id.save_item:
+        title.addTextChangedListener(new TextWatcher() {
 
-      if (titleChanged) {
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+            }
 
-        if (isDuplicate(title.getText().toString())) {
-          ShowToast.showToast(getActivity(),
-              "The item wich such name already exists.");
-        } else {
-          updateData();
-        }
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
 
-      } else {
-        if (saveItemListener != null && checkFields()) {
-          updateData();
-        } else {
-          ShowToast.showToast(getActivity(), "Please fill Title.");
-        }
-      }
+            @Override
+            public void afterTextChanged(Editable s) {
+                mAfterTextChanged = title.getText().toString();
 
-      break;
+                if (mBeforeTextChanged.equals(mAfterTextChanged)) {
+                    mTitleChanged = false;
+                } else {
+                    mTitleChanged = true;
+                }
+
+            }
+        });
     }
-    return true;
-  }
 
-  private void updateData() {
-    dbHelper.updateRow(createTicket());
-    hideKeyboard();
-    saveItemListener.saveItem();
-    ShowToast.showToast(getActivity(), "Ticket has been updated.");
-  }
+    private void initUIelements() {
+        title = (EditText) getView().findViewById(R.id.et_title);
+        login = (EditText) getView().findViewById(R.id.et_login_data);
+        password = (EditText) getView().findViewById(R.id.et_password_data);
+        notes = (EditText) getView().findViewById(R.id.et_notes_data);
 
-  private void hideKeyboard() {
-    InputMethodManager imm = (InputMethodManager) getActivity()
-        .getSystemService(Context.INPUT_METHOD_SERVICE);
-    imm.hideSoftInputFromWindow(title.getWindowToken(), 0);
-  }
+        if (mTicket != null) {
+            title.setText(mTicket.getTitle());
+            login.setText(mTicket.getLogin());
+            password.setText(mTicket.getPassword());
+            notes.setText(mTicket.getNotes());
+        }
+    }
 
-  public Ticket createTicket() {
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
 
-    ticket.setTitle((title.getText()).toString().trim());
-    ticket.setLogin((login.getText()).toString().trim());
-    ticket.setPassword((password.getText()).toString().trim());
-    ticket.setNotes((notes.getText()).toString().trim());
+        switch (item.getItemId()) {
+        case R.id.save_item:
 
-    return ticket;
-  }
+            if (mTitleChanged) {
+
+                if (isDuplicate(title.getText().toString())) {
+                    ShowToast.showToast(getActivity(), getString(R.string.item_already_exists));
+                } else {
+                    updateData();
+                }
+
+            } else {
+                if (saveItemListener != null && checkFields()) {
+                    updateData();
+                } else {
+                    ShowToast.showToast(getActivity(), getString(R.string.fill_the_title));
+                }
+            }
+
+            break;
+        }
+        return true;
+    }
+
+    private void updateData() {
+        dbHelper.updateRow(createTicket());
+        hideKeyboard();
+        saveItemListener.saveItem();
+        ShowToast.showToast(getActivity(), "Ticket has been updated.");
+    }
+
+    private void hideKeyboard() {
+        InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(
+                Context.INPUT_METHOD_SERVICE);
+        imm.hideSoftInputFromWindow(title.getWindowToken(), 0);
+    }
+
+    public Ticket createTicket() {
+
+        mTicket.setTitle((title.getText()).toString().trim());
+        mTicket.setLogin((login.getText()).toString().trim());
+        mTicket.setPassword((password.getText()).toString().trim());
+        mTicket.setNotes((notes.getText()).toString().trim());
+
+        return mTicket;
+    }
 }

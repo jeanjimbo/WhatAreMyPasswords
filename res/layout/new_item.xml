@@ -1,29 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-	android:id="@+id/empty_right_frag" android:layout_height="match_parent"
-	android:layout_width="match_parent" style="@style/layout_portrait_head">
+    android:id="@+id/empty_right_frag"
+    style="@style/layout_portrait_head"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
 
-	<LinearLayout android:layout_height="wrap_content"
-		android:layout_width="match_parent" style="@style/layout_portrait"
-		android:layout_gravity="center_vertical">
+    <LinearLayout
+        style="@style/layout_portrait"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical" >
 
-		<EditText android:layout_width="match_parent" android:id="@+id/et_title"
-			style="@style/items_description_plain" android:layout_height="wrap_content"
-			android:hint="@string/title" android:singleLine="true" android:capitalize="sentences"/>
+        <EditText
+            android:id="@+id/et_title"
+            style="@style/items_description_plain"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:capitalize="sentences"
+            android:hint="@string/title"
+            android:singleLine="true" />
 
-		<EditText android:id="@+id/et_login_data"
-			android:layout_width="match_parent" android:layout_height="wrap_content"
-			style="@style/items_description_plain" android:hint="@string/log_in"
-			android:singleLine="true" />
+        <EditText
+            android:id="@+id/et_login_data"
+            style="@style/items_description_plain"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/log_in"
+            android:singleLine="true" />
 
-		<EditText android:hint="@string/password" android:id="@+id/et_password_data"
-			android:layout_width="match_parent" android:layout_height="wrap_content"
-			style="@style/items_description_plain" android:singleLine="true" />
+        <EditText
+            android:id="@+id/et_password_data"
+            style="@style/items_description_plain"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/password"
+            android:singleLine="true" />
 
-		<EditText android:hint="@string/notes" android:id="@+id/et_notes_data"
-			android:layout_width="match_parent" android:layout_height="wrap_content"
-			style="@style/items_description_plain" android:singleLine="true"/>
-
-	</LinearLayout>
+        <EditText
+            android:id="@+id/et_notes_data"
+            style="@style/items_description_plain"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/notes"
+            android:singleLine="true" />
+    </LinearLayout>
 
 </LinearLayout>
