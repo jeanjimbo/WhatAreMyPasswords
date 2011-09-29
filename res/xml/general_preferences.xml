@@ -4,7 +4,7 @@
 	android:summary="@string/change_password">
 
 		<intent android:targetClass="ebeletskiy.gmail.com.passwords.usage.ChangePasswordActivity"
-			android:targetPackage="ebeletskiy.gmail.com.passwords" />
+			android:targetPackage="ebeletskiy.gmail.com.passwords.usage" />
 	</PreferenceScreen>
 
 </PreferenceScreen>
