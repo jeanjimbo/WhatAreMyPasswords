@@ -45,12 +45,12 @@
 
             </EditText>
 
-            <Button
+            <ImageButton
                 android:id="@+id/new_item_bt_generate_password"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="3"
-                android:text="@string/generate_password" />
+                android:src="@drawable/generate_password_icon"
+                 />
 
         </LinearLayout>
 
