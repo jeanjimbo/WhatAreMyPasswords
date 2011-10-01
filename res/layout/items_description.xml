@@ -67,7 +67,7 @@
                     android:layout_height="wrap_content"
                     android:gravity="right"
                     android:password="true"
-                    android:textColor="@color/password_text" />
+                    android:textColor="@color/description_password_text" />
             </TableRow>
 
             <!-- Notes -->
