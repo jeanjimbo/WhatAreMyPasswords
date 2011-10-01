@@ -11,4 +11,6 @@ public final class MyConfigs {
     public static final String FIRST_RUN = "FirstRun";
     public static final String USER_PASSWORD = "UserPassword";
     public static final String FIRST_RUN_MAIN = "FirstRunMain";
+    public static final String FIRST_PASSWORD_GENERATED = "firstPasswordRun";
+    public static final String FIRST_ITEM_DESCRIPTION_OPENED = "firstItemDesriptionRun";
 }
