@@ -3,6 +3,7 @@ package ebeletskiy.gmail.com.passwords;
 import java.util.Random;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -53,6 +54,7 @@ public class GeneratePasswords extends Activity {
 
         mBtnGeneratePassword.setOnClickListener(btnGenerateClickListener);
         mSeekBar.setOnSeekBarChangeListener(seekBarListener);
+        mTvPassword.setOnClickListener(tvPasswordListener);
     }
 
     private void initUI() {
@@ -70,7 +72,10 @@ public class GeneratePasswords extends Activity {
         
         @Override
         public void onClick(View v) {
-            
+            Intent i = new Intent();
+            i.putExtra("password", mTvPassword.getText().toString());
+            setResult(15, i);
+            onBackPressed();
         }
     };
     

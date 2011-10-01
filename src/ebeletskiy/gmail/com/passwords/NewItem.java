@@ -67,9 +67,18 @@ public class NewItem extends Fragment {
             
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getActivity(), GeneratePasswords.class));
+//                startActivity(new Intent(getActivity(), GeneratePasswords.class));
+                startActivityForResult(new Intent(getActivity(), GeneratePasswords.class), 15);
             }
         });
+    }
+    
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 15) {
+            password.setText(data.getStringExtra("password").toString());
+        }
     }
 
     public void initUI() {
