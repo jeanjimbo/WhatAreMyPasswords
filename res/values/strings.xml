@@ -65,6 +65,7 @@
     <string name="password_s_length">Password\'s length: </string>
     <string name="password_s_length_can_t_be_zero">Password\'s length can\'t be zero</string>
     <string name="refresh">Refresh</string>
-    <string name="click_on_the_password_to_use_it_">Click on the password to use it.</string>
+    <string name="click_on_the_password_to_use_it_">Tap on the password to use it.</string>
+    <string name="tap_and_hold_on_the_password_to_copy_it_">Tap and hold on the password to copy it.</string>
 
 </resources>

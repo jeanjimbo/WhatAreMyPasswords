@@ -4,6 +4,7 @@ import java.util.Random;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -13,6 +14,7 @@ import android.widget.RadioGroup;
 import android.widget.SeekBar;
 import android.widget.SeekBar.OnSeekBarChangeListener;
 import android.widget.TextView;
+import ebeletskiy.gmail.com.passwords.utils.MyConfigs;
 import ebeletskiy.gmail.com.passwords.utils.ShowToast;
 
 public class GeneratePasswords extends Activity {
@@ -44,17 +46,32 @@ public class GeneratePasswords extends Activity {
 
         if (savedInstanceState != null) {
             mGeneratedPassword = savedInstanceState.getString("generated_password");
-            mLlPassword.setVisibility(View.VISIBLE);
+            mTvPassword.setText(mGeneratedPassword);
+            mLlPassword.setVisibility(savedInstanceState.getInt("password_visibility"));
+            mRgLeft.check(savedInstanceState.getInt("left_radio_group"));
+            mRgRight.check(savedInstanceState.getInt("right_radio_group"));
+            mSeekBar.setProgress(savedInstanceState.getInt("seekbar_position"));
         } else {
-            mSeekBar.setMax(PASSWORD_MAX_LENGTH);
             mSeekBar.setProgress(PASSWORD_DEFAULT_LENGTH);
             mLlPassword.setVisibility(View.INVISIBLE);
-            mTvPasswordLength.setText(" " + Integer.toString(mSeekBar.getProgress()));
         }
+
+        mSeekBar.setMax(PASSWORD_MAX_LENGTH);
+        mTvPasswordLength.setText(" " + Integer.toString(mSeekBar.getProgress()));
 
         mBtnGeneratePassword.setOnClickListener(btnGenerateClickListener);
         mSeekBar.setOnSeekBarChangeListener(seekBarListener);
         mTvPassword.setOnClickListener(tvPasswordListener);
+    }
+
+    protected void onSaveInstanceState(Bundle outState) {
+        if (mGeneratedPassword != null) {
+            outState.putString("generated_password", mGeneratedPassword);
+        }
+        outState.putInt("password_visibility", mLlPassword.getVisibility());
+        outState.putInt("left_radio_group", mRgLeft.getCheckedRadioButtonId());
+        outState.putInt("right_radio_group", mRgRight.getCheckedRadioButtonId());
+        outState.putInt("seekbar_position", mSeekBar.getProgress());
     }
 
     private void initUI() {
@@ -109,10 +126,16 @@ public class GeneratePasswords extends Activity {
                 mBtnGeneratePassword.setText(R.string.refresh);
             }
         }
-        
+
         public void showTip() {
-            ShowToast.showToast(getApplicationContext(),
-                    getString(R.string.click_on_the_password_to_use_it_));
+            SharedPreferences sharedPreferences = getSharedPreferences(MyConfigs.PREFS_NAME, 0);
+            int result = sharedPreferences.getInt(MyConfigs.FIRST_PASSWORD_GENERATED, 0);
+            if (result == 0) {
+                ShowToast.showToast(getApplicationContext(),
+                        getString(R.string.click_on_the_password_to_use_it_));
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                editor.putInt(MyConfigs.FIRST_PASSWORD_GENERATED, 1).commit();
+            }
         }
 
         public void readSettings() {
@@ -162,12 +185,5 @@ public class GeneratePasswords extends Activity {
             mLlPassword.setVisibility(View.VISIBLE);
             mTvPassword.setText(mGeneratedPassword);
         }
-    };
-
-    protected void onSaveInstanceState(Bundle outState) {
-        if (mGeneratedPassword != null) {
-            outState.putString("generated_password", mGeneratedPassword);
-        }
-
-    };
+    };;
 }
