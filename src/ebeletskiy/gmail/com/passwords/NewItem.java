@@ -3,6 +3,7 @@ package ebeletskiy.gmail.com.passwords;
 import android.app.Activity;
 import android.app.Fragment;
 import android.content.Context;
+import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -10,8 +11,10 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.Button;
 import android.widget.EditText;
 import ebeletskiy.gmail.com.passwords.interfaces.SaveItemListener;
 import ebeletskiy.gmail.com.passwords.models.Ticket;
@@ -31,6 +34,7 @@ public class NewItem extends Fragment {
     public EditText password;
     public EditText notes;
     public Ticket ticket;
+    public Button btnGeneratePassword;
 
     @Override
     public void onAttach(Activity activity) {
@@ -59,6 +63,13 @@ public class NewItem extends Fragment {
         dbHelper = new DBHelper(getActivity());
         ticket = new Ticket();
         initUI();
+        btnGeneratePassword.setOnClickListener(new OnClickListener() {
+            
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getActivity(), GeneratePasswords.class));
+            }
+        });
     }
 
     public void initUI() {
@@ -66,6 +77,7 @@ public class NewItem extends Fragment {
         login = (EditText) getView().findViewById(R.id.et_login_data);
         password = (EditText) getView().findViewById(R.id.et_password_data);
         notes = (EditText) getView().findViewById(R.id.et_notes_data);
+        btnGeneratePassword = (Button) getView().findViewById(R.id.new_item_bt_generate_password);
     }
 
     public Ticket createTicket() {

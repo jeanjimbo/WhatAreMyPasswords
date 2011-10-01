@@ -55,5 +55,15 @@
     <string name="change_password">Change password</string>
     <string name="save_new_password">Save new password</string>
     <string name="generate_password">Generate password</string>
+    <string name="letters">Letters</string>
+    <string name="digits">Digits</string>
+    <string name="both">Both</string>
+    <string name="uppercase">Uppercase</string>
+    <string name="lowercase">Lowercase</string>
+    <string name="mixed">Mixed</string>
+    <string name="generate">Generate</string>
+    <string name="password_s_length">Password\'s length: </string>
+    <string name="password_s_length_can_t_be_zero">Password\'s length can\'t be zero</string>
+    <string name="refresh">Refresh</string>
 
 </resources>
