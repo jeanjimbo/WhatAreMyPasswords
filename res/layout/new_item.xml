@@ -29,7 +29,6 @@
             android:singleLine="true" />
 
         <LinearLayout
-            android:id="@+id/linearLayout1"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="horizontal" >
@@ -42,16 +41,15 @@
                 android:layout_weight="1"
                 android:hint="@string/password"
                 android:singleLine="true" >
-
             </EditText>
-
-            <Button
-                android:id="@+id/new_item_bt_generate_password"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="3"
-                android:text="@string/generate_password" />
 
+            <ImageButton
+                android:id="@+id/new_item_ibt_generate_password"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:background="@drawable/generate_password_icon"
+                android:src="@drawable/generate_password" />
         </LinearLayout>
 
         <EditText

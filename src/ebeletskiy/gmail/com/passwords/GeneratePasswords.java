@@ -67,9 +67,8 @@ public class GeneratePasswords extends Activity {
         mTvPasswordLength = (TextView) findViewById(R.id.generate_password_tv_password_length);
     }
 
-    
     OnClickListener tvPasswordListener = new OnClickListener() {
-        
+
         @Override
         public void onClick(View v) {
             Intent i = new Intent();
@@ -78,7 +77,7 @@ public class GeneratePasswords extends Activity {
             onBackPressed();
         }
     };
-    
+
     SeekBar.OnSeekBarChangeListener seekBarListener = new OnSeekBarChangeListener() {
 
         @Override
@@ -97,6 +96,24 @@ public class GeneratePasswords extends Activity {
 
     OnClickListener btnGenerateClickListener = new OnClickListener() {
         private String stringToGeneratePassword;
+
+        @Override
+        public void onClick(View v) {
+            mGeneratedPassword = null;
+            readSettings();
+            generatePassword();
+            showPassword();
+            showTip();
+
+            if (mGeneratedPassword != null) {
+                mBtnGeneratePassword.setText(R.string.refresh);
+            }
+        }
+        
+        public void showTip() {
+            ShowToast.showToast(getApplicationContext(),
+                    getString(R.string.click_on_the_password_to_use_it_));
+        }
 
         public void readSettings() {
             switch (mRgLeft.getCheckedRadioButtonId()) {
@@ -127,7 +144,8 @@ public class GeneratePasswords extends Activity {
         public void generatePassword() {
             int length = mSeekBar.getProgress();
             if (length == 0) {
-                ShowToast.showToast(getApplicationContext(), getString(R.string.password_s_length_can_t_be_zero));
+                ShowToast.showToast(getApplicationContext(),
+                        getString(R.string.password_s_length_can_t_be_zero));
                 return;
             }
             StringBuffer sb = new StringBuffer();
@@ -143,18 +161,6 @@ public class GeneratePasswords extends Activity {
         public void showPassword() {
             mLlPassword.setVisibility(View.VISIBLE);
             mTvPassword.setText(mGeneratedPassword);
-        }
-
-        @Override
-        public void onClick(View v) {
-            mGeneratedPassword = null;
-            readSettings();
-            generatePassword();
-            showPassword();
-            
-            if (mGeneratedPassword != null) {
-                mBtnGeneratePassword.setText(R.string.refresh);
-            }
         }
     };
 

@@ -14,8 +14,8 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import ebeletskiy.gmail.com.passwords.interfaces.SaveItemListener;
 import ebeletskiy.gmail.com.passwords.models.Ticket;
 import ebeletskiy.gmail.com.passwords.utils.DBHelper;
@@ -34,7 +34,7 @@ public class NewItem extends Fragment {
     public EditText password;
     public EditText notes;
     public Ticket ticket;
-    public Button btnGeneratePassword;
+    public ImageButton btnGeneratePassword;
 
     @Override
     public void onAttach(Activity activity) {
@@ -64,20 +64,21 @@ public class NewItem extends Fragment {
         ticket = new Ticket();
         initUI();
         btnGeneratePassword.setOnClickListener(new OnClickListener() {
-            
+
             @Override
             public void onClick(View v) {
-//                startActivity(new Intent(getActivity(), GeneratePasswords.class));
                 startActivityForResult(new Intent(getActivity(), GeneratePasswords.class), 15);
             }
         });
     }
-    
+
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == 15) {
-            password.setText(data.getStringExtra("password").toString());
+            if (data != null){
+                password.setText(data.getStringExtra("password").toString());
+            }
         }
     }
 
@@ -86,7 +87,8 @@ public class NewItem extends Fragment {
         login = (EditText) getView().findViewById(R.id.et_login_data);
         password = (EditText) getView().findViewById(R.id.et_password_data);
         notes = (EditText) getView().findViewById(R.id.et_notes_data);
-        btnGeneratePassword = (Button) getView().findViewById(R.id.new_item_bt_generate_password);
+        btnGeneratePassword = (ImageButton) getView().findViewById(
+                R.id.new_item_ibt_generate_password);
     }
 
     public Ticket createTicket() {
