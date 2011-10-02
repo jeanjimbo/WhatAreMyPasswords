@@ -1,12 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
 
-	<item android:visible="true" android:enabled="true" android:id="@+id/edit_item"
-		android:title="@string/edit" android:showAsAction="ifRoom" 
-		android:icon="@drawable/ic_menu_edit"></item>
+    <item
+        android:id="@+id/edit_item"
+        android:enabled="true"
+        android:icon="@drawable/ic_menu_edit"
+        android:showAsAction="ifRoom"
+        android:title="@string/edit"
+        android:visible="true"></item>
 
-	<item android:visible="true" android:enabled="true" android:id="@+id/delete_item"
-		android:title="@string/delete" android:showAsAction="ifRoom" 
-		android:icon="@drawable/ic_menu_delete"></item>
-		
+    <item
+        android:id="@+id/delete_item"
+        android:enabled="true"
+        android:icon="@drawable/ic_menu_delete"
+        android:showAsAction="ifRoom"
+        android:title="@string/delete"
+        android:visible="true"></item>
+
 </menu>

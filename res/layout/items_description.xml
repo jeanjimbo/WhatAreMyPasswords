@@ -1,63 +1,95 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-	android:id="@+id/empty_right_frag" android:layout_height="match_parent"
-	android:layout_width="match_parent" style="@style/layout_portrait_head">
+    android:id="@+id/empty_right_frag"
+    style="@style/layout_portrait_head"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
 
-	<LinearLayout android:layout_height="wrap_content"
-		android:layout_width="match_parent" android:layout_gravity="center_vertical"
-		style="@style/layout_portrait">
+    <LinearLayout
+        style="@style/layout_portrait"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical" >
 
-	<TextView android:id="@+id/tv_title" android:layout_width="wrap_content"
-		android:layout_height="wrap_content"
-		android:textSize="35dip" android:textColor="@color/title_color"/>
-		
-		<TableLayout android:id="@+id/items_description_plain"
-			android:layout_height="match_parent" android:layout_width="match_parent"
-			android:stretchColumns="1">
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/title_color"
+            android:textSize="35dip" />
 
-			<View android:layout_height="2dip" android:background="@color/title_color" />
+        <TableLayout
+            android:id="@+id/items_description_plain"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:stretchColumns="1" >
 
-			<!-- Login -->
-			<TableRow android:paddingTop="30dip">
-				<TextView android:text="@string/log_in" android:id="@+id/tv_login"
-					android:layout_width="wrap_content" android:layout_height="wrap_content"
-					android:gravity="left" style="@style/items_description_plain" />
-				<TextView android:id="@+id/tv_login_data"
-					android:layout_width="wrap_content" android:layout_height="wrap_content"
-					android:gravity="right" style="@style/items_description_plain" />
-			</TableRow>
+            <View
+                android:layout_height="2dip"
+                android:background="@color/title_color" />
 
-			<!-- Password -->
-			<TableRow>
-				<TextView android:id="@+id/tv_password"
-					android:layout_height="wrap_content" android:layout_width="wrap_content"
-					android:text="@string/password" android:gravity="left"
-					style="@style/items_description_plain" />
-				<TextView android:id="@+id/tv_password_data"
-					android:layout_width="wrap_content" android:layout_height="wrap_content"
-					android:gravity="right" android:password="true"
-					android:textColor="@color/password_text"
-					style="@style/items_description_plain" />
-			</TableRow>
+            <!-- Login -->
 
-			<!-- Notes -->
-			<TableRow>
-				<TextView android:id="@+id/tv_notes" android:layout_width="wrap_content"
-					android:layout_height="wrap_content" android:text="@string/notes"
-					android:gravity="left" style="@style/items_description_plain" />
-				<TextView android:id="@+id/tv_notes_data"
-					android:layout_width="wrap_content" android:layout_height="wrap_content"
-					android:gravity="right" style="@style/items_description_plain" />
-			</TableRow>
+            <TableRow android:paddingTop="30dip" >
 
-		</TableLayout>
+                <TextView
+                    android:id="@+id/tv_login"
+                    style="@style/items_description_plain"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="left"
+                    android:text="@string/log_in" />
 
-	</LinearLayout>
+                <TextView
+                    android:id="@+id/tv_login_data"
+                    style="@style/items_description_plain"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="right" />
+            </TableRow>
+
+            <!-- Password -->
+
+            <TableRow >
+
+                <TextView
+                    android:id="@+id/tv_password"
+                    style="@style/items_description_plain"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="left"
+                    android:text="@string/password" />
+
+                <TextView
+                    android:id="@+id/tv_password_data"
+                    style="@style/items_description_plain"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="right"
+                    android:password="true"
+                    android:textColor="@color/description_password_text" />
+            </TableRow>
+
+            <!-- Notes -->
+
+            <TableRow >
+
+                <TextView
+                    android:id="@+id/tv_notes"
+                    style="@style/items_description_plain"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="left"
+                    android:text="@string/notes" />
+
+                <TextView
+                    android:id="@+id/tv_notes_data"
+                    style="@style/items_description_plain"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="right" />
+            </TableRow>
+        </TableLayout>
+    </LinearLayout>
 
 </LinearLayout>
-
-
-
-
-
-

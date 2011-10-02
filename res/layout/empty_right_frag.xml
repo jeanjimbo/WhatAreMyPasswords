@@ -1,17 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-	android:id="@+id/empty_right_frag" android:layout_height="match_parent"
-	android:layout_width="match_parent" style="@style/layout_portrait_head">
+    android:id="@+id/empty_right_frag"
+    style="@style/layout_portrait_head"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
 
-	<LinearLayout android:layout_height="wrap_content"
-		android:layout_width="match_parent" style="@style/layout_portrait"
-		android:layout_gravity="center_vertical">
+    <LinearLayout
+        style="@style/layout_portrait"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical" >
 
-		<TextView android:id="@+id/tv_empty_frag"
-			android:layout_height="wrap_content" android:layout_width="wrap_content"
-			android:text="@string/empty_screen"
-			android:textColor="@color/text_color" android:layout_gravity="center_horizontal" />
-
-	</LinearLayout>
+        <TextView
+            android:id="@+id/tv_empty_frag"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:text="@string/empty_screen"
+            android:textColor="@color/text_color" />
+    </LinearLayout>
 
 </LinearLayout>

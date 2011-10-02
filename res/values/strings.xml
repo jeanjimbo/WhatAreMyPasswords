@@ -3,40 +3,69 @@
 
     <string name="appname">Remember Passwords</string>
 
-<!--  Check password  -->
+    <!-- Check password -->
     <string name="log_in">Login</string>
-    
-<!-- Empty screen (right panel) -->
+
+    <!-- Empty screen (right panel) -->
     <string name="empty_screen">Choose an item from the left pane or create new one by choosing the option from menu.</string>
-    
-<!--  First time screen -->
+
+    <!-- First time screen -->
     <string name="welcome_text">This is your first launch of the application. You need to define password you will use to access your data.</string>
     <string name="password">Password</string>
-    <string name="type_your_password_again">Type your password again</string>
+    <string name="repeat_new_password_again">Repeat new password</string>
     <string name="create_account_for_me">Create Account</string>
-    
-<!-- Items description -->
+
+    <!-- Items description -->
     <string name="notes">Notes</string>
-    
-<!-- Items list -->
+
+    <!-- Items list -->
     <string name="you_do_not_have_any_passwords_yet_">You do not have any passwords yet.</string>
     <string name="title">Title</string>
-    
-<!-- Menu long menu -->
+
+    <!-- Menu long menu -->
     <string name="edit_item">Edit Item</string>
     <string name="delete_item">Delete Item</string>
-    
-<!-- Menu items description -->
+
+    <!-- Menu items description -->
     <string name="edit">Edit</string>
     <string name="delete">Delete</string>
     <string name="show_password">Show Password</string>
-    
-<!-- Menu items list -->
+
+    <!-- Menu items list -->
     <string name="add_new_item">Add New Item</string>
-    
-<!-- Main activity -->
+
+    <!-- Main activity -->
     <string name="settings">Settings</string>
-    
-<!-- Menu new item -->
+
+    <!-- Menu new item -->
     <string name="save_item">Save Item</string>
+    <string name="sure_you_want_to_delete">Are you sure you want to delete the item?</string>
+    <string name="yes">yes</string>
+    <string name="no">no</string>
+    <string name="item_has_been_deleted">Item has been deleted.</string>
+    <string name="item_already_exists">The item with a such name already exists.</string>
+    <string name="fill_the_title">Please fill the title.</string>
+    <string name="fill_both_fields_passwords_match">Fill both fields and make sure passwords match.</string>
+    <string name="password_field_is_empty">Password field is empty.</string>
+    <string name="password_copied_to_clipboard">Password copied to clipboard.</string>
+    <string name="incorrect_password">Incorrect password.</string>
+    <string name="cancel">Cancel</string>
+    <string name="ok">OK</string>
+    <string name="change_your_current_password">Change your current password</string>
+    <string name="change_password">Change password</string>
+    <string name="save_new_password">Save new password</string>
+    <string name="generate_password">Generate password</string>
+    <string name="letters">Letters</string>
+    <string name="digits">Digits</string>
+    <string name="both">Both</string>
+    <string name="uppercase">Uppercase</string>
+    <string name="lowercase">Lowercase</string>
+    <string name="mixed">Mixed</string>
+    <string name="generate">Generate</string>
+    <string name="password_s_length">Password\'s length: </string>
+    <string name="password_s_length_can_t_be_zero">Password\'s length can\'t be zero</string>
+    <string name="refresh">Refresh</string>
+    <string name="click_on_the_password_to_use_it_">Tap on the password to use it.</string>
+    <string name="tap_and_hold_on_the_password_to_copy_it_">Tap and hold on the password to copy it.</string>
+
 </resources>

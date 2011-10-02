@@ -1,43 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-	<style name="activated_item" parent="@android:style/Widget.Holo.Light.ListView">
-		<item name="android:background">?android:attr/activatedBackgroundIndicator</item>
-	</style>
-	
-	<style name="items_description_plain">
-		<item name="android:textSize">25dip</item>
-		<item name="android:textColor">@color/text_color</item>
-	</style>	
-	
-	<style name="items_description_bold">
-		<item name="android:textSize">25dip</item>
-		<item name="android:textColor">@color/text_color</item>
-	</style>
-	
-	<!--  Right pane -->
-	<style name="layout_portrait">
-		<item name="android:background">@drawable/layout_round_corners</item>
-		<item name="android:orientation">vertical</item>
-		<item name="android:padding">40dip</item>
-	</style>
-	
-	<style name="layout_portrait_head">
-		<item name="android:background">@drawable/right_back</item>
-		<item name="android:orientation">horizontal</item>
-		<item name="android:padding">40dip</item>
-	</style>
-	
-	<!--  Left pane -->
-	<style name="no_items_text">
-		<item name="android:textSize">15dip</item>
-		<item name="android:textStyle">bold</item>
-		<item name="android:textColor">@color/light_item_color</item>
-	</style>
-	
-	<style name="layout_no_items">
-		<item name="android:background">@drawable/layout_round_corners_left_pane</item>
-		<item name="android:orientation">horizontal</item>
-		<item name="android:padding">40dip</item>
-	</style>
-	
+
+    <style name="activated_item" parent="@android:style/Widget.Holo.Light.ListView">
+        <item name="android:background">?android:attr/activatedBackgroundIndicator</item>
+    </style>
+
+    <style name="items_description_plain">
+        <item name="android:textSize">25dip</item>
+        <item name="android:textColor">@color/text_color</item>
+    </style>
+
+    <style name="items_description_bold">
+        <item name="android:textSize">25dip</item>
+        <item name="android:textColor">@color/text_color</item>
+    </style>
+
+    <!-- Right pane -->
+    <style name="layout_portrait">
+        <item name="android:background">@drawable/layout_round_corners</item>
+        <item name="android:orientation">vertical</item>
+        <item name="android:padding">40dip</item>
+    </style>
+
+    <style name="layout_portrait_head">
+        <item name="android:background">@drawable/right_back</item>
+        <item name="android:orientation">horizontal</item>
+        <item name="android:padding">40dip</item>
+    </style>
+
+    <!-- Left pane -->
+    <style name="no_items_text">
+        <item name="android:textSize">15dip</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/light_item_color</item>
+    </style>
+
+    <style name="layout_no_items">
+        <item name="android:background">@drawable/layout_round_corners_left_pane</item>
+        <item name="android:orientation">horizontal</item>
+        <item name="android:padding">40dip</item>
+    </style>
+
 </resources>

@@ -1,0 +1,10 @@
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+	<PreferenceScreen android:title="@string/change_password"
+	android:summary="@string/change_password">
+
+		<intent android:targetClass="ebeletskiy.gmail.com.passwords.ChangePasswordActivity"
+			android:targetPackage="ebeletskiy.gmail.com.passwords" />
+	</PreferenceScreen>
+
+</PreferenceScreen>

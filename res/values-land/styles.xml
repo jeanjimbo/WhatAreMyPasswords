@@ -1,26 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-	<style name="activated_item" parent="@android:style/Widget.Holo.Light.ListView">
-		<item name="android:background">?android:attr/activatedBackgroundIndicator</item>
-	</style>
-	
-	<style name="items_description_plain">
-		<item name="android:textSize">30dip</item>
-		<item name="android:textColor">@color/text_color</item>
-	</style>	
-	
-	<!--  Right pane -->
-	<style name="layout_portrait">
-		<item name="android:background">@drawable/layout_round_corners</item>
-		<item name="android:orientation">vertical</item>
-		<item name="android:padding">40dip</item>
-	</style>
-	
-	<style name="layout_portrait_head">
-		<item name="android:background">@drawable/right_back</item>
-		<item name="android:orientation">horizontal</item>
-		<item name="android:padding">80dip</item>
-	</style>
-	
-	
+
+    <style name="items_description_plain">
+        <item name="android:textSize">30dip</item>
+        <item name="android:textColor">@color/text_color</item>
+    </style>
+
+    <!-- Right pane -->
+    <style name="layout_portrait_head">
+        <item name="android:background">@drawable/right_back</item>
+        <item name="android:orientation">horizontal</item>
+        <item name="android:padding">80dip</item>
+    </style>
+
 </resources>
