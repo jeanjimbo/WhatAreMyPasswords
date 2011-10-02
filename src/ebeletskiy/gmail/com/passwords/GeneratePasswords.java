@@ -29,7 +29,6 @@ public class GeneratePasswords extends Activity {
     private static final String LOWERCASE_AND_DIGITS = "abcdefghijklmnopqrstuvwxyz0123456789";
     private static final String DIGITS_ONLY = "0123456789";
 
-    private int mPasswordLength;
     private String mGeneratedPassword;
     private SeekBar mSeekBar;
     private RadioGroup mRgLeft, mRgRight;
@@ -185,5 +184,5 @@ public class GeneratePasswords extends Activity {
             mLlPassword.setVisibility(View.VISIBLE);
             mTvPassword.setText(mGeneratedPassword);
         }
-    };;
+    };
 }
