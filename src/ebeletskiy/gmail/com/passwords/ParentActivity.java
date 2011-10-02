@@ -133,9 +133,9 @@ public class ParentActivity extends Activity implements StartNewActivity, StartN
     }
 
     @Override
-    public void startNewActivity(Intent i) {
+    public void startNewActivity(Intent intent) {
         setInvokedByNewActivityRun(true);
-        // TODO implement this
+        startActivity(intent);
     }
 
     @Override
