@@ -53,7 +53,6 @@ public class MainActivity extends ParentActivity implements ListItemClickListene
     }
 
     public void myOnStart() {
-        
 
         if (MyConfigs.DEBUG)
             Log.i(TAG, "myOnStart()");
@@ -82,7 +81,7 @@ public class MainActivity extends ParentActivity implements ListItemClickListene
             }
         }
     }
-    
+
     @Override
     public void onResume() {
         super.onResume();
@@ -169,7 +168,11 @@ public class MainActivity extends ParentActivity implements ListItemClickListene
             startActivity(intent);
             return true;
         case R.id.show_preferences:
-            startActivity(new Intent(this, ApplicationPreferences.class));
+            if (MyConfigs.DEBUG) {
+                Log.i(TAG, "onOptionsItemSelected(): R.id.show_preference selected.");
+            }
+            startNewActivity(new Intent(this, ApplicationPreferences.class));
+            // startActivity(new Intent(this, ApplicationPreferences.class));
             return true;
         default:
             return super.onOptionsItemSelected(item);
