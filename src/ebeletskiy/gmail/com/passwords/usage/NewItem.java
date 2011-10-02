@@ -3,39 +3,49 @@ package ebeletskiy.gmail.com.passwords.usage;
 import android.app.Activity;
 import android.app.Fragment;
 import android.content.Context;
+import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import ebeletskiy.gmail.com.passwords.usage.interfaces.SaveItemListener;
+import android.widget.ImageButton;
 import ebeletskiy.gmail.com.passwords.usage.models.Ticket;
 import ebeletskiy.gmail.com.passwords.usage.utils.DBHelper;
+import ebeletskiy.gmail.com.passwords.usage.interfaces.StartNewActivityForResult;
+import ebeletskiy.gmail.com.passwords.usage.utils.ShowToast;
+import ebeletskiy.gmail.com.passwords.utils.MyConfigs;
 import ebeletskiy.gmail.com.passwords.usage.utils.ShowToast;
 
 public class NewItem extends Fragment {
-    private static final String TAG = "EditItem";
+    private static final String TAG = "NewItem.class";
 
     private boolean menuWasCreated = false;
 
     public DBHelper dbHelper;
     public SaveItemListener saveItemListener;
+    public StartNewActivityForResult startActivityForResultLister;
 
     public EditText title;
     public EditText login;
     public EditText password;
     public EditText notes;
     public Ticket ticket;
+    public ImageButton btnGeneratePassword;
 
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
         saveItemListener = (SaveItemListener) activity;
+        startActivityForResultLister = (StartNewActivityForResult) activity;
     }
 
     @Override
@@ -59,6 +69,29 @@ public class NewItem extends Fragment {
         dbHelper = new DBHelper(getActivity());
         ticket = new Ticket();
         initUI();
+        btnGeneratePassword.setOnClickListener(new OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                startActivityForResultLister.startNewActivityForResult(new Intent(getActivity(),
+                        GeneratePasswords.class), MyConfigs.NEW_ITEM_PASSWORD_REQUEST_CODE);
+                // startActivityForResult(new Intent(getActivity(),
+                // GeneratePasswords.class), 15);
+            }
+        });
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (MyConfigs.DEBUG) {
+            Log.i(TAG, "onActivityResult()");
+        }
+        if (requestCode == MyConfigs.NEW_ITEM_PASSWORD_REQUEST_CODE) {
+            if (data != null) {
+                password.setText(data.getStringExtra("password").toString());
+            }
+        }
     }
 
     public void initUI() {
@@ -66,6 +99,8 @@ public class NewItem extends Fragment {
         login = (EditText) getView().findViewById(R.id.et_login_data);
         password = (EditText) getView().findViewById(R.id.et_password_data);
         notes = (EditText) getView().findViewById(R.id.et_notes_data);
+        btnGeneratePassword = (ImageButton) getView().findViewById(
+                R.id.new_item_ibt_generate_password);
     }
 
     public Ticket createTicket() {

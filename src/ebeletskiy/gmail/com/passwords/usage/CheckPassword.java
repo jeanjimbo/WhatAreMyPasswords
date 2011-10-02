@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import ebeletskiy.gmail.com.passwords.usage.utils.MyConfigs;
@@ -11,9 +12,12 @@ import ebeletskiy.gmail.com.passwords.usage.utils.ShowToast;
 
 public class CheckPassword extends Activity {
 
+    public static final String TAG = "CheckPassword.java";
+    
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if (MyConfigs.DEBUG) Log.i(TAG, "onCreate()");
         setContentView(R.layout.check_password);
     }
 

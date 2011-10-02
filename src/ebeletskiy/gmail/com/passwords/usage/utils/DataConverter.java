@@ -9,13 +9,6 @@ public class DataConverter {
     public static Ticket convertToTicket(Cursor result) {
         Ticket ticket = new Ticket();
 
-        // String str = " ";
-        // String [] stringarray = result.getColumnNames();
-        // for (int i = 0; i < stringarray.length; i++) {
-        // str = str + stringarray[i];
-        // }
-        // Log.i(TAG, str);
-
         result.moveToFirst();
         ticket.setId(result.getInt(0));
         ticket.setTitle(result.getString(1));

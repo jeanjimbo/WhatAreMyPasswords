@@ -1,14 +1,12 @@
 package ebeletskiy.gmail.com.passwords.usage;
 
 import android.app.ActionBar;
-import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.SharedPreferences.Editor;
 import android.os.Bundle;
-import android.os.Handler;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -22,39 +20,28 @@ import ebeletskiy.gmail.com.passwords.usage.prefs.ApplicationPreferences;
 import ebeletskiy.gmail.com.passwords.usage.utils.MyConfigs;
 import ebeletskiy.gmail.com.passwords.usage.prefs.ApplicationPreferences;
 
-public class MainActivity extends Activity implements ListItemClickListener, AddNewItemListener,
-        SaveItemListener, DeleteItemListener, EditItemListener {
-    private static final String TAG = "MainActivity";
+public class MainActivity extends ParentActivity implements ListItemClickListener,
+        AddNewItemListener, SaveItemListener, DeleteItemListener, EditItemListener {
 
-    protected boolean fromOrientation = false;
-    protected SharedPreferences mSharedPreferences;
-    protected Editor mPrefsEditor;
+    private static final String TAG = "Main Activity";
+    public static final int LAYOUT = R.layout.main;
 
-    protected Handler mHandler;
-    protected Runnable finishRunnable = new Runnable() {
+    public MainActivity(int mLayout) {
+        super(mLayout);
+    }
 
-        @Override
-        public void run() {
-            mPrefsEditor = getApplicationContext().getSharedPreferences(MyConfigs.PREFS_NAME, 0)
-                    .edit();
-            mPrefsEditor.putBoolean("finishThread", true).commit();
-
-            finish();
-        }
+    public MainActivity() {
+        this(LAYOUT);
     };
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.main);
 
         initActionBar();
         if (savedInstanceState == null) {
             addEmptyFragment();
         }
-
-        mSharedPreferences = getSharedPreferences(MyConfigs.PREFS_NAME, 0);
-        mPrefsEditor = mSharedPreferences.edit();
 
         ((ItemsList) getFragmentManager().findFragmentById(R.id.left_frag))
                 .enablePersistentSelection();
@@ -64,49 +51,43 @@ public class MainActivity extends Activity implements ListItemClickListener, Add
     @Override
     public void onStart() {
         super.onStart();
+    }
 
+    public void myOnStart() {
+        
+
+        if (MyConfigs.DEBUG)
+            Log.i(TAG, "myOnStart()");
         if (mHandler != null) {
+            if (MyConfigs.DEBUG)
+                Log.i(TAG, "onStart(), handler != null");
             mHandler.removeCallbacks(finishRunnable);
-            mPrefsEditor.putBoolean("finishThread", false).commit();
         }
 
         if (mSharedPreferences.getBoolean(MyConfigs.FIRST_RUN_MAIN, true)) {
             updateSharedPreferences();
         } else {
-            fromOrientation = mSharedPreferences.getBoolean("fromOrient", false);
+            checkPassword = mSharedPreferences.getBoolean(MyConfigs.ORIENTATION_CHANGE, false);
 
-            if (fromOrientation) {
+            if (checkPassword) {
                 // do not check for password
-                mPrefsEditor.putBoolean("fromOrient", false).commit();
+                mPrefsEditor.putBoolean(MyConfigs.ORIENTATION_CHANGE, false).commit();
             } else {
-                startActivity(new Intent(this, CheckPassword.class));
-                finish();
+
+                if (!invokedByNewActivityRun) {
+                    if (MyConfigs.DEBUG)
+                        Log.i(TAG, "onMyStart(): launching CheckPassword.class");
+                    startActivity(new Intent(this, CheckPassword.class));
+                    finish();
+                }
             }
         }
     }
-
+    
     @Override
-    public Object onRetainNonConfigurationInstance() {
-        mPrefsEditor.putBoolean("fromOrient", true);
-        mPrefsEditor.commit();
-        return null;
-    }
-
-    @Override
-    protected void onStop() {
-        super.onStop();
-        mHandler = new Handler();
-        mHandler.postDelayed(finishRunnable, MyConfigs.DESTROY_APP_AFTER);
-        mPrefsEditor.putBoolean("finishThread", true).commit();
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        if (mHandler != null) {
-            mHandler.removeCallbacks(finishRunnable);
-            mPrefsEditor.putBoolean("finishThread", false).commit();
-        }
+    public void onResume() {
+        super.onResume();
+        setInvokedByNewActivityRun(false);
     }
 
     private void updateSharedPreferences() {
@@ -174,12 +155,12 @@ public class MainActivity extends Activity implements ListItemClickListener, Add
         transaction.commit();
     }
 
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		MenuInflater inflater = getMenuInflater();
-		inflater.inflate(R.menu.menu_main_activity, menu);
-		return true;
-	}
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_main_activity, menu);
+        return true;
+    }
 
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
@@ -187,12 +168,13 @@ public class MainActivity extends Activity implements ListItemClickListener, Add
             Intent intent = new Intent(this, MainActivity.class);
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(intent);
-			return true;
-		case R.id.show_preferences:
-			startActivity(new Intent(this, ApplicationPreferences.class));
+            return true;
+        case R.id.show_preferences:
+            startActivity(new Intent(this, ApplicationPreferences.class));
             return true;
         default:
             return super.onOptionsItemSelected(item);
         }
     }
+
 }

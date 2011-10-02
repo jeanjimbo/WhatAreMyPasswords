@@ -12,7 +12,7 @@
     <!-- First time screen -->
     <string name="welcome_text">This is your first launch of the application. You need to define password you will use to access your data.</string>
     <string name="password">Password</string>
-    <string name="type_your_password_again">Type your password again</string>
+    <string name="repeat_new_password_again">Repeat new password</string>
     <string name="create_account_for_me">Create Account</string>
 
     <!-- Items description -->
@@ -54,5 +54,18 @@
     <string name="change_your_current_password">Change your current password</string>
     <string name="change_password">Change password</string>
     <string name="save_new_password">Save new password</string>
+    <string name="generate_password">Generate password</string>
+    <string name="letters">Letters</string>
+    <string name="digits">Digits</string>
+    <string name="both">Both</string>
+    <string name="uppercase">Uppercase</string>
+    <string name="lowercase">Lowercase</string>
+    <string name="mixed">Mixed</string>
+    <string name="generate">Generate</string>
+    <string name="password_s_length">Password\'s length: </string>
+    <string name="password_s_length_can_t_be_zero">Password\'s length can\'t be zero</string>
+    <string name="refresh">Refresh</string>
+    <string name="click_on_the_password_to_use_it_">Tap on the password to use it.</string>
+    <string name="tap_and_hold_on_the_password_to_copy_it_">Tap and hold on the password to copy it.</string>
 
 </resources>

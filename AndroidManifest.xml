@@ -42,6 +42,8 @@
         </activity>
         <activity android:name=".ChangePasswordActivity" >
         </activity>
+        <activity android:name=".GeneratePasswords" >
+        </activity>
     </application>
 
 </manifest>

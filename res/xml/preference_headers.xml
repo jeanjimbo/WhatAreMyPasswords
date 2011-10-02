@@ -2,7 +2,7 @@
 	<header android:fragment="ebeletskiy.gmail.com.passwords.usage.prefs.GeneralPreferenceFragment"
 		android:title="General" android:summary="General Preferences">
 	</header>
-	<header android:fragment="ebeletskiy.gmail.com.passwords.usage.prefs.AboutPreferenceFragment"
+	<!-- <header android:fragment="ebeletskiy.gmail.com.passwords.prefs.AboutPreferenceFragment"
 		android:title="About" android:summary="">
-	</header>
+	</header> -->
 </preference-headers>

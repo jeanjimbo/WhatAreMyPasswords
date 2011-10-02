@@ -2,6 +2,7 @@ package ebeletskiy.gmail.com.passwords.usage;
 
 import android.app.Activity;
 import android.app.Fragment;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.method.PasswordTransformationMethod;
 import android.view.LayoutInflater;
@@ -20,6 +21,7 @@ import ebeletskiy.gmail.com.passwords.usage.utils.Clipboard;
 import ebeletskiy.gmail.com.passwords.usage.utils.DBHelper;
 import ebeletskiy.gmail.com.passwords.usage.utils.MyCustomAlertDialog;
 import ebeletskiy.gmail.com.passwords.usage.utils.ShowToast;
+import ebeletskiy.gmail.com.passwords.usage.utils.MyConfigs;
 import ebeletskiy.gmail.com.passwords.usage.utils.FontManager;
 
 public class ItemsDescription extends Fragment {
@@ -84,6 +86,18 @@ public class ItemsDescription extends Fragment {
         mPassword.setOnClickListener(shortClickListener);
 
         applyFonts();
+        showTip();
+    }
+    
+    public void showTip() {
+        SharedPreferences sharedPreferences = getActivity().getSharedPreferences(MyConfigs.PREFS_NAME, 0);
+        int result = sharedPreferences.getInt(MyConfigs.FIRST_ITEM_DESCRIPTION_OPENED, 0);
+        if (result == 0) {
+            ShowToast.showToast(getActivity(),
+                    getActivity().getString(R.string.tap_and_hold_on_the_password_to_copy_it_));
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            editor.putInt(MyConfigs.FIRST_ITEM_DESCRIPTION_OPENED, 1).commit();
+        }
     }
 
     private void applyFonts() {
