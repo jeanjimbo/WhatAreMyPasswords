@@ -17,8 +17,9 @@ import android.widget.TextView;
 import ebeletskiy.gmail.com.passwords.utils.MyConfigs;
 import ebeletskiy.gmail.com.passwords.utils.ShowToast;
 
-public class GeneratePasswords extends Activity {
+public class GeneratePasswords extends ParentActivity {
 
+    public static final int LAYOUT = R.layout.generate_password;
     private static final int PASSWORD_MAX_LENGTH = 15;
     private static final int PASSWORD_DEFAULT_LENGTH = 6;
     private static final String UPPERCASE_LETTERS_ONLY = "ABCDEFGHIKLMNOPQRSTVXYZ";
@@ -37,10 +38,17 @@ public class GeneratePasswords extends Activity {
     private TextView mTvPasswordLength;
     private Button mBtnGeneratePassword;
 
+    public GeneratePasswords(int mLayout) {
+        super(mLayout);
+    }
+
+    public GeneratePasswords() {
+        this(LAYOUT);
+    };
+
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.generate_password);
         initUI();
 
         if (savedInstanceState != null) {
@@ -91,6 +99,7 @@ public class GeneratePasswords extends Activity {
             i.putExtra("password", mTvPassword.getText().toString());
             setResult(15, i);
             onBackPressed();
+            finish();
         }
     };
 
@@ -124,6 +133,7 @@ public class GeneratePasswords extends Activity {
             if (mGeneratedPassword != null) {
                 mBtnGeneratePassword.setText(R.string.refresh);
             }
+
         }
 
         public void showTip() {
