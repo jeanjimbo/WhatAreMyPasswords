@@ -1,14 +1,11 @@
 package ebeletskiy.gmail.com.passwords;
 
 import android.app.ActionBar;
-import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.SharedPreferences.Editor;
 import android.os.Bundle;
-import android.os.Handler;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -26,15 +23,14 @@ public class MainActivity extends ParentActivity implements ListItemClickListene
         AddNewItemListener, SaveItemListener, DeleteItemListener, EditItemListener {
 
     private static final String TAG = "Main Activity";
-
-    public static int mLayout = R.layout.main;
+    public static final int LAYOUT = R.layout.main;
 
     public MainActivity(int mLayout) {
         super(mLayout);
     }
 
     public MainActivity() {
-        this(mLayout);
+        this(LAYOUT);
     };
 
     @Override
@@ -57,9 +53,13 @@ public class MainActivity extends ParentActivity implements ListItemClickListene
     }
 
     public void myOnStart() {
-        if (MyConfigs.DEBUG) Log.i(TAG, "myOnStart()");
+        
+
+        if (MyConfigs.DEBUG)
+            Log.i(TAG, "myOnStart()");
         if (mHandler != null) {
-            if (MyConfigs.DEBUG) Log.i(TAG, "onStart(), handler != null");
+            if (MyConfigs.DEBUG)
+                Log.i(TAG, "onStart(), handler != null");
             mHandler.removeCallbacks(finishRunnable);
         }
 
@@ -72,11 +72,21 @@ public class MainActivity extends ParentActivity implements ListItemClickListene
                 // do not check for password
                 mPrefsEditor.putBoolean(MyConfigs.ORIENTATION_CHANGE, false).commit();
             } else {
-                if (MyConfigs.DEBUG) Log.i(TAG, "onMyStart(): launching CheckPassword.class");
-                startActivity(new Intent(this, CheckPassword.class));
-                finish();
+
+                if (!invokedByNewActivityRun) {
+                    if (MyConfigs.DEBUG)
+                        Log.i(TAG, "onMyStart(): launching CheckPassword.class");
+                    startActivity(new Intent(this, CheckPassword.class));
+                    finish();
+                }
             }
         }
+    }
+    
+    @Override
+    public void onResume() {
+        super.onResume();
+        setInvokedByNewActivityRun(false);
     }
 
     private void updateSharedPreferences() {
@@ -165,4 +175,5 @@ public class MainActivity extends ParentActivity implements ListItemClickListene
             return super.onOptionsItemSelected(item);
         }
     }
+
 }

@@ -14,4 +14,6 @@ public final class MyConfigs {
     public static final String FIRST_PASSWORD_GENERATED = "firstPasswordRun";
     public static final String FIRST_ITEM_DESCRIPTION_OPENED = "firstItemDesriptionRun";
     public static final String ORIENTATION_CHANGE = "orientation_change";
+    
+    public static final int NEW_ITEM_PASSWORD_REQUEST_CODE = 15;
 }

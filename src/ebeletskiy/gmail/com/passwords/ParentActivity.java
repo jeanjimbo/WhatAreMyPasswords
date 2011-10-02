@@ -1,6 +1,5 @@
 package ebeletskiy.gmail.com.passwords;
 
-import ebeletskiy.gmail.com.passwords.utils.MyConfigs;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -8,8 +7,11 @@ import android.content.SharedPreferences.Editor;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
+import ebeletskiy.gmail.com.passwords.interfaces.StartNewActivity;
+import ebeletskiy.gmail.com.passwords.interfaces.StartNewActivityForResult;
+import ebeletskiy.gmail.com.passwords.utils.MyConfigs;
 
-public class ParentActivity extends Activity {
+public class ParentActivity extends Activity implements StartNewActivity, StartNewActivityForResult {
     private static final String TAG = "Parent Activity";
 
     public int mLayout = -1;
@@ -17,6 +19,7 @@ public class ParentActivity extends Activity {
     public SharedPreferences mSharedPreferences;
     public Editor mPrefsEditor;
     public Handler mHandler;
+    public static boolean invokedByNewActivityRun = false;
 
     public Runnable finishRunnable = new Runnable() {
 
@@ -69,12 +72,23 @@ public class ParentActivity extends Activity {
 
         if (checkPassword) {
             // do not check for password
+            if (MyConfigs.DEBUG)
+                Log.i(TAG, "onStart(), do not check password");
             mPrefsEditor.putBoolean(MyConfigs.ORIENTATION_CHANGE, false).commit();
         } else {
-            if (MyConfigs.DEBUG)
-                Log.i(TAG, "onStart(): like from OrientationChange");
-            startActivity(new Intent(this, CheckPassword.class));
-            finish();
+            if (MyConfigs.DEBUG) {
+                Log.i(TAG, "onStart(): check password.");
+            }
+
+            if (!invokedByNewActivityRun) {
+                if (MyConfigs.DEBUG) {
+                    Log.i(TAG, "onStart(): invokeByNewActivityRun = " + invokedByNewActivityRun);
+                }
+
+                startActivity(new Intent(this, CheckPassword.class));
+                setInvokedByNewActivityRun(false);
+                finish();
+            }
         }
     }
 
@@ -92,8 +106,16 @@ public class ParentActivity extends Activity {
         super.onStop();
         if (MyConfigs.DEBUG)
             Log.i(TAG, "onStop()");
-        mHandler = new Handler();
-        mHandler.postDelayed(finishRunnable, MyConfigs.DESTROY_APP_AFTER);
+        if (!invokedByNewActivityRun) {
+            if (MyConfigs.DEBUG)
+                Log.i(TAG, "onStop(): invokedByNewActitivyRun is false -> starting finishRunnable");
+            mHandler = new Handler();
+            mHandler.postDelayed(finishRunnable, MyConfigs.DESTROY_APP_AFTER);
+        } else {
+            if (MyConfigs.DEBUG)
+                Log.i(TAG,
+                        "onStop(): invokedByNewActitivyRun is true -> do NOT starting finishRunnable");
+        }
     }
 
     @Override
@@ -103,6 +125,32 @@ public class ParentActivity extends Activity {
         super.onDestroy();
         if (mHandler != null) {
             mHandler.removeCallbacks(finishRunnable);
+        }
+    }
+
+    public void setInvokedByNewActivityRun(boolean value) {
+        invokedByNewActivityRun = value;
+    }
+
+    @Override
+    public void startNewActivity(Intent i) {
+        setInvokedByNewActivityRun(true);
+        // TODO implement this
+    }
+
+    @Override
+    public void startNewActivityForResult(Intent intent, int requestCode) {
+        setInvokedByNewActivityRun(true);
+        startActivityForResult(intent, requestCode);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        Log.i(TAG, "onActivityResult()");
+        if (requestCode == MyConfigs.NEW_ITEM_PASSWORD_REQUEST_CODE) {
+            ((NewItem) getFragmentManager().findFragmentById(R.id.right_frag)).onActivityResult(
+                    requestCode, resultCode, data);
         }
     }
 
