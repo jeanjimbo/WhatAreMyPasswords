@@ -38,7 +38,7 @@
             android:id="@+id/edt_firsttimeactivity_second_field"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/type_your_password_again"
+            android:hint="@string/repeat_new_password_again"
             android:password="true"
             android:singleLine="true" />
 
