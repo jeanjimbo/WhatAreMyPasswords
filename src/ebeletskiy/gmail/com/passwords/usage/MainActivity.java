@@ -18,7 +18,6 @@ import ebeletskiy.gmail.com.passwords.usage.interfaces.SaveItemListener;
 import ebeletskiy.gmail.com.passwords.usage.models.Ticket;
 import ebeletskiy.gmail.com.passwords.usage.prefs.ApplicationPreferences;
 import ebeletskiy.gmail.com.passwords.usage.utils.MyConfigs;
-import ebeletskiy.gmail.com.passwords.usage.prefs.ApplicationPreferences;
 
 public class MainActivity extends ParentActivity implements ListItemClickListener,
         AddNewItemListener, SaveItemListener, DeleteItemListener, EditItemListener {

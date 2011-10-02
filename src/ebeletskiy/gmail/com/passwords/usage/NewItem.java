@@ -16,13 +16,12 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
-import ebeletskiy.gmail.com.passwords.usage.interfaces.SaveItemListener;
 import android.widget.ImageButton;
+import ebeletskiy.gmail.com.passwords.interfaces.StartNewActivityForResult;
+import ebeletskiy.gmail.com.passwords.usage.interfaces.SaveItemListener;
 import ebeletskiy.gmail.com.passwords.usage.models.Ticket;
 import ebeletskiy.gmail.com.passwords.usage.utils.DBHelper;
-import ebeletskiy.gmail.com.passwords.usage.interfaces.StartNewActivityForResult;
-import ebeletskiy.gmail.com.passwords.usage.utils.ShowToast;
-import ebeletskiy.gmail.com.passwords.utils.MyConfigs;
+import ebeletskiy.gmail.com.passwords.usage.utils.MyConfigs;
 import ebeletskiy.gmail.com.passwords.usage.utils.ShowToast;
 
 public class NewItem extends Fragment {

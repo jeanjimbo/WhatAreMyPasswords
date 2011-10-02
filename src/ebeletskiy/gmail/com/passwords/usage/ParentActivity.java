@@ -1,4 +1,4 @@
-package ebeletskiy.gmail.com.passwords;
+package ebeletskiy.gmail.com.passwords.usage;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -9,7 +9,8 @@ import android.os.Handler;
 import android.util.Log;
 import ebeletskiy.gmail.com.passwords.interfaces.StartNewActivity;
 import ebeletskiy.gmail.com.passwords.interfaces.StartNewActivityForResult;
-import ebeletskiy.gmail.com.passwords.utils.MyConfigs;
+import ebeletskiy.gmail.com.passwords.usage.R;
+import ebeletskiy.gmail.com.passwords.usage.utils.MyConfigs;
 
 public class ParentActivity extends Activity implements StartNewActivity, StartNewActivityForResult {
     private static final String TAG = "Parent Activity";

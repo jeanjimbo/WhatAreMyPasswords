@@ -1,8 +1,7 @@
-package ebeletskiy.gmail.com.passwords;
+package ebeletskiy.gmail.com.passwords.usage;
 
 import java.util.Random;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -14,8 +13,9 @@ import android.widget.RadioGroup;
 import android.widget.SeekBar;
 import android.widget.SeekBar.OnSeekBarChangeListener;
 import android.widget.TextView;
-import ebeletskiy.gmail.com.passwords.utils.MyConfigs;
-import ebeletskiy.gmail.com.passwords.utils.ShowToast;
+import ebeletskiy.gmail.com.passwords.usage.R;
+import ebeletskiy.gmail.com.passwords.usage.utils.MyConfigs;
+import ebeletskiy.gmail.com.passwords.usage.utils.ShowToast;
 
 public class GeneratePasswords extends ParentActivity {
 
