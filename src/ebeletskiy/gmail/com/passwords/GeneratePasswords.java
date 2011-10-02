@@ -58,6 +58,7 @@ public class GeneratePasswords extends ParentActivity {
             mRgLeft.check(savedInstanceState.getInt("left_radio_group"));
             mRgRight.check(savedInstanceState.getInt("right_radio_group"));
             mSeekBar.setProgress(savedInstanceState.getInt("seekbar_position"));
+            mBtnGeneratePassword.setText(savedInstanceState.getString("button_text"));
         } else {
             mSeekBar.setProgress(PASSWORD_DEFAULT_LENGTH);
             mLlPassword.setVisibility(View.INVISIBLE);
@@ -79,6 +80,7 @@ public class GeneratePasswords extends ParentActivity {
         outState.putInt("left_radio_group", mRgLeft.getCheckedRadioButtonId());
         outState.putInt("right_radio_group", mRgRight.getCheckedRadioButtonId());
         outState.putInt("seekbar_position", mSeekBar.getProgress());
+        outState.putString("button_text", mBtnGeneratePassword.getText().toString());
     }
 
     private void initUI() {
