@@ -5,7 +5,7 @@ import ebeletskiy.gmail.com.passwords.R.layout;
 import android.app.Activity;
 import android.os.Bundle;
 
-public class ChangePasswordActivity extends Activity {
+public class ChangePassword extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

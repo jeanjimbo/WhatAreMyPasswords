@@ -1,4 +1,4 @@
-package ebeletskiy.gmail.com.passwords.prefs;
+package ebeletskiy.gmail.com.passwords.fragments;
 
 import android.app.Fragment;
 import android.content.SharedPreferences;
@@ -15,7 +15,7 @@ import ebeletskiy.gmail.com.passwords.R;
 import ebeletskiy.gmail.com.passwords.utils.MyConfigs;
 import ebeletskiy.gmail.com.passwords.utils.ShowToast;
 
-public class ChangePasswordFragment extends Fragment {
+public class ChangePassword extends Fragment {
     private EditText firstPassword;
     private EditText secondPassword;
     private Button okButton;

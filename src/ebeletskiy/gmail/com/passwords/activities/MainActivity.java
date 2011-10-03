@@ -50,7 +50,6 @@ public class MainActivity extends ParentActivity implements ListItemClickListene
 
         initActionBar();
         if (savedInstanceState == null) {
-//            addEmptyFragment();
             loadRightFragment(new EmptyRightFrag(), false);
         }
 

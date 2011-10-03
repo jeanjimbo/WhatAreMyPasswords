@@ -41,7 +41,7 @@
         </activity>
         <activity android:name=".prefs.ApplicationPreferences" >
         </activity>
-        <activity android:name=".activities.ChangePasswordActivity" >
+        <activity android:name=".activities.ChangePassword" >
         </activity>
         <activity android:name=".activities.GeneratePasswords" >
         </activity>
