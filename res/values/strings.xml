@@ -67,5 +67,6 @@
     <string name="refresh">Refresh</string>
     <string name="click_on_the_password_to_use_it_">Tap on the password to use it.</string>
     <string name="tap_and_hold_on_the_password_to_copy_it_">Tap and hold on the password to copy it.</string>
+    <string name="ticket_has_been_updated_">Ticket has been updated.</string>
 
 </resources>

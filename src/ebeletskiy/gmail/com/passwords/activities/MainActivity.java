@@ -50,7 +50,8 @@ public class MainActivity extends ParentActivity implements ListItemClickListene
 
         initActionBar();
         if (savedInstanceState == null) {
-            addEmptyFragment();
+//            addEmptyFragment();
+            loadRightFragment(new EmptyRightFrag(), false);
         }
 
         ((ItemsList) getFragmentManager().findFragmentById(R.id.left_frag))
@@ -74,7 +75,7 @@ public class MainActivity extends ParentActivity implements ListItemClickListene
         }
 
         if (mSharedPreferences.getBoolean(MyConfigs.FIRST_RUN_MAIN, true)) {
-            updateSharedPreferences();
+            markAppAsLaunched();
         } else {
             checkPassword = mSharedPreferences.getBoolean(MyConfigs.ORIENTATION_CHANGE, false);
 
@@ -99,11 +100,10 @@ public class MainActivity extends ParentActivity implements ListItemClickListene
         setInvokedByNewActivityRun(false);
     }
 
-    private void updateSharedPreferences() {
+    private void markAppAsLaunched() {
         SharedPreferences sharedPreferences = getSharedPreferences(MyConfigs.PREFS_NAME, 0);
         SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putBoolean(MyConfigs.FIRST_RUN_MAIN, false);
-        editor.commit();
+        editor.putBoolean(MyConfigs.FIRST_RUN_MAIN, false).commit();
     }
 
     private void addEmptyFragment() {
@@ -120,13 +120,13 @@ public class MainActivity extends ParentActivity implements ListItemClickListene
     @Override
     public void itemClicked(Ticket ticket) {
         Fragment newFragment = new ItemsDescription(ticket);
-        loadFragment(newFragment, false);
+        loadRightFragment(newFragment, false);
     }
 
     @Override
     public void onAddNewItem() {
         Fragment newFragment = new NewItem();
-        loadFragment(newFragment, true);
+        loadRightFragment(newFragment, true);
     }
 
     @Override
@@ -134,7 +134,7 @@ public class MainActivity extends ParentActivity implements ListItemClickListene
         refreshList();
 
         Fragment newFragment = new EmptyRightFrag();
-        loadFragment(newFragment, true);
+        loadRightFragment(newFragment, true);
     }
 
     @Override
@@ -142,20 +142,20 @@ public class MainActivity extends ParentActivity implements ListItemClickListene
         refreshList();
 
         Fragment newFragment = new EmptyRightFrag();
-        loadFragment(newFragment, false);
+        loadRightFragment(newFragment, false);
     }
 
     @Override
     public void loadEditItem(Ticket ticket) {
         Fragment newFragment = new EditItem(ticket);
-        loadFragment(newFragment, true);
+        loadRightFragment(newFragment, true);
     }
 
     private void refreshList() {
         ((ItemsList) getFragmentManager().findFragmentById(R.id.left_frag)).refresh();
     }
 
-    private void loadFragment(Fragment fragment, boolean animation) {
+    private void loadRightFragment(Fragment fragment, boolean animation) {
         FragmentTransaction transaction = getFragmentManager().beginTransaction();
         if (animation) {
             transaction.setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_right);
