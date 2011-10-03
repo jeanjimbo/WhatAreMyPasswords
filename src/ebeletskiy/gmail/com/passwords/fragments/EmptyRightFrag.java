@@ -1,5 +1,7 @@
-package ebeletskiy.gmail.com.passwords;
+package ebeletskiy.gmail.com.passwords.fragments;
 
+import ebeletskiy.gmail.com.passwords.R;
+import ebeletskiy.gmail.com.passwords.R.layout;
 import android.app.Fragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;

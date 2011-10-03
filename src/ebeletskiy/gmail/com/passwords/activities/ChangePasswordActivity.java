@@ -1,5 +1,7 @@
-package ebeletskiy.gmail.com.passwords;
+package ebeletskiy.gmail.com.passwords.activities;
 
+import ebeletskiy.gmail.com.passwords.R;
+import ebeletskiy.gmail.com.passwords.R.layout;
 import android.app.Activity;
 import android.os.Bundle;
 

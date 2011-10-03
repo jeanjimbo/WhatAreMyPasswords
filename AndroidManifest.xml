@@ -20,7 +20,7 @@
         android:icon="@drawable/icon"
         android:label="@string/appname"
         android:theme="@android:style/Theme.Holo.Light" >
-        <activity android:name=".LaunchActivityManager" >
+        <activity android:name=".activities.LaunchActivityManager" >
             <intent-filter >
                 <action android:name="android.intent.action.MAIN" />
 
@@ -28,22 +28,22 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="FirstTimeActivity"
+            android:name=".activities.FirstTimeActivity"
             android:windowSoftInputMode="adjustPan" >
         </activity>
         <activity
-            android:name="MainActivity"
+            android:name=".activities.MainActivity"
             android:windowSoftInputMode="adjustPan" >
         </activity>
         <activity
-            android:name="CheckPassword"
+            android:name=".activities.CheckPassword"
             android:windowSoftInputMode="adjustPan" >
         </activity>
         <activity android:name=".prefs.ApplicationPreferences" >
         </activity>
-        <activity android:name=".ChangePasswordActivity" >
+        <activity android:name=".activities.ChangePasswordActivity" >
         </activity>
-        <activity android:name=".GeneratePasswords" >
+        <activity android:name=".activities.GeneratePasswords" >
         </activity>
     </application>
 

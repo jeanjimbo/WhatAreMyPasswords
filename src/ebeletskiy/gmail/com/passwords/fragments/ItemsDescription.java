@@ -1,4 +1,4 @@
-package ebeletskiy.gmail.com.passwords;
+package ebeletskiy.gmail.com.passwords.fragments;
 
 import android.app.Activity;
 import android.app.Fragment;
@@ -14,6 +14,11 @@ import android.view.View.OnClickListener;
 import android.view.View.OnLongClickListener;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import ebeletskiy.gmail.com.passwords.R;
+import ebeletskiy.gmail.com.passwords.R.id;
+import ebeletskiy.gmail.com.passwords.R.layout;
+import ebeletskiy.gmail.com.passwords.R.menu;
+import ebeletskiy.gmail.com.passwords.R.string;
 import ebeletskiy.gmail.com.passwords.interfaces.DeleteItemListener;
 import ebeletskiy.gmail.com.passwords.interfaces.EditItemListener;
 import ebeletskiy.gmail.com.passwords.models.Ticket;

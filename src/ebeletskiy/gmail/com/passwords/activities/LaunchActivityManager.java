@@ -1,4 +1,4 @@
-package ebeletskiy.gmail.com.passwords;
+package ebeletskiy.gmail.com.passwords.activities;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -22,13 +22,11 @@ public class LaunchActivityManager extends Activity {
     }
 
     public void runMainActivity() {
-        Intent i = new Intent(this, MainActivity.class);
-        startActivity(i);
+        startActivity(new Intent(this, MainActivity.class));
     }
 
     public void runFirstTimeActivity() {
-        Intent i = new Intent(this, FirstTimeActivity.class);
-        startActivity(i);
+        startActivity(new Intent(this, FirstTimeActivity.class));
     }
 
 }

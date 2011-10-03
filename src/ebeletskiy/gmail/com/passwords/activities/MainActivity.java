@@ -1,4 +1,4 @@
-package ebeletskiy.gmail.com.passwords;
+package ebeletskiy.gmail.com.passwords.activities;
 
 import android.app.ActionBar;
 import android.app.Fragment;
@@ -10,6 +10,17 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import ebeletskiy.gmail.com.passwords.R;
+import ebeletskiy.gmail.com.passwords.R.anim;
+import ebeletskiy.gmail.com.passwords.R.drawable;
+import ebeletskiy.gmail.com.passwords.R.id;
+import ebeletskiy.gmail.com.passwords.R.layout;
+import ebeletskiy.gmail.com.passwords.R.menu;
+import ebeletskiy.gmail.com.passwords.fragments.EditItem;
+import ebeletskiy.gmail.com.passwords.fragments.EmptyRightFrag;
+import ebeletskiy.gmail.com.passwords.fragments.ItemsDescription;
+import ebeletskiy.gmail.com.passwords.fragments.ItemsList;
+import ebeletskiy.gmail.com.passwords.fragments.NewItem;
 import ebeletskiy.gmail.com.passwords.interfaces.AddNewItemListener;
 import ebeletskiy.gmail.com.passwords.interfaces.DeleteItemListener;
 import ebeletskiy.gmail.com.passwords.interfaces.EditItemListener;

@@ -1,4 +1,4 @@
-package ebeletskiy.gmail.com.passwords;
+package ebeletskiy.gmail.com.passwords.activities;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -7,6 +7,10 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import ebeletskiy.gmail.com.passwords.R;
+import ebeletskiy.gmail.com.passwords.R.id;
+import ebeletskiy.gmail.com.passwords.R.layout;
+import ebeletskiy.gmail.com.passwords.R.string;
 import ebeletskiy.gmail.com.passwords.utils.MyConfigs;
 import ebeletskiy.gmail.com.passwords.utils.ShowToast;
 
