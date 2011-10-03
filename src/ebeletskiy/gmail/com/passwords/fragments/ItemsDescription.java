@@ -171,12 +171,24 @@ public class ItemsDescription extends Fragment {
             showAlertDialog();
             break;
         case R.id.edit_item:
-            mEditItemListener.loadEditItem(mTicket);
+            mEditItemListener.loadEditItem(createTicket());
         default:
             break;
         }
         return super.onOptionsItemSelected(item);
 
+    }
+    
+    public Ticket createTicket() {
+
+        Ticket mTicket = new Ticket();
+
+        mTicket.setTitle((mTitle.getText()).toString().trim());
+        mTicket.setLogin((mLogin.getText()).toString().trim());
+        mTicket.setPassword((mPassword.getText()).toString().trim());
+        mTicket.setNotes((mNotes.getText()).toString().trim());
+
+        return mTicket;
     }
 
     private void showAlertDialog() {

@@ -80,24 +80,23 @@ public class NewItem extends Fragment {
             public void onClick(View v) {
                 startActivityForResultLister.startNewActivityForResult(new Intent(getActivity(),
                         GeneratePasswords.class), MyConfigs.NEW_ITEM_PASSWORD_REQUEST_CODE);
-                // startActivityForResult(new Intent(getActivity(),
-                // GeneratePasswords.class), 15);
             }
         });
     }
 
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (MyConfigs.DEBUG) {
-            Log.i(TAG, "onActivityResult()");
-        }
-        if (requestCode == MyConfigs.NEW_ITEM_PASSWORD_REQUEST_CODE) {
-            if (data != null) {
-                password.setText(data.getStringExtra("password").toString());
-            }
-        }
-    }
+
+//    @Override
+//    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+//        super.onActivityResult(requestCode, resultCode, data);
+//        if (MyConfigs.DEBUG) {
+//            Log.i(TAG, "onActivityResult()");
+//        }
+//        if (requestCode == MyConfigs.NEW_ITEM_PASSWORD_REQUEST_CODE) {
+//            if (data != null) {
+//                password.setText(data.getStringExtra("password").toString());
+//            }
+//        }
+//    }
 
     public void initUI() {
         title = (EditText) getView().findViewById(R.id.et_title);
