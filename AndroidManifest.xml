@@ -9,14 +9,15 @@
         android:targetSdkVersion="11" />
 
     <supports-screens
+        android:largeScreens="false"
         android:normalScreens="false"
         android:smallScreens="false"
-        android:largeScreens="false"
         android:xlargeScreens="true" >
     </supports-screens>
 
     <application
         android:debuggable="false"
+        android:hardwareAccelerated="true"
         android:icon="@drawable/icon"
         android:label="@string/appname"
         android:theme="@android:style/Theme.Holo.Light" >
