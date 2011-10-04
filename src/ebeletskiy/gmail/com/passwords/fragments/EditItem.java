@@ -19,14 +19,17 @@ public class EditItem extends NewItem {
 
     private boolean mTitleChanged = false;
     private Ticket mTicket;
+    private int id;
 
     private String mBeforeTextChanged;
     private String mAfterTextChanged;
 
-    public EditItem() {};
+    public EditItem() {
+    };
 
     public EditItem(Ticket ticket) {
         this.mTicket = ticket;
+        id = ticket.getId();
     }
 
     @Override
@@ -35,8 +38,8 @@ public class EditItem extends NewItem {
 
         if (savedInstanceState != null) {
             mBeforeTextChanged = savedInstanceState.getString("beforeTextChanged");
+            id = savedInstanceState.getInt("id");
         }
-
     }
 
     @Override
@@ -44,7 +47,6 @@ public class EditItem extends NewItem {
         super.onResume();
         mBeforeTextChanged = title.getText().toString().trim();
         title.addTextChangedListener(textWatcherListener);
-        Log.i(TAG, "BeforeTextChanged in onResume() = " + title.getText().toString().trim());
     }
 
     @Override
@@ -64,9 +66,6 @@ public class EditItem extends NewItem {
         switch (item.getItemId()) {
         case R.id.save_item:
 
-            if (MyConfigs.DEBUG) {
-                Log.i(TAG, "onOptionsItemSelected(): mTitleChanged = " + mTitleChanged);
-            }
             if (mTitleChanged) {
 
                 if (isDuplicate(title.getText().toString())) {
@@ -103,13 +102,13 @@ public class EditItem extends NewItem {
     }
 
     public Ticket createTicket() {
-
         Ticket mTicket = new Ticket();
-
+        
         mTicket.setTitle((title.getText()).toString().trim());
         mTicket.setLogin((login.getText()).toString().trim());
         mTicket.setPassword((password.getText()).toString().trim());
         mTicket.setNotes((notes.getText()).toString().trim());
+        mTicket.setId(id);
 
         return mTicket;
     }
@@ -118,6 +117,7 @@ public class EditItem extends NewItem {
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         outState.putString("beforeTextChanged", mBeforeTextChanged);
+        outState.putInt("id", id);
     }
 
     TextWatcher textWatcherListener = new TextWatcher() {

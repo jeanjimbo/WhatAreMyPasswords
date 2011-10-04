@@ -5,6 +5,7 @@ import android.app.Fragment;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.method.PasswordTransformationMethod;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -15,11 +16,6 @@ import android.view.View.OnLongClickListener;
 import android.view.ViewGroup;
 import android.widget.TextView;
 import ebeletskiy.gmail.com.passwords.R;
-import ebeletskiy.gmail.com.passwords.R.id;
-import ebeletskiy.gmail.com.passwords.R.layout;
-import ebeletskiy.gmail.com.passwords.R.menu;
-import ebeletskiy.gmail.com.passwords.R.string;
-import ebeletskiy.gmail.com.passwords.interfaces.DeleteItemListener;
 import ebeletskiy.gmail.com.passwords.interfaces.EditItemListener;
 import ebeletskiy.gmail.com.passwords.models.Ticket;
 import ebeletskiy.gmail.com.passwords.utils.Clipboard;
@@ -35,6 +31,7 @@ public class ItemsDescription extends Fragment {
     private boolean mPasswordShown = true;
 
     private Ticket mTicket;
+    private int id;
     private TextView mTitle, mLogin, mPassword, mNotes;
     private DBHelper mDbHelper;
     private EditItemListener mEditItemListener;
@@ -50,6 +47,7 @@ public class ItemsDescription extends Fragment {
         }
 
         this.mTicket = ticket;
+        id = ticket.getId();
     }
 
     @Override
@@ -85,6 +83,7 @@ public class ItemsDescription extends Fragment {
             mLogin.setText((String) savedInstanceState.get("mLogin"));
             mPassword.setText((String) savedInstanceState.get("mPassword"));
             mNotes.setText((String) savedInstanceState.get("mNotes"));
+            id = savedInstanceState.getInt("mId");
         }
 
         mPassword.setOnLongClickListener(longClickListener);
@@ -93,9 +92,10 @@ public class ItemsDescription extends Fragment {
         applyFonts();
         showTip();
     }
-    
+
     public void showTip() {
-        SharedPreferences sharedPreferences = getActivity().getSharedPreferences(MyConfigs.PREFS_NAME, 0);
+        SharedPreferences sharedPreferences = getActivity().getSharedPreferences(
+                MyConfigs.PREFS_NAME, 0);
         int result = sharedPreferences.getInt(MyConfigs.FIRST_ITEM_DESCRIPTION_OPENED, 0);
         if (result == 0) {
             ShowToast.showToast(getActivity(),
@@ -178,15 +178,15 @@ public class ItemsDescription extends Fragment {
         return super.onOptionsItemSelected(item);
 
     }
-    
+
     public Ticket createTicket() {
-
         Ticket mTicket = new Ticket();
-
+        
         mTicket.setTitle((mTitle.getText()).toString().trim());
         mTicket.setLogin((mLogin.getText()).toString().trim());
         mTicket.setPassword((mPassword.getText()).toString().trim());
         mTicket.setNotes((mNotes.getText()).toString().trim());
+        mTicket.setId(id);
 
         return mTicket;
     }
@@ -201,6 +201,7 @@ public class ItemsDescription extends Fragment {
         outState.putString("mLogin", mLogin.getText().toString());
         outState.putString("mPassword", mPassword.getText().toString());
         outState.putString("mNotes", mNotes.getText().toString());
+        outState.putInt("mId", id);
     }
 
     private void initUI() {
