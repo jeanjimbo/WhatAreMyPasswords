@@ -40,8 +40,8 @@
     <!-- Menu new item -->
     <string name="save_item">Save Item</string>
     <string name="sure_you_want_to_delete">Are you sure you want to delete the item?</string>
-    <string name="yes">yes</string>
-    <string name="no">no</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
     <string name="item_has_been_deleted">Item has been deleted.</string>
     <string name="item_already_exists">The item with a such name already exists.</string>
     <string name="fill_the_title">Please fill the title.</string>
