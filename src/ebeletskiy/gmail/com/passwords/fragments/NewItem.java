@@ -26,7 +26,7 @@ import ebeletskiy.gmail.com.passwords.utils.MyConfigs;
 import ebeletskiy.gmail.com.passwords.utils.ShowToast;
 
 public class NewItem extends Fragment {
-    private static final String TAG = "NewItem.class";
+    private static final String TAG = "NewItem.java";
 
     private boolean menuWasCreated = false;
 
@@ -80,18 +80,15 @@ public class NewItem extends Fragment {
     }
 
 
-//    @Override
-//    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-//        super.onActivityResult(requestCode, resultCode, data);
-//        if (MyConfigs.DEBUG) {
-//            Log.i(TAG, "onActivityResult()");
-//        }
-//        if (requestCode == MyConfigs.NEW_ITEM_PASSWORD_REQUEST_CODE) {
-//            if (data != null) {
-//                password.setText(data.getStringExtra("password").toString());
-//            }
-//        }
-//    }
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == MyConfigs.NEW_ITEM_PASSWORD_REQUEST_CODE) {
+            if (data != null) {
+                password.setText(data.getStringExtra("password").toString());
+            }
+        }
+    }
 
     public void initUI() {
         title = (EditText) getView().findViewById(R.id.et_title);
