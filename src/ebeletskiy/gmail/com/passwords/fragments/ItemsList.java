@@ -109,7 +109,7 @@ public class ItemsList extends ListFragment {
         Ticket ticket = DataConverter.convertToTicket(cursor);
 
         if (mItemClickListener != null) {
-            mItemClickListener.itemClicked(ticket);
+            mItemClickListener.ticketFromItemsListClicked(ticket);
         }
     }
 

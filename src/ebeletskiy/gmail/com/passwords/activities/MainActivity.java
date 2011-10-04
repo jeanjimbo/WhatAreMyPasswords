@@ -105,10 +105,10 @@ public class MainActivity extends ParentActivity implements ListItemClickListene
         editor.putBoolean(MyConfigs.FIRST_RUN_MAIN, false).commit();
     }
 
-    private void addEmptyFragment() {
-        Fragment fg = new EmptyRightFrag();
-        getFragmentManager().beginTransaction().add(R.id.right_frag, fg).commit();
-    }
+//    private void addEmptyFragment() {
+//        Fragment fg = new EmptyRightFrag();
+//        getFragmentManager().beginTransaction().add(R.id.right_frag, fg).commit();
+//    }
 
     private void initActionBar() {
         ActionBar actionBar = getActionBar();
@@ -117,7 +117,7 @@ public class MainActivity extends ParentActivity implements ListItemClickListene
     }
 
     @Override
-    public void itemClicked(Ticket ticket) {
+    public void ticketFromItemsListClicked(Ticket ticket) {
         Fragment newFragment = new ItemsDescription(ticket);
         loadRightFragment(newFragment, false);
     }
