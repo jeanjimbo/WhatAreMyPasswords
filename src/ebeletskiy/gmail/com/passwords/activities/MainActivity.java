@@ -50,7 +50,7 @@ public class MainActivity extends ParentActivity implements ListItemClickListene
 
         initActionBar();
         if (savedInstanceState == null) {
-            loadRightFragment(new EmptyRightFrag(), false);
+            loadRightFragment(new EmptyRightFrag(), false, false);
         }
 
         ((ItemsList) getFragmentManager().findFragmentById(R.id.left_frag))
@@ -105,11 +105,6 @@ public class MainActivity extends ParentActivity implements ListItemClickListene
         editor.putBoolean(MyConfigs.FIRST_RUN_MAIN, false).commit();
     }
 
-//    private void addEmptyFragment() {
-//        Fragment fg = new EmptyRightFrag();
-//        getFragmentManager().beginTransaction().add(R.id.right_frag, fg).commit();
-//    }
-
     private void initActionBar() {
         ActionBar actionBar = getActionBar();
         actionBar.setBackgroundDrawable(getResources()
@@ -119,13 +114,13 @@ public class MainActivity extends ParentActivity implements ListItemClickListene
     @Override
     public void ticketFromItemsListClicked(Ticket ticket) {
         Fragment newFragment = new ItemsDescription(ticket);
-        loadRightFragment(newFragment, false);
+        loadRightFragment(newFragment, false, true);
     }
 
     @Override
     public void onAddNewItem() {
         Fragment newFragment = new NewItem();
-        loadRightFragment(newFragment, true);
+        loadRightFragment(newFragment, true, true);
     }
 
     @Override
@@ -133,7 +128,7 @@ public class MainActivity extends ParentActivity implements ListItemClickListene
         refreshList();
 
         Fragment newFragment = new EmptyRightFrag();
-        loadRightFragment(newFragment, true);
+        loadRightFragment(newFragment, true, true);
     }
 
     @Override
@@ -141,25 +136,28 @@ public class MainActivity extends ParentActivity implements ListItemClickListene
         refreshList();
 
         Fragment newFragment = new EmptyRightFrag();
-        loadRightFragment(newFragment, false);
+        loadRightFragment(newFragment, false, true);
     }
 
     @Override
     public void loadEditItem(Ticket ticket) {
         Fragment newFragment = new EditItem(ticket);
-        loadRightFragment(newFragment, true);
+        loadRightFragment(newFragment, true, true);
     }
 
     private void refreshList() {
         ((ItemsList) getFragmentManager().findFragmentById(R.id.left_frag)).refresh();
     }
 
-    private void loadRightFragment(Fragment fragment, boolean animation) {
+    private void loadRightFragment(Fragment fragment, boolean animation, boolean addToBackStackFlag) {
         FragmentTransaction transaction = getFragmentManager().beginTransaction();
         if (animation) {
             transaction.setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_right);
         }
         transaction.replace(R.id.right_frag, fragment);
+        if (addToBackStackFlag) {
+            transaction.addToBackStack(null);
+        }
         transaction.commit();
     }
 
@@ -182,7 +180,6 @@ public class MainActivity extends ParentActivity implements ListItemClickListene
                 Log.i(TAG, "onOptionsItemSelected(): R.id.show_preference selected.");
             }
             startNewActivity(new Intent(this, ApplicationPreferences.class));
-            // startActivity(new Intent(this, ApplicationPreferences.class));
             return true;
         default:
             return super.onOptionsItemSelected(item);
