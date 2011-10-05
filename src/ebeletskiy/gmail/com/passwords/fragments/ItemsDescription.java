@@ -59,31 +59,33 @@ public class ItemsDescription extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Log.i(TAG, "onCreate()");
         mDbHelper = new DBHelper(getActivity());
+        if (savedInstanceState != null) {
+            mTicket = new Ticket();
+            mTicket.setTitle(savedInstanceState.getString("mTitle"));
+            mTicket.setLogin(savedInstanceState.getString("mLogin"));
+            mTicket.setPassword(savedInstanceState.getString("mPassword"));
+            mTicket.setNotes(savedInstanceState.getString("mNotes"));
+        }
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        Log.i(TAG, "onCreateView()");
         return inflater.inflate(R.layout.items_description, container, false);
     }
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        Log.i(TAG, "onActivityCreated()");
         initUI();
         applyFonts();
 
         if (!mMenuWasCreated) {
             setHasOptionsMenu(true);
             mMenuWasCreated = true;
-        }
-
-        if (savedInstanceState != null) {
-            mTitle.setText((String) savedInstanceState.get("mTitle"));
-            mLogin.setText((String) savedInstanceState.get("mLogin"));
-            mPassword.setText((String) savedInstanceState.get("mPassword"));
-            mNotes.setText((String) savedInstanceState.get("mNotes"));
-            id = savedInstanceState.getInt("mId");
         }
 
         mPassword.setOnLongClickListener(longClickListener);
@@ -181,7 +183,7 @@ public class ItemsDescription extends Fragment {
 
     public Ticket createTicket() {
         Ticket mTicket = new Ticket();
-        
+
         mTicket.setTitle((mTitle.getText()).toString().trim());
         mTicket.setLogin((mLogin.getText()).toString().trim());
         mTicket.setPassword((mPassword.getText()).toString().trim());
@@ -197,14 +199,19 @@ public class ItemsDescription extends Fragment {
 
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        outState.putString("mTitle", mTitle.getText().toString());
-        outState.putString("mLogin", mLogin.getText().toString());
-        outState.putString("mPassword", mPassword.getText().toString());
-        outState.putString("mNotes", mNotes.getText().toString());
+        Log.i(TAG, "onSaveInstanceState()");
+        if (mTicket != null) {
+            outState.putString("mTitle", mTicket.getTitle());
+            outState.putString("mLogin", mTicket.getLogin());
+            outState.putString("mPassword", mTicket.getPassword());
+            outState.putString("mNotes", mTicket.getNotes());
+        }
         outState.putInt("mId", id);
+
     }
 
     private void initUI() {
+        Log.i(TAG, "initUI()");
         mTitle = (TextView) getView().findViewById(R.id.tv_title);
         mLogin = (TextView) getView().findViewById(R.id.tv_login_data);
         mPassword = (TextView) getView().findViewById(R.id.tv_password_data);
@@ -220,6 +227,7 @@ public class ItemsDescription extends Fragment {
 
     public void onDestroy() {
         super.onDestroy();
+        Log.i(TAG, "onDestroy()");
         if (mDbHelper != null) {
             mDbHelper.close();
         }
