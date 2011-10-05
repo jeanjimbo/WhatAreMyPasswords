@@ -1,4 +1,4 @@
-package ebeletskiy.gmail.com.passwords;
+package ebeletskiy.gmail.com.passwords.fragments;
 
 import android.app.Activity;
 import android.app.ListFragment;
@@ -6,6 +6,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.ActionMode;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -18,16 +19,17 @@ import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.CursorAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+import ebeletskiy.gmail.com.passwords.R;
 import ebeletskiy.gmail.com.passwords.interfaces.AddNewItemListener;
-import ebeletskiy.gmail.com.passwords.interfaces.DeleteItemListener;
 import ebeletskiy.gmail.com.passwords.interfaces.EditItemListener;
+import ebeletskiy.gmail.com.passwords.interfaces.HideAddMenuItem;
 import ebeletskiy.gmail.com.passwords.interfaces.ListItemClickListener;
 import ebeletskiy.gmail.com.passwords.models.Ticket;
 import ebeletskiy.gmail.com.passwords.utils.DBHelper;
 import ebeletskiy.gmail.com.passwords.utils.DataConverter;
 import ebeletskiy.gmail.com.passwords.utils.MyCustomAlertDialog;
 
-public class ItemsList extends ListFragment {
+public class ItemsList extends ListFragment implements HideAddMenuItem {
     private static final String TAG = "ItemsList";
     private boolean menuWasCreated = false;
 
@@ -36,11 +38,11 @@ public class ItemsList extends ListFragment {
     private Cursor mCursor;
     private ListItemClickListener mItemClickListener;
     private AddNewItemListener mNewItemBtnListener;
-    private DeleteItemListener mDeleteListener;
     private EditItemListener mEditItemListener;
     private Ticket mTicket;
     private View mView;
     private ActionMode mCurrentActionMode;
+    private boolean isAddMenutItemVisible;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -61,6 +63,10 @@ public class ItemsList extends ListFragment {
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        
+        if (savedInstanceState != null) {
+            isAddMenutItemVisible = savedInstanceState.getBoolean("isAddMenutItemVisible");
+        }
 
         getListView().setOnItemLongClickListener(new OnItemLongClickListener() {
 
@@ -88,7 +94,6 @@ public class ItemsList extends ListFragment {
 
         mItemClickListener = (ListItemClickListener) activity;
         mNewItemBtnListener = (AddNewItemListener) activity;
-        mDeleteListener = (DeleteItemListener) activity;
         mEditItemListener = (EditItemListener) activity;
     }
 
@@ -104,7 +109,7 @@ public class ItemsList extends ListFragment {
         Ticket ticket = DataConverter.convertToTicket(cursor);
 
         if (mItemClickListener != null) {
-            mItemClickListener.itemClicked(ticket);
+            mItemClickListener.ticketFromItemsListClicked(ticket);
         }
     }
 
@@ -194,6 +199,14 @@ public class ItemsList extends ListFragment {
     }
 
     @Override
+    public void onPrepareOptionsMenu(Menu menu) {
+        super.onPrepareOptionsMenu(menu);
+        Log.i(TAG, "onPrepareOptionsMenu");
+        MenuItem addMenuItem = menu.getItem(1);
+        addMenuItem.setVisible(isAddMenutItemVisible);
+    }
+
+    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
 
         switch (item.getItemId()) {
@@ -255,5 +268,16 @@ public class ItemsList extends ListFragment {
         if (mDbHelper != null) {
             mDbHelper.close();
         }
+    }
+
+    @Override
+    public void isAddMenuItemVisible(boolean value) {
+        isAddMenutItemVisible = value;
+    }
+    
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putBoolean("isAddMenutItemVisible", isAddMenutItemVisible);
     }
 }

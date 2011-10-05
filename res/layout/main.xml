@@ -9,7 +9,7 @@
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="1"
-        class="ebeletskiy.gmail.com.passwords.ItemsList" />
+        class="ebeletskiy.gmail.com.passwords.fragments.ItemsList" />
 
     <FrameLayout
         android:id="@+id/right_frag"

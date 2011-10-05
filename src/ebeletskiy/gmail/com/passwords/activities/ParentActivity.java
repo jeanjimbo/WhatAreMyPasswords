@@ -1,4 +1,4 @@
-package ebeletskiy.gmail.com.passwords;
+package ebeletskiy.gmail.com.passwords.activities;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -7,6 +7,9 @@ import android.content.SharedPreferences.Editor;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
+import ebeletskiy.gmail.com.passwords.R;
+import ebeletskiy.gmail.com.passwords.R.id;
+import ebeletskiy.gmail.com.passwords.fragments.NewItem;
 import ebeletskiy.gmail.com.passwords.interfaces.StartNewActivity;
 import ebeletskiy.gmail.com.passwords.interfaces.StartNewActivityForResult;
 import ebeletskiy.gmail.com.passwords.utils.MyConfigs;

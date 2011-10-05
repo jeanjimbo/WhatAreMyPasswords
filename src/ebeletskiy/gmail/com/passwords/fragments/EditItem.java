@@ -1,20 +1,25 @@
-package ebeletskiy.gmail.com.passwords;
+package ebeletskiy.gmail.com.passwords.fragments;
 
 import android.content.Context;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.MenuItem;
+import android.view.ViewGroup.MarginLayoutParams;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
+import ebeletskiy.gmail.com.passwords.R;
 import ebeletskiy.gmail.com.passwords.models.Ticket;
+import ebeletskiy.gmail.com.passwords.utils.MyConfigs;
 import ebeletskiy.gmail.com.passwords.utils.ShowToast;
 
 public class EditItem extends NewItem {
-    private static final String TAG = "EditItem";
+    private static final String TAG = "EditItem.java";
 
     private boolean mTitleChanged = false;
     private Ticket mTicket;
+    private int id;
 
     private String mBeforeTextChanged;
     private String mAfterTextChanged;
@@ -24,44 +29,29 @@ public class EditItem extends NewItem {
 
     public EditItem(Ticket ticket) {
         this.mTicket = ticket;
+        id = ticket.getId();
     }
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        initUIelements();
-        mBeforeTextChanged = title.getText().toString();
 
-        title.addTextChangedListener(new TextWatcher() {
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-            }
-
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-                mAfterTextChanged = title.getText().toString();
-
-                if (mBeforeTextChanged.equals(mAfterTextChanged)) {
-                    mTitleChanged = false;
-                } else {
-                    mTitleChanged = true;
-                }
-
-            }
-        });
+        if (savedInstanceState != null) {
+            mBeforeTextChanged = savedInstanceState.getString("beforeTextChanged");
+            id = savedInstanceState.getInt("id");
+        }
     }
 
-    private void initUIelements() {
-        title = (EditText) getView().findViewById(R.id.et_title);
-        login = (EditText) getView().findViewById(R.id.et_login_data);
-        password = (EditText) getView().findViewById(R.id.et_password_data);
-        notes = (EditText) getView().findViewById(R.id.et_notes_data);
+    @Override
+    public void onResume() {
+        super.onResume();
+        mBeforeTextChanged = title.getText().toString().trim();
+        title.addTextChangedListener(textWatcherListener);
+    }
 
+    @Override
+    public void initUI() {
+        super.initUI();
         if (mTicket != null) {
             title.setText(mTicket.getTitle());
             login.setText(mTicket.getLogin());
@@ -101,7 +91,8 @@ public class EditItem extends NewItem {
         dbHelper.updateRow(createTicket());
         hideKeyboard();
         saveItemListener.saveItem();
-        ShowToast.showToast(getActivity(), "Ticket has been updated.");
+        ShowToast.showToast(getActivity(),
+                getActivity().getString(R.string.ticket_has_been_updated_));
     }
 
     private void hideKeyboard() {
@@ -111,12 +102,42 @@ public class EditItem extends NewItem {
     }
 
     public Ticket createTicket() {
-
+        Ticket mTicket = new Ticket();
+        
         mTicket.setTitle((title.getText()).toString().trim());
         mTicket.setLogin((login.getText()).toString().trim());
         mTicket.setPassword((password.getText()).toString().trim());
         mTicket.setNotes((notes.getText()).toString().trim());
+        mTicket.setId(id);
 
         return mTicket;
     }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putString("beforeTextChanged", mBeforeTextChanged);
+        outState.putInt("id", id);
+    }
+
+    TextWatcher textWatcherListener = new TextWatcher() {
+
+        @Override
+        public void onTextChanged(CharSequence s, int start, int before, int count) {
+        }
+
+        @Override
+        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+        }
+
+        @Override
+        public void afterTextChanged(Editable s) {
+            mAfterTextChanged = title.getText().toString().trim();
+            if (mBeforeTextChanged.equals(mAfterTextChanged)) {
+                mTitleChanged = false;
+            } else {
+                mTitleChanged = true;
+            }
+        }
+    };
 }

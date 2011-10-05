@@ -1,4 +1,4 @@
-package ebeletskiy.gmail.com.passwords;
+package ebeletskiy.gmail.com.passwords.fragments;
 
 import android.app.Activity;
 import android.app.Fragment;
@@ -6,7 +6,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -17,6 +16,8 @@ import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import ebeletskiy.gmail.com.passwords.R;
+import ebeletskiy.gmail.com.passwords.activities.GeneratePasswords;
 import ebeletskiy.gmail.com.passwords.interfaces.SaveItemListener;
 import ebeletskiy.gmail.com.passwords.interfaces.StartNewActivityForResult;
 import ebeletskiy.gmail.com.passwords.models.Ticket;
@@ -25,7 +26,7 @@ import ebeletskiy.gmail.com.passwords.utils.MyConfigs;
 import ebeletskiy.gmail.com.passwords.utils.ShowToast;
 
 public class NewItem extends Fragment {
-    private static final String TAG = "NewItem.class";
+    private static final String TAG = "NewItem.java";
 
     private boolean menuWasCreated = false;
 
@@ -74,18 +75,14 @@ public class NewItem extends Fragment {
             public void onClick(View v) {
                 startActivityForResultLister.startNewActivityForResult(new Intent(getActivity(),
                         GeneratePasswords.class), MyConfigs.NEW_ITEM_PASSWORD_REQUEST_CODE);
-                // startActivityForResult(new Intent(getActivity(),
-                // GeneratePasswords.class), 15);
             }
         });
     }
 
+
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (MyConfigs.DEBUG) {
-            Log.i(TAG, "onActivityResult()");
-        }
         if (requestCode == MyConfigs.NEW_ITEM_PASSWORD_REQUEST_CODE) {
             if (data != null) {
                 password.setText(data.getStringExtra("password").toString());

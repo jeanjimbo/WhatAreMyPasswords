@@ -1,10 +1,11 @@
-package ebeletskiy.gmail.com.passwords;
+package ebeletskiy.gmail.com.passwords.fragments;
 
 import android.app.Activity;
 import android.app.Fragment;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.method.PasswordTransformationMethod;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -14,7 +15,7 @@ import android.view.View.OnClickListener;
 import android.view.View.OnLongClickListener;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import ebeletskiy.gmail.com.passwords.interfaces.DeleteItemListener;
+import ebeletskiy.gmail.com.passwords.R;
 import ebeletskiy.gmail.com.passwords.interfaces.EditItemListener;
 import ebeletskiy.gmail.com.passwords.models.Ticket;
 import ebeletskiy.gmail.com.passwords.utils.Clipboard;
@@ -30,6 +31,7 @@ public class ItemsDescription extends Fragment {
     private boolean mPasswordShown = true;
 
     private Ticket mTicket;
+    private int id;
     private TextView mTitle, mLogin, mPassword, mNotes;
     private DBHelper mDbHelper;
     private EditItemListener mEditItemListener;
@@ -45,6 +47,7 @@ public class ItemsDescription extends Fragment {
         }
 
         this.mTicket = ticket;
+        id = ticket.getId();
     }
 
     @Override
@@ -56,17 +59,27 @@ public class ItemsDescription extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Log.i(TAG, "onCreate()");
         mDbHelper = new DBHelper(getActivity());
+        if (savedInstanceState != null) {
+            mTicket = new Ticket();
+            mTicket.setTitle(savedInstanceState.getString("mTitle"));
+            mTicket.setLogin(savedInstanceState.getString("mLogin"));
+            mTicket.setPassword(savedInstanceState.getString("mPassword"));
+            mTicket.setNotes(savedInstanceState.getString("mNotes"));
+        }
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        Log.i(TAG, "onCreateView()");
         return inflater.inflate(R.layout.items_description, container, false);
     }
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        Log.i(TAG, "onActivityCreated()");
         initUI();
         applyFonts();
 
@@ -75,22 +88,16 @@ public class ItemsDescription extends Fragment {
             mMenuWasCreated = true;
         }
 
-        if (savedInstanceState != null) {
-            mTitle.setText((String) savedInstanceState.get("mTitle"));
-            mLogin.setText((String) savedInstanceState.get("mLogin"));
-            mPassword.setText((String) savedInstanceState.get("mPassword"));
-            mNotes.setText((String) savedInstanceState.get("mNotes"));
-        }
-
         mPassword.setOnLongClickListener(longClickListener);
         mPassword.setOnClickListener(shortClickListener);
 
         applyFonts();
         showTip();
     }
-    
+
     public void showTip() {
-        SharedPreferences sharedPreferences = getActivity().getSharedPreferences(MyConfigs.PREFS_NAME, 0);
+        SharedPreferences sharedPreferences = getActivity().getSharedPreferences(
+                MyConfigs.PREFS_NAME, 0);
         int result = sharedPreferences.getInt(MyConfigs.FIRST_ITEM_DESCRIPTION_OPENED, 0);
         if (result == 0) {
             ShowToast.showToast(getActivity(),
@@ -166,12 +173,24 @@ public class ItemsDescription extends Fragment {
             showAlertDialog();
             break;
         case R.id.edit_item:
-            mEditItemListener.loadEditItem(mTicket);
+            mEditItemListener.loadEditItem(createTicket());
         default:
             break;
         }
         return super.onOptionsItemSelected(item);
 
+    }
+
+    public Ticket createTicket() {
+        Ticket mTicket = new Ticket();
+
+        mTicket.setTitle((mTitle.getText()).toString().trim());
+        mTicket.setLogin((mLogin.getText()).toString().trim());
+        mTicket.setPassword((mPassword.getText()).toString().trim());
+        mTicket.setNotes((mNotes.getText()).toString().trim());
+        mTicket.setId(id);
+
+        return mTicket;
     }
 
     private void showAlertDialog() {
@@ -180,13 +199,19 @@ public class ItemsDescription extends Fragment {
 
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        outState.putString("mTitle", mTitle.getText().toString());
-        outState.putString("mLogin", mLogin.getText().toString());
-        outState.putString("mPassword", mPassword.getText().toString());
-        outState.putString("mNotes", mNotes.getText().toString());
+        Log.i(TAG, "onSaveInstanceState()");
+        if (mTicket != null) {
+            outState.putString("mTitle", mTicket.getTitle());
+            outState.putString("mLogin", mTicket.getLogin());
+            outState.putString("mPassword", mTicket.getPassword());
+            outState.putString("mNotes", mTicket.getNotes());
+        }
+        outState.putInt("mId", id);
+
     }
 
     private void initUI() {
+        Log.i(TAG, "initUI()");
         mTitle = (TextView) getView().findViewById(R.id.tv_title);
         mLogin = (TextView) getView().findViewById(R.id.tv_login_data);
         mPassword = (TextView) getView().findViewById(R.id.tv_password_data);
@@ -202,6 +227,7 @@ public class ItemsDescription extends Fragment {
 
     public void onDestroy() {
         super.onDestroy();
+        Log.i(TAG, "onDestroy()");
         if (mDbHelper != null) {
             mDbHelper.close();
         }

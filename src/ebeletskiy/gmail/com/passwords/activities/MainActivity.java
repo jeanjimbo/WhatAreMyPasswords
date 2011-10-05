@@ -1,4 +1,4 @@
-package ebeletskiy.gmail.com.passwords;
+package ebeletskiy.gmail.com.passwords.activities;
 
 import android.app.ActionBar;
 import android.app.Fragment;
@@ -10,9 +10,16 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import ebeletskiy.gmail.com.passwords.R;
+import ebeletskiy.gmail.com.passwords.fragments.EditItem;
+import ebeletskiy.gmail.com.passwords.fragments.EmptyRightFrag;
+import ebeletskiy.gmail.com.passwords.fragments.ItemsDescription;
+import ebeletskiy.gmail.com.passwords.fragments.ItemsList;
+import ebeletskiy.gmail.com.passwords.fragments.NewItem;
 import ebeletskiy.gmail.com.passwords.interfaces.AddNewItemListener;
 import ebeletskiy.gmail.com.passwords.interfaces.DeleteItemListener;
 import ebeletskiy.gmail.com.passwords.interfaces.EditItemListener;
+import ebeletskiy.gmail.com.passwords.interfaces.HideAddMenuItem;
 import ebeletskiy.gmail.com.passwords.interfaces.ListItemClickListener;
 import ebeletskiy.gmail.com.passwords.interfaces.SaveItemListener;
 import ebeletskiy.gmail.com.passwords.models.Ticket;
@@ -21,6 +28,7 @@ import ebeletskiy.gmail.com.passwords.utils.MyConfigs;
 
 public class MainActivity extends ParentActivity implements ListItemClickListener,
         AddNewItemListener, SaveItemListener, DeleteItemListener, EditItemListener {
+    private HideAddMenuItem hideAddMenuItemListener;
 
     private static final String TAG = "Main Activity";
     public static final int LAYOUT = R.layout.main;
@@ -37,9 +45,10 @@ public class MainActivity extends ParentActivity implements ListItemClickListene
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        hideAddMenuItemListener = (ItemsList) getFragmentManager().findFragmentById(R.id.left_frag);
         initActionBar();
         if (savedInstanceState == null) {
-            addEmptyFragment();
+            loadRightFragment(new EmptyRightFrag(), false, false);
         }
 
         ((ItemsList) getFragmentManager().findFragmentById(R.id.left_frag))
@@ -63,7 +72,7 @@ public class MainActivity extends ParentActivity implements ListItemClickListene
         }
 
         if (mSharedPreferences.getBoolean(MyConfigs.FIRST_RUN_MAIN, true)) {
-            updateSharedPreferences();
+            markAppAsLaunched();
         } else {
             checkPassword = mSharedPreferences.getBoolean(MyConfigs.ORIENTATION_CHANGE, false);
 
@@ -88,16 +97,10 @@ public class MainActivity extends ParentActivity implements ListItemClickListene
         setInvokedByNewActivityRun(false);
     }
 
-    private void updateSharedPreferences() {
+    private void markAppAsLaunched() {
         SharedPreferences sharedPreferences = getSharedPreferences(MyConfigs.PREFS_NAME, 0);
         SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putBoolean(MyConfigs.FIRST_RUN_MAIN, false);
-        editor.commit();
-    }
-
-    private void addEmptyFragment() {
-        Fragment fg = new EmptyRightFrag();
-        getFragmentManager().beginTransaction().add(R.id.right_frag, fg).commit();
+        editor.putBoolean(MyConfigs.FIRST_RUN_MAIN, false).commit();
     }
 
     private void initActionBar() {
@@ -107,15 +110,15 @@ public class MainActivity extends ParentActivity implements ListItemClickListene
     }
 
     @Override
-    public void itemClicked(Ticket ticket) {
+    public void ticketFromItemsListClicked(Ticket ticket) {
         Fragment newFragment = new ItemsDescription(ticket);
-        loadFragment(newFragment, false);
+        loadRightFragment(newFragment, false, true);
     }
 
     @Override
     public void onAddNewItem() {
         Fragment newFragment = new NewItem();
-        loadFragment(newFragment, true);
+        loadRightFragment(newFragment, true, true);
     }
 
     @Override
@@ -123,7 +126,7 @@ public class MainActivity extends ParentActivity implements ListItemClickListene
         refreshList();
 
         Fragment newFragment = new EmptyRightFrag();
-        loadFragment(newFragment, true);
+        loadRightFragment(newFragment, true, true);
     }
 
     @Override
@@ -131,25 +134,36 @@ public class MainActivity extends ParentActivity implements ListItemClickListene
         refreshList();
 
         Fragment newFragment = new EmptyRightFrag();
-        loadFragment(newFragment, false);
+        loadRightFragment(newFragment, false, true);
     }
 
     @Override
     public void loadEditItem(Ticket ticket) {
         Fragment newFragment = new EditItem(ticket);
-        loadFragment(newFragment, true);
+        loadRightFragment(newFragment, true, true);
     }
 
     private void refreshList() {
         ((ItemsList) getFragmentManager().findFragmentById(R.id.left_frag)).refresh();
     }
 
-    private void loadFragment(Fragment fragment, boolean animation) {
+    private void loadRightFragment(Fragment fragment, boolean animation, boolean addToBackStackFlag) {
+        Log.i(TAG, "loadRightFragment = " + fragment.getClass().toString());
         FragmentTransaction transaction = getFragmentManager().beginTransaction();
         if (animation) {
             transaction.setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_right);
         }
         transaction.replace(R.id.right_frag, fragment);
+        if (addToBackStackFlag) {
+            transaction.addToBackStack(null);
+        }
+        if (fragment instanceof EditItem || fragment instanceof NewItem) {
+            Log.i(TAG, "instanceof EditItem or NewItem = false");
+            hideAddMenuItemListener.isAddMenuItemVisible(false);
+        } else {
+            Log.i(TAG, "Not an instanceof EditItem or NewItem = true");
+            hideAddMenuItemListener.isAddMenuItemVisible(true);
+        }
         transaction.commit();
     }
 
@@ -172,7 +186,6 @@ public class MainActivity extends ParentActivity implements ListItemClickListene
                 Log.i(TAG, "onOptionsItemSelected(): R.id.show_preference selected.");
             }
             startNewActivity(new Intent(this, ApplicationPreferences.class));
-            // startActivity(new Intent(this, ApplicationPreferences.class));
             return true;
         default:
             return super.onOptionsItemSelected(item);
