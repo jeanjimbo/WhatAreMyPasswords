@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -36,6 +37,7 @@ public class ChangePassword extends Fragment {
         okButton.setOnClickListener(okButtonOnClickListener);
 
         secondPassword.addTextChangedListener(textWatcher);
+        secondPassword.setOnKeyListener(onSoftKeyboardDonePress);
     }
 
     private TextWatcher textWatcher = new TextWatcher() {
@@ -55,23 +57,37 @@ public class ChangePassword extends Fragment {
                 newPassword = firstPassword.getText().toString().trim();
                 okButton.setEnabled(true);
             } else {
-//                ShowToast.showToast(getActivity(),
-//                        getResources().getString(R.string.fill_both_fields_passwords_match));
                 okButton.setEnabled(false);
             }
         }
     };
+    
+    private void processPasswordChange() {
+        SharedPreferences sharedPreferences = getActivity().getSharedPreferences(
+                MyConfigs.PREFS_NAME, 0);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString(MyConfigs.USER_PASSWORD, newPassword);
+        editor.commit();
+        getActivity().onBackPressed();
+    }
 
     private OnClickListener okButtonOnClickListener = new OnClickListener() {
 
         @Override
         public void onClick(View v) {
-            SharedPreferences sharedPreferences = getActivity().getSharedPreferences(
-                    MyConfigs.PREFS_NAME, 0);
-            SharedPreferences.Editor editor = sharedPreferences.edit();
-            editor.putString(MyConfigs.USER_PASSWORD, newPassword);
-            editor.commit();
-            getActivity().onBackPressed();
+           processPasswordChange();
+        }
+    };
+    
+    public View.OnKeyListener onSoftKeyboardDonePress = new View.OnKeyListener() {
+        public boolean onKey(View v, int keyCode, KeyEvent event) {
+            if (event.getKeyCode() == KeyEvent.KEYCODE_ENTER) {
+                if (KeyEvent.ACTION_UP == event.getAction()) {
+                    processPasswordChange();
+                    return true;
+                }
+            }
+            return false;
         }
     };
 

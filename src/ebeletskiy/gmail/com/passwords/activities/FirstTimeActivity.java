@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.Gravity;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -18,24 +19,31 @@ import ebeletskiy.gmail.com.passwords.utils.ShowToast;
 public class FirstTimeActivity extends Activity {
 
     private String mPassword;
+    private EditText edtPassword;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.first_time_screen);
+        edtPassword = (EditText) findViewById(R.id.edt_firsttimeactivity_second_field);
+        edtPassword.setOnKeyListener(onSoftKeyboardDonePress);
     }
-
+    
     public void onButtonClick(View v) {
+       processNewAccountCreation();
+    }
+    
+    private void processNewAccountCreation() {
         if (checkFields()) {
             savePassword();
-            updateSharedPreferences();
+            markAsAccountCreated();
             launchMainActivity();
         } else {
             ShowToast.showToast(this, getString(R.string.fill_both_fields_passwords_match));
         }
     }
 
-    private void updateSharedPreferences() {
+    private void markAsAccountCreated() {
         SharedPreferences sharedPreferences = getSharedPreferences(MyConfigs.PREFS_NAME, 0);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putBoolean(MyConfigs.FIRST_RUN, false);
@@ -73,4 +81,16 @@ public class FirstTimeActivity extends Activity {
             return false;
         }
     }
+    
+    public View.OnKeyListener onSoftKeyboardDonePress = new View.OnKeyListener() {
+        public boolean onKey(View v, int keyCode, KeyEvent event) {
+            if (event.getKeyCode() == KeyEvent.KEYCODE_ENTER) {
+                if (KeyEvent.ACTION_UP == event.getAction()) {
+                    processNewAccountCreation();
+                    return true;
+                }
+            }
+            return false;
+        }
+    };
 }
