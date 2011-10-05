@@ -11,11 +11,6 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import ebeletskiy.gmail.com.passwords.R;
-import ebeletskiy.gmail.com.passwords.R.anim;
-import ebeletskiy.gmail.com.passwords.R.drawable;
-import ebeletskiy.gmail.com.passwords.R.id;
-import ebeletskiy.gmail.com.passwords.R.layout;
-import ebeletskiy.gmail.com.passwords.R.menu;
 import ebeletskiy.gmail.com.passwords.fragments.EditItem;
 import ebeletskiy.gmail.com.passwords.fragments.EmptyRightFrag;
 import ebeletskiy.gmail.com.passwords.fragments.ItemsDescription;
@@ -24,6 +19,7 @@ import ebeletskiy.gmail.com.passwords.fragments.NewItem;
 import ebeletskiy.gmail.com.passwords.interfaces.AddNewItemListener;
 import ebeletskiy.gmail.com.passwords.interfaces.DeleteItemListener;
 import ebeletskiy.gmail.com.passwords.interfaces.EditItemListener;
+import ebeletskiy.gmail.com.passwords.interfaces.HideAddMenuItem;
 import ebeletskiy.gmail.com.passwords.interfaces.ListItemClickListener;
 import ebeletskiy.gmail.com.passwords.interfaces.SaveItemListener;
 import ebeletskiy.gmail.com.passwords.models.Ticket;
@@ -32,6 +28,7 @@ import ebeletskiy.gmail.com.passwords.utils.MyConfigs;
 
 public class MainActivity extends ParentActivity implements ListItemClickListener,
         AddNewItemListener, SaveItemListener, DeleteItemListener, EditItemListener {
+    private HideAddMenuItem hideAddMenuItemListener;
 
     private static final String TAG = "Main Activity";
     public static final int LAYOUT = R.layout.main;
@@ -48,6 +45,7 @@ public class MainActivity extends ParentActivity implements ListItemClickListene
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        hideAddMenuItemListener = (ItemsList) getFragmentManager().findFragmentById(R.id.left_frag);
         initActionBar();
         if (savedInstanceState == null) {
             loadRightFragment(new EmptyRightFrag(), false, false);
@@ -150,6 +148,7 @@ public class MainActivity extends ParentActivity implements ListItemClickListene
     }
 
     private void loadRightFragment(Fragment fragment, boolean animation, boolean addToBackStackFlag) {
+        Log.i(TAG, "loadRightFragment = " + fragment.getClass().toString());
         FragmentTransaction transaction = getFragmentManager().beginTransaction();
         if (animation) {
             transaction.setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_right);
@@ -157,6 +156,13 @@ public class MainActivity extends ParentActivity implements ListItemClickListene
         transaction.replace(R.id.right_frag, fragment);
         if (addToBackStackFlag) {
             transaction.addToBackStack(null);
+        }
+        if (fragment instanceof EditItem || fragment instanceof NewItem) {
+            Log.i(TAG, "instanceof EditItem or NewItem = false");
+            hideAddMenuItemListener.isAddMenuItemVisible(false);
+        } else {
+            Log.i(TAG, "Not an instanceof EditItem or NewItem = true");
+            hideAddMenuItemListener.isAddMenuItemVisible(true);
         }
         transaction.commit();
     }
