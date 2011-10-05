@@ -6,6 +6,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -69,16 +71,9 @@ public class NewItem extends Fragment {
         dbHelper = new DBHelper(getActivity());
         ticket = new Ticket();
         initUI();
-        btnGeneratePassword.setOnClickListener(new OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                startActivityForResultLister.startNewActivityForResult(new Intent(getActivity(),
-                        GeneratePasswords.class), MyConfigs.NEW_ITEM_PASSWORD_REQUEST_CODE);
-            }
-        });
+        notes.setOnKeyListener(onSoftKeyboardDonePress);
+        btnGeneratePassword.setOnClickListener(generatePasswordListener);
     }
-
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -142,21 +137,24 @@ public class NewItem extends Fragment {
 
         switch (item.getItemId()) {
         case R.id.save_item:
-
-            if (checkFields()) {
-                if (!isDuplicate((title.getText()).toString().trim())) {
-                    createNewItem();
-                    hideKeyboard();
-                    saveItemListener.saveItem();
-                } else {
-                    ShowToast.showToast(getActivity(), getString(R.string.item_already_exists));
-                }
-            } else {
-                ShowToast.showToast(getActivity(), getString(R.string.fill_the_title));
-            }
+            onSaveOperation();
             break;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    public void onSaveOperation() {
+        if (checkFields()) {
+            if (!isDuplicate((title.getText()).toString().trim())) {
+                createNewItem();
+                hideKeyboard();
+                saveItemListener.saveItem();
+            } else {
+                ShowToast.showToast(getActivity(), getString(R.string.item_already_exists));
+            }
+        } else {
+            ShowToast.showToast(getActivity(), getString(R.string.fill_the_title));
+        }
     }
 
     private void hideKeyboard() {
@@ -175,4 +173,25 @@ public class NewItem extends Fragment {
             dbHelper.close();
         }
     }
+
+    private OnClickListener generatePasswordListener = new OnClickListener() {
+
+        @Override
+        public void onClick(View v) {
+            startActivityForResultLister.startNewActivityForResult(new Intent(getActivity(),
+                    GeneratePasswords.class), MyConfigs.NEW_ITEM_PASSWORD_REQUEST_CODE);
+        }
+    };
+
+    public View.OnKeyListener onSoftKeyboardDonePress = new View.OnKeyListener() {
+        public boolean onKey(View v, int keyCode, KeyEvent event) {
+            if (event.getKeyCode() == KeyEvent.KEYCODE_ENTER) {
+                if (KeyEvent.ACTION_UP == event.getAction()) {
+                    onSaveOperation();
+                    return true;
+                }
+            }
+            return false;
+        }
+    };
 }

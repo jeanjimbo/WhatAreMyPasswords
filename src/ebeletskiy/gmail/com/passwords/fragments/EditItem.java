@@ -66,25 +66,28 @@ public class EditItem extends NewItem {
         switch (item.getItemId()) {
         case R.id.save_item:
 
-            if (mTitleChanged) {
-
-                if (isDuplicate(title.getText().toString())) {
-                    ShowToast.showToast(getActivity(), getString(R.string.item_already_exists));
-                } else {
-                    updateData();
-                }
-
-            } else {
-                if (saveItemListener != null && checkFields()) {
-                    updateData();
-                } else {
-                    ShowToast.showToast(getActivity(), getString(R.string.fill_the_title));
-                }
-            }
-
             break;
         }
         return true;
+    }
+
+    @Override
+    public void onSaveOperation() {
+        if (mTitleChanged) {
+
+            if (isDuplicate(title.getText().toString())) {
+                ShowToast.showToast(getActivity(), getString(R.string.item_already_exists));
+            } else {
+                updateData();
+            }
+
+        } else {
+            if (saveItemListener != null && checkFields()) {
+                updateData();
+            } else {
+                ShowToast.showToast(getActivity(), getString(R.string.fill_the_title));
+            }
+        }
     }
 
     private void updateData() {
@@ -103,7 +106,7 @@ public class EditItem extends NewItem {
 
     public Ticket createTicket() {
         Ticket mTicket = new Ticket();
-        
+
         mTicket.setTitle((title.getText()).toString().trim());
         mTicket.setLogin((login.getText()).toString().trim());
         mTicket.setPassword((password.getText()).toString().trim());
