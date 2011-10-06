@@ -67,6 +67,7 @@ public class ItemsDescription extends Fragment {
             mTicket.setLogin(savedInstanceState.getString("mLogin"));
             mTicket.setPassword(savedInstanceState.getString("mPassword"));
             mTicket.setNotes(savedInstanceState.getString("mNotes"));
+            id = savedInstanceState.getInt("mId");
         }
     }
 

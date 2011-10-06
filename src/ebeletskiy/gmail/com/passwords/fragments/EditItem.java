@@ -65,7 +65,7 @@ public class EditItem extends NewItem {
 
         switch (item.getItemId()) {
         case R.id.save_item:
-
+            onSaveOperation();
             break;
         }
         return true;
