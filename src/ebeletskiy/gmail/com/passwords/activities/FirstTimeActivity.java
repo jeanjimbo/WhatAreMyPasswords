@@ -35,7 +35,13 @@ public class FirstTimeActivity extends Activity {
     
     private void processNewAccountCreation() {
         if (checkFields()) {
-            savePassword();
+            try {
+                savePassword();
+            } catch (IllegalArgumentException e) {
+                ShowToast.showToast(getApplicationContext(), getString(R.string.please_fill_the_password_));
+                e.printStackTrace();
+                return;
+            }
             markAsAccountCreated();
             launchMainActivity();
         } else {
