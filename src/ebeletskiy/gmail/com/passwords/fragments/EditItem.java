@@ -20,6 +20,7 @@ public class EditItem extends NewItem {
     private boolean mTitleChanged = false;
     private Ticket mTicket;
     private int id;
+    // public EditText title;
 
     private String mBeforeTextChanged;
     private String mAfterTextChanged;
@@ -76,7 +77,12 @@ public class EditItem extends NewItem {
         if (mTitleChanged) {
 
             if (isDuplicate(title.getText().toString())) {
-                ShowToast.showToast(getActivity(), getString(R.string.item_already_exists));
+                if (checkFields()) {
+                    ShowToast.showToast(getActivity(), getString(R.string.fill_the_title));
+                } else {
+                    ShowToast.showToast(getActivity(), getString(R.string.item_already_exists));
+                }
+
             } else {
                 updateData();
             }
