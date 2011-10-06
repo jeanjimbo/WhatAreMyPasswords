@@ -20,7 +20,8 @@
             android:layout_weight="1"
             android:text="@string/welcome_text"
             android:textAppearance="?android:attr/textAppearanceMedium"
-            android:textColor="@color/text_color" />
+            android:textColor="@color/text_color"
+            android:layout_gravity="center_horizontal" />
 
         <EditText
             android:id="@+id/edt_firsttimeactivity_first_field"
