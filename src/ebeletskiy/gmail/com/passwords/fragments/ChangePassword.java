@@ -61,30 +61,40 @@ public class ChangePassword extends Fragment {
             }
         }
     };
-    
+
     private void processPasswordChange() {
-        SharedPreferences sharedPreferences = getActivity().getSharedPreferences(
-                MyConfigs.PREFS_NAME, 0);
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putString(MyConfigs.USER_PASSWORD, newPassword);
-        editor.commit();
-        getActivity().onBackPressed();
+
+        if (!firstPassword.equals("")) {
+            SharedPreferences sharedPreferences = getActivity().getSharedPreferences(
+                    MyConfigs.PREFS_NAME, 0);
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            editor.putString(MyConfigs.USER_PASSWORD, newPassword);
+            editor.commit();
+            getActivity().onBackPressed();
+        } else {
+            ShowToast.showToast(getActivity(), getString(R.string.please_fill_the_password_));
+        }
     }
 
     private OnClickListener okButtonOnClickListener = new OnClickListener() {
 
         @Override
         public void onClick(View v) {
-           processPasswordChange();
+            processPasswordChange();
         }
     };
-    
+
     public View.OnKeyListener onSoftKeyboardDonePress = new View.OnKeyListener() {
         public boolean onKey(View v, int keyCode, KeyEvent event) {
             if (event.getKeyCode() == KeyEvent.KEYCODE_ENTER) {
                 if (KeyEvent.ACTION_UP == event.getAction()) {
-                    processPasswordChange();
-                    return true;
+                    if (okButton.isEnabled()) {
+                        processPasswordChange();
+                        return true;
+                    } else {
+                        ShowToast.showToast(getActivity(),
+                                getString(R.string.please_fill_the_password_));
+                    }
                 }
             }
             return false;
