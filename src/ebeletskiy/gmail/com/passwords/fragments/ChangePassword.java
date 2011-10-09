@@ -3,6 +3,7 @@ package ebeletskiy.gmail.com.passwords.fragments;
 import android.app.Fragment;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.KeyEvent;
@@ -65,8 +66,8 @@ public class ChangePassword extends Fragment {
     private void processPasswordChange() {
 
         if (!firstPassword.equals("")) {
-            SharedPreferences sharedPreferences = getActivity().getSharedPreferences(
-                    MyConfigs.PREFS_NAME, 0);
+            SharedPreferences sharedPreferences = PreferenceManager
+                    .getDefaultSharedPreferences(getActivity());
             SharedPreferences.Editor editor = sharedPreferences.edit();
             editor.putString(MyConfigs.USER_PASSWORD, newPassword);
             editor.commit();

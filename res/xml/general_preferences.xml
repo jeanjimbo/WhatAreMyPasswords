@@ -15,7 +15,6 @@
         android:entries="@array/list_password_tries_strings"
         android:entryValues="@array/list_password_tries_values"
         android:key="incorrect_password_allowed_attempts"
-        android:persistent="false"
         android:summary="Define the amount of max password attempts"
         android:title="Auto clean all data" />
 </PreferenceScreen>

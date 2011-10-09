@@ -6,6 +6,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -143,7 +144,8 @@ public class GeneratePasswords extends ParentActivity {
         }
 
         public void showTip() {
-            SharedPreferences sharedPreferences = getSharedPreferences(MyConfigs.PREFS_NAME, 0);
+            SharedPreferences sharedPreferences = PreferenceManager
+                    .getDefaultSharedPreferences(getApplicationContext());
             int result = sharedPreferences.getInt(MyConfigs.FIRST_PASSWORD_GENERATED, 0);
             if (result == 0) {
                 ShowToast.showToast(getApplicationContext(),

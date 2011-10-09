@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.os.Bundle;
 import android.os.Handler;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import ebeletskiy.gmail.com.passwords.R;
 import ebeletskiy.gmail.com.passwords.R.id;
@@ -51,7 +52,8 @@ public class ParentActivity extends Activity implements StartNewActivity, StartN
                     "onCreate(): setContentView(mLayout) where mLayout is -1");
         }
 
-        mSharedPreferences = getSharedPreferences(MyConfigs.PREFS_NAME, 0);
+        // mSharedPreferences = getSharedPreferences(MyConfigs.PREFS_NAME, 0);
+        mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         mPrefsEditor = mSharedPreferences.edit();
     }
 

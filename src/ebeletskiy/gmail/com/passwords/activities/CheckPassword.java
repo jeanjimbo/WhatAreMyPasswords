@@ -5,6 +5,7 @@ import android.app.DialogFragment;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
@@ -28,7 +29,7 @@ public class CheckPassword extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.check_password);
-        sharedPreferences = getSharedPreferences(MyConfigs.PREFS_NAME, 0);
+        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         prefsEditor = sharedPreferences.edit();
         mUserPassword = sharedPreferences.getString(MyConfigs.USER_PASSWORD, "");
         passwordManager = new IncorrectPasswordManager(this);

@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.Fragment;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.text.method.PasswordTransformationMethod;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -97,8 +98,8 @@ public class ItemsDescription extends Fragment {
     }
 
     public void showTip() {
-        SharedPreferences sharedPreferences = getActivity().getSharedPreferences(
-                MyConfigs.PREFS_NAME, 0);
+        SharedPreferences sharedPreferences = PreferenceManager
+                .getDefaultSharedPreferences(getActivity());
         int result = sharedPreferences.getInt(MyConfigs.FIRST_ITEM_DESCRIPTION_OPENED, 0);
         if (result == 0) {
             ShowToast.showToast(getActivity(),

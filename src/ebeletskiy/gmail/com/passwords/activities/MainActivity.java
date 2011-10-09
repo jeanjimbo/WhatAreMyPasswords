@@ -4,7 +4,6 @@ import android.app.ActionBar;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -96,9 +95,7 @@ public class MainActivity extends ParentActivity implements ListItemClickListene
     }
 
     private void markAppAsLaunched() {
-        SharedPreferences sharedPreferences = getSharedPreferences(MyConfigs.PREFS_NAME, 0);
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putBoolean(MyConfigs.FIRST_RUN_MAIN, false).commit();
+        mPrefsEditor.putBoolean(MyConfigs.FIRST_RUN_MAIN, false).commit();
     }
 
     private void initActionBar() {
