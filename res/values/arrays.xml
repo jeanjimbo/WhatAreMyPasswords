@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="list_password_tries_strings">
+        <item>Allow 5 attempts</item>
+        <item>Allow 10 attempts</item>
+        <item>Allow 20 attempts</item>
+        <item>Allow 50 attempts</item>
+    </string-array>
+
+    <string-array name="list_password_tries_values">
+        <item>5</item>
+        <item>10</item>
+        <item>20</item>
+        <item>50</item>
+    </string-array>
+
+</resources>
