@@ -17,6 +17,6 @@ public final class MyConfigs {
     public static final String INCORRECT_PASSWORD_ATTEMPTS = "vvincorrect_password_attempts";
     public static final String INCORRECT_PASSWORD_ALLOWED_ATTEMPTS = "incorrect_password_allowed_attempts";
 
-    public static final int INCORRECT_PASSWORD_ALLOWED_ATTEMPTS_DEFAULT = 3;
+    public static final int INCORRECT_PASSWORD_ALLOWED_ATTEMPTS_DEFAULT = 10;
     public static final int NEW_ITEM_PASSWORD_REQUEST_CODE = 15;
 }

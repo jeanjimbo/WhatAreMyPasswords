@@ -22,7 +22,7 @@ public class CheckPassword extends Activity {
     private String mUserPassword = null;
     private SharedPreferences sharedPreferences;
     private SharedPreferences.Editor prefsEditor;
-    private DBHelper dbHelper;
+    private IncorrectPasswordManager passwordManager;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -30,25 +30,11 @@ public class CheckPassword extends Activity {
         setContentView(R.layout.check_password);
         sharedPreferences = getSharedPreferences(MyConfigs.PREFS_NAME, 0);
         prefsEditor = sharedPreferences.edit();
-        initUserPassword();
+        mUserPassword = sharedPreferences.getString(MyConfigs.USER_PASSWORD, "");
+        passwordManager = new IncorrectPasswordManager(this);
+
         mEdtPassword = (EditText) findViewById(R.id.edt_checkpassword_password);
         mEdtPassword.setOnKeyListener(onSoftKeyboardDonePress);
-    }
-
-    private void incrementIncorrectPasswordAttempts() {
-        int tmpPasswordAttempts = sharedPreferences
-                .getInt(MyConfigs.INCORRECT_PASSWORD_ATTEMPTS, 0);
-        tmpPasswordAttempts++;
-        prefsEditor.putInt(MyConfigs.INCORRECT_PASSWORD_ATTEMPTS, tmpPasswordAttempts).commit();
-    }
-
-    private int getIncorrectPasswordAttempts() {
-        int tmp = sharedPreferences.getInt(MyConfigs.INCORRECT_PASSWORD_ATTEMPTS, 0);
-        return tmp;
-    }
-
-    private void initUserPassword() {
-        mUserPassword = sharedPreferences.getString(MyConfigs.USER_PASSWORD, "");
     }
 
     public void onButtonClick(View v) {
@@ -63,43 +49,8 @@ public class CheckPassword extends Activity {
             setFlagAppStartsFirstTime();
             launchMainActivity();
         } else {
-            incrementIncorrectPasswordAttempts();
-            if (getIncorrectPasswordAttempts() == getAllowedPasswordAttempts()) {
-                clearUserDatabase();
-                resetUserSettings();
-                notifyUserDataDeleted();
-                startAppFromBegining();
-            } else {
-                showAttemptsLeftAlert();
-            }
+            passwordManager.start();
         }
-    }
-
-    private void notifyUserDataDeleted() {
-        new UserDataDeletedDialog().show(getFragmentManager(), "tag");
-    }
-
-    private void showAttemptsLeftAlert() {
-        int attemptsLeft = getAllowedPasswordAttempts() - getIncorrectPasswordAttempts();
-        new PasswordAttemptsDialog(attemptsLeft).show(getFragmentManager(), "tag");
-    }
-
-    private void clearUserDatabase() {
-        dbHelper = new DBHelper(getApplicationContext());
-        dbHelper.deleteAll();
-    }
-
-    private void resetUserSettings() {
-        prefsEditor.clear().commit();
-    }
-
-    private void startAppFromBegining() {
-        startActivity(new Intent(this, LaunchActivityManager.class));
-    }
-
-    private int getAllowedPasswordAttempts() {
-        return sharedPreferences.getInt(MyConfigs.INCORRECT_PASSWORD_ALLOWED_ATTEMPTS,
-                MyConfigs.INCORRECT_PASSWORD_ALLOWED_ATTEMPTS_DEFAULT);
     }
 
     private void setFlagAppStartsFirstTime() {
@@ -124,13 +75,5 @@ public class CheckPassword extends Activity {
             return false;
         }
     };
-
-    public void onDestroy() {
-        super.onDestroy();
-        Log.i(TAG, "onDestroy()");
-        if (dbHelper != null) {
-            dbHelper.close();
-        }
-    }
 
 }
