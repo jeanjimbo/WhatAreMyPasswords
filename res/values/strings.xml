@@ -71,5 +71,8 @@
     <string name="written_by_eugene_beletskiy">Written by Eugene Beletskiy.</string>
     <string name="if_you_like_the_application_please_consider_leaving_positive_feedback_on_google_market">If you like the application please consider leaving positive feedback on Google Market.</string>
     <string name="please_fill_the_password_">Please fill the password.</string>
+    <string name="you_have">"You have "</string>
+    <string name="_attempts_left_afterwards_for_security_reasons_all_user_data_will_be_deleted">" more attempt(s) to provide correct password, afterwards for security reasons all user data will be deleted."</string>
+    <string name="all_data_has_been_deleted">All data has been deleted.</string>
 
 </resources>

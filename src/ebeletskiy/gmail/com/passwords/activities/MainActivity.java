@@ -6,7 +6,6 @@ import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -47,6 +46,7 @@ public class MainActivity extends ParentActivity implements ListItemClickListene
 
         hideAddMenuItemListener = (ItemsList) getFragmentManager().findFragmentById(R.id.left_frag);
         initActionBar();
+        resetIncorrectPasswordAttempts();
         if (savedInstanceState == null) {
             loadRightFragment(new EmptyRightFrag(), false, false);
         }
@@ -56,6 +56,10 @@ public class MainActivity extends ParentActivity implements ListItemClickListene
 
     }
 
+    private void resetIncorrectPasswordAttempts() {
+        mPrefsEditor.putInt(MyConfigs.INCORRECT_PASSWORD_ATTEMPTS, 0).commit();
+    }
+
     @Override
     public void onStart() {
         super.onStart();
@@ -63,11 +67,7 @@ public class MainActivity extends ParentActivity implements ListItemClickListene
 
     public void myOnStart() {
 
-        if (MyConfigs.DEBUG)
-            Log.i(TAG, "myOnStart()");
         if (mHandler != null) {
-            if (MyConfigs.DEBUG)
-                Log.i(TAG, "onStart(), handler != null");
             mHandler.removeCallbacks(finishRunnable);
         }
 
@@ -82,8 +82,6 @@ public class MainActivity extends ParentActivity implements ListItemClickListene
             } else {
 
                 if (!invokedByNewActivityRun) {
-                    if (MyConfigs.DEBUG)
-                        Log.i(TAG, "onMyStart(): launching CheckPassword.class");
                     startActivity(new Intent(this, CheckPassword.class));
                     finish();
                 }
@@ -148,7 +146,6 @@ public class MainActivity extends ParentActivity implements ListItemClickListene
     }
 
     private void loadRightFragment(Fragment fragment, boolean animation, boolean addToBackStackFlag) {
-        Log.i(TAG, "loadRightFragment = " + fragment.getClass().toString());
         FragmentTransaction transaction = getFragmentManager().beginTransaction();
         if (animation) {
             transaction.setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_right);
@@ -158,10 +155,8 @@ public class MainActivity extends ParentActivity implements ListItemClickListene
             transaction.addToBackStack(null);
         }
         if (fragment instanceof EditItem || fragment instanceof NewItem) {
-            Log.i(TAG, "instanceof EditItem or NewItem = false");
             hideAddMenuItemListener.isAddMenuItemVisible(false);
         } else {
-            Log.i(TAG, "Not an instanceof EditItem or NewItem = true");
             hideAddMenuItemListener.isAddMenuItemVisible(true);
         }
         transaction.commit();
@@ -182,9 +177,6 @@ public class MainActivity extends ParentActivity implements ListItemClickListene
             startActivity(intent);
             return true;
         case R.id.show_preferences:
-            if (MyConfigs.DEBUG) {
-                Log.i(TAG, "onOptionsItemSelected(): R.id.show_preference selected.");
-            }
             startNewActivity(new Intent(this, ApplicationPreferences.class));
             return true;
         default:

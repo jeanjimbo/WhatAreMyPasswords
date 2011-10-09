@@ -62,6 +62,10 @@ public class DBHelper extends SQLiteOpenHelper {
     public void deleteRow(int id) {
         getWritableDatabase().delete(TABLE_NAME, "_id=" + id, null);
     }
+    
+    public void deleteAllData() {
+        getWritableDatabase().delete(TABLE_NAME, null, null);
+    }
 
     public void updateRow(Ticket ticket) {
         ContentValues cv = new ContentValues();
