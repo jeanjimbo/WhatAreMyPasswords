@@ -30,7 +30,7 @@ public class FirstTimeActivity extends Activity {
         setContentView(R.layout.first_time_screen);
         edtPassword = (EditText) findViewById(R.id.edt_firsttimeactivity_second_field);
         edtPassword.setOnKeyListener(onSoftKeyboardDonePress);
-        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         editor = sharedPreferences.edit();
     }
 
@@ -43,7 +43,7 @@ public class FirstTimeActivity extends Activity {
             try {
                 savePassword();
             } catch (IllegalArgumentException e) {
-                ShowToast.showToast(getApplicationContext(),
+                ShowToast.showToast(this,
                         getString(R.string.please_fill_the_password_));
                 e.printStackTrace();
                 return;

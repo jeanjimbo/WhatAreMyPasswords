@@ -52,8 +52,7 @@ public class ParentActivity extends Activity implements StartNewActivity, StartN
                     "onCreate(): setContentView(mLayout) where mLayout is -1");
         }
 
-        // mSharedPreferences = getSharedPreferences(MyConfigs.PREFS_NAME, 0);
-        mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         mPrefsEditor = mSharedPreferences.edit();
     }
 

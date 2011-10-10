@@ -1,7 +1,6 @@
 package ebeletskiy.gmail.com.passwords.activities;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import ebeletskiy.gmail.com.passwords.fragments.PasswordAttemptsDialog;

@@ -29,7 +29,7 @@ public class CheckPassword extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.check_password);
-        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         prefsEditor = sharedPreferences.edit();
         mUserPassword = sharedPreferences.getString(MyConfigs.USER_PASSWORD, "");
         passwordManager = new IncorrectPasswordManager(this);

@@ -145,10 +145,10 @@ public class GeneratePasswords extends ParentActivity {
 
         public void showTip() {
             SharedPreferences sharedPreferences = PreferenceManager
-                    .getDefaultSharedPreferences(getApplicationContext());
+                    .getDefaultSharedPreferences(GeneratePasswords.this);
             int result = sharedPreferences.getInt(MyConfigs.FIRST_PASSWORD_GENERATED, 0);
             if (result == 0) {
-                ShowToast.showToast(getApplicationContext(),
+                ShowToast.showToast(GeneratePasswords.this,
                         getString(R.string.click_on_the_password_to_use_it_));
                 SharedPreferences.Editor editor = sharedPreferences.edit();
                 editor.putInt(MyConfigs.FIRST_PASSWORD_GENERATED, 1).commit();
