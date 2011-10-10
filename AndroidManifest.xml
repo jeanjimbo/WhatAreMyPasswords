@@ -46,6 +46,19 @@
         </activity>
         <activity android:name=".activities.GeneratePasswords" >
         </activity>
+        <activity
+            android:configChanges="orientation|keyboard"
+            android:launchMode="singleTask"
+            android:name="com.dropbox.client2.android.AuthActivity" >
+            <intent-filter >
+                <data android:scheme="db-a8z9r8bjqnqo9r8" />
+
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.BROWSABLE" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>

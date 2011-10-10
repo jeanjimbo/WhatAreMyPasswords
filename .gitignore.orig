@@ -1,0 +1,25 @@
+# built application files
+*.apk
+*.ap_
+
+# files for the dex VM
+*.dex
+
+# Java class files
+*.class
+
+# generated GUI files
+*R.java
+
+# jars
+*.jar
+
+#stuff
+.*
+*.orig
+<<<<<<< HEAD
+=======
+project.properties
+
+>>>>>>> .gitignore updated to exclude bin/* stuff
+bin/*
