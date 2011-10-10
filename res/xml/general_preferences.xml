@@ -9,12 +9,10 @@
             android:targetPackage="ebeletskiy.gmail.com.passwords" />
     </PreferenceScreen>
 
-        
-        <!-- android:defaultValue="digiGreen" -->
     <ListPreference
         android:entries="@array/list_password_tries_strings"
         android:entryValues="@array/list_password_tries_values"
         android:key="incorrect_password_allowed_attempts"
-        android:summary="Define the amount of max password attempts"
-        android:title="Auto clean all data" />
+        android:summary="@string/define_the_amount_of_max_password_attempts"
+        android:title="@string/reset_data" />
 </PreferenceScreen>
